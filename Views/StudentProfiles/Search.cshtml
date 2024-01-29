@@ -1,0 +1,1457 @@
+﻿@*@model IEnumerable<Study_Abroad.DTO.UniversityDetailDto>*@
+@model Study_Abroad.Models.ViewModel.StudentProfileVM
+@{
+    ViewData["Title"] = "Search";
+    Layout = "_LayoutAdmin";
+}
+
+@section CSS{
+    <link rel="stylesheet" href="~/study-abroad/css/search.css">
+
+    <!-- google icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- fontawesome cdn -->
+    <script src="https://kit.fontawesome.com/ad82b4717d.js" crossorigin="anonymous"></script>
+    <!-- JQuery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <style>
+        datalist {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #86b7fe;
+            border-radius: 0 0 5px 5px;
+            border-top: none;
+            font-family: sans-serif;
+            /*width: 350px;*/
+            top: 80px;
+            padding: 5px;
+            max-height: 10rem;
+            overflow-y: auto;
+            z-index: 5;
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+        }
+
+        option {
+            background-color: white;
+            padding: 4px;
+            /*color: blue;*/
+            margin-bottom: 1px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+}
+<div class="container-fluid bg-search">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 serch-program">
+                <h1>Search Programs <br> & Schools</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- input type  -->
+<div class="container-fluid mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4 p-0">
+                        <div class="input-group input-search mb-3 " id="course-div">
+                            <input type="text" autocomplete="off" role="combobox" list="" id="courseId" name="courseId" class="form-control input data-list-input" placeholder="What would you like to study?" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <datalist id="course-list" role="listbox">
+                                @if (ViewBag.Courses != null)
+                                    foreach (var item in ViewBag.Courses)
+                                    {
+                                        <option value="@item.CourseName" data-courseId="@item.CourseId">@item.CourseName</option>
+                                    }
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="col-md-8 p-0">
+                        <div class="input-group input-search mb-3" id="university-div">
+                            <input type="text" autocomplete="off" role="combobox" list="" id="universityId" name="universityId" class="form-control" placeholder="Where? e.g. school name or location" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <datalist id="university-list" role="listbox">
+                                @if (ViewBag.Universities != null)
+                                    foreach (var item in ViewBag.Universities)
+                                    {
+                                        <option value="@item.UniversityName" data-uniId="@item.UniversityId">@item.UniversityName</option>
+                                    }
+                            </datalist>
+                            <button class="btn btn-primary" type="button" id="button-addon2" onclick="onSearch()">
+                                <span class="material-symbols-outlined">
+                                    search
+                                </span> &nbsp;&nbsp;  Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- input type -->
+
+
+<div class="container-fluid mt-5">
+    <div class="container">
+        <div class="row">
+            <!-- 4 column -->
+
+            <div class="col-md-4 ps-0">
+                <ul id="accordion" class="accordion">
+                    <li class="mb-3 li-1">
+                        <div class="link">Eligibility<i class="fa fa-chevron-down"></i></div>
+                        <div class="p-4 slide-drop">
+                            <form action="Eligibility">
+                                <div class="mb-4">
+                                    <label for="exampleFormControlInput1" class="form-label mb-3">Do you have a valid Study <br> Permit / Visa?</label>
+                                    <select class="form-select" @*asp-for="studentProfile.IsValid_Visa"*@ aria-label="Default select example">
+                                        <option selected>Select</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="exampleFormControlInput1" class="form-label mb-3">Nationality</label>
+                                    <select class="form-select" aria-label="Default select example" asp-for="studentProfile.CountryId" asp-items="ViewBag.CountryId">
+                                        <option selected>Select</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="exampleFormControlInput1" class="form-label mb-3">Education Country</label>
+                                    <select class="form-select" aria-label="Default select example" asp-for="studentProfile.Country_of_Education" asp-items="ViewBag.CountryId">
+                                        <option selected>Select</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="exampleFormControlInput1" class="form-label mb-3">Education Level</label>
+                                    <select class="form-select" asp-for="studentProfile.Education_Level" aria-label="Default select example">
+                                        <option value="">Select Education Level</option>
+                                        <option value="Intermediate">Intermediate</option>
+                                        <option value="Graduation">Graduation</option>
+                                        <option value="Master">Master</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="" class="form-label mb-3">Grading Scheme</label>
+                                    <select class="form-select" asp-for="studentProfile.Grading_Scheme" aria-label="Default select example">
+                                        <option value="">Select Grading Scheme</option>
+                                        <option value="0-10">0-10</option>
+                                        <option value="0-100">0-100</option>
+                                        <option value="other">other</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="" class="form-label mb-3">Grading Scale</label>
+                                    <input type="number" class="form-control" asp-for="studentProfile.Grade_Scale" placeholder="Enter Grading Scale">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="" class="form-label mb-3">Grading Score</label>
+                                    <input type="number" class="form-control" asp-for="studentProfile.Grading_Score" placeholder="Enter Grading Score">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="" class="form-label mb-3">English Exam Type</label>
+                                    <select class="form-select" id="TestType" onchange="EnglishTest(this)" @*asp-for="LanguageTest.Language_Type"*@  placeholder="Select Country" aria-label="Default select example">
+                                        <option value="Dont have">I Dont have this</option>
+                                        <option value="Later">I Will Provide later</option>
+                                        <option value="IELTS">IELTS</option>
+                                        <option value="TOEFL">TOEFL</option>
+                                        <option value="Duolingo">DUOLINGO</option>
+                                        <option value="PTE">PTE</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12 mb-4">
+                                    <div class="row" id="LanguageTest">
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="row ">
+                                        <div class="d-flex justify-content-around ">
+                                            <h6 class="py-50"> GRE Exam Score</h6>
+                                            <div class="custom-control custom-switch custom-control-inline ">
+                                                <input type="checkbox" class="custom-control-input" value="false" id="customSwitch1" onchange="GRETEst(this)">
+                                                <label class="custom-control-label " for="customSwitch1"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-4" id="GRE-Checked">
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="row ">
+                                        <div class="d-flex justify-content-around ">
+                                            <h6 class="py-50"> GMAT Exam Score</h6>
+                                            <div class="custom-control custom-switch custom-control-inline ">
+                                                <input type="checkbox" class="custom-control-input" value="false" id="customSwitch2" onchange="GMATTest(this)">
+                                                <label class="custom-control-label " for="customSwitch2"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12" id="GMAT-Checked">
+                                </div>
+
+                                <div class="mb-4 mt-2">
+                                    <div class="form-check direct-admission-div">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            &nbsp;  Only Show Direct Admissions
+                                            <span class="material-symbols-outlined"> info </span>
+                                        </label>
+
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <button type="button" onclick="Eligibility()" class="btn btn-eli-filter">Save and Apply Filters</button>
+                                </div>
+                            </form>
+
+                        </div>
+
+
+
+
+                    </li>
+                    <li class="li-2">
+                        <div class="link ">School Filters<i class="fa fa-chevron-down"></i></div>
+                        <div class="p-4 slide-drop">
+                            <form action="">
+
+                                <div class="mb-4">
+                                    <label for="exampleFormControlInput1" class="form-label mb-3">Countries</label>
+                                    <select class="form-select select2" aria-label="Default select example" id="CountryName" asp-for="university.CountryId" onchange="CountryChange(this)" asp-items="ViewBag.CountryId">
+                                        <option selected value="">Select</option>                                  
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="form-check Post-graduation-div">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            &nbsp;  Post-Graduation Work Permit Available <span class="material-symbols-outlined"> info </span>
+                                        </label>
+
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="exampleFormControlInput1" class="form-label mb-3">Provinces / States</label>
+                                    <select class="form-select" aria-label="Default select example" asp-for="university.StateId" id="StateName" onchange="StateChange(this)" asp-items="ViewBag.StateId">
+                                        <option selected value="">Select</option>
+                                    </select>
+                                </div>
+
+                                @*<div class="mb-4">
+                                    <label for="exampleFormControlInput1" class="form-label mb-3 campus-city">
+                                        Campus City   <span class="material-symbols-outlined"> info </span>
+
+                                    </label>
+                                    <select class="form-select" aria-label="Default select example"  id="CityName" asp-items="ViewBag.CityId" >
+                                        <option selected>Select</option>
+                                    </select>
+                                </div>*@
+
+                                <div class="mb-4 checkbox-div">
+                                    <label for="exampleFormControlInput1" class="form-label mb-3">School Types</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="0" id="university" onchange="UniversityChange(this)">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            University
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="3" id="institute" onchange="InstituteChange(this)">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            English Institute
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="2" id="college" onchange="CollegeChange(this)">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            College
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="1" id="school" onchange="SchoolChange(this)">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            High School
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label mb-3">
+                                        Schools
+
+                                    </label>
+                                    <select class="form-select" aria-label="Default select example" asp-for="university.UniversityId" id="alluniversity" asp-items="ViewBag.UniversityId">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </li>
+                    <li class="li-3 ">
+                        <div class="link "> Program Filters<i class="fa fa-chevron-down"></i></div>
+                        <div class="p-4 slide-drop">
+                            <form action="">
+
+                                <div class="mb-4">
+                                    <label for="exampleFormControlInput1" class="form-label mb-3">Program Levels</label>
+                                    <select class="form-select" aria-label="Default select example" id="Programlevel" asp-items="ViewBag.ProgramId">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="exampleFormControlInput1" class="form-label mb-3">Intakes</label>
+                                    <select class="form-select" aria-label="Default select example" id="intak" asp-items="ViewBag.Intaks">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+
+                                @*<div class="mb-4">
+            <label for="exampleFormControlInput1" class="form-label mb-3 intake-status">
+                Intakes Status <span class="material-symbols-outlined"> info </span>
+
+            </label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Select</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>*@
+
+                                <div class="mb-4">
+                                    <label for="exampleFormControlInput1" class="form-label mb-3">Post-Secondary Discipline</label>
+                                    <select class="form-select" aria-label="Default select example" id="disipline" asp-items="ViewBag.DisiplineId">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+
+                                @*<div class="mb-4">
+            <label style="width: 100%;" for="exampleFormControlInput1" class="form-label mb-3">Post-Secondary Sub-Categories</label>
+            <select class="form-select" aria-label="Default select example" id="subDisipline" asp-items="ViewBag.DisiplineId">
+                <option selected>Select</option>
+            </select>
+        </div>*@
+
+                                <div class="mb-4">
+                                    <p class="form-last-text">
+                                        All amounts are listed in the currency charged by the school For best results, please specify a country of the school.
+                                    </p>
+                                </div>
+
+
+                                <div class="mb-4  tuition-fee-div">
+                                    <label for="exampleFormControlInput1" class="form-label tuition-fee ">Tuition Fee</label>
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Include living costs
+                                        </label>
+
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 mt-2">
+
+                                    <div class="Scriptcontent">
+
+                                        <!-- Range Slider HTML -->
+                                        <div slider id="slider-distance">
+                                            <div>
+                                                <div inverse-left style="width:70%;"></div>
+                                                <div inverse-right style="width:70%;"></div>
+                                                <div range style="left:0%;right:0%;"></div>
+                                                <span thumb style="left:0%;"></span>
+                                                <span thumb style="left:100%;"></span>
+                                                <div sign style="left:0%; font-size:16px; font-weight:500;">
+                                                    <span id="value">0</span>k
+                                                </div>
+                                                <div sign style="left:100%; font-size:16px; font-weight:500;">
+                                                    <span id="value">100</span>k
+                                                </div>
+                                            </div>
+                                            <input type="range" tabindex="0" value="0" max="100" min="0" step="1" id="tutionStart" oninput="
+                          this.value=Math.min(this.value,this.parentNode.childNodes[5].value-1);
+                          var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)-(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
+                          var children = this.parentNode.childNodes[1].childNodes;
+                          children[1].style.width=value+'%';
+                          children[5].style.left=value+'%';
+                          children[7].style.left=value+'%';children[11].style.left=value+'%';
+                          children[11].childNodes[1].innerHTML=this.value;" />
+
+                                            <input type="range" tabindex="0" value="100" max="100" min="0" step="1" id="tutionEnd" oninput="
+                          this.value=Math.max(this.value,this.parentNode.childNodes[3].value-(-1));
+                          var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)-(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
+                          var children = this.parentNode.childNodes[1].childNodes;
+                          children[3].style.width=(100-value)+'%';
+                          children[5].style.right=(100-value)+'%';
+                          children[9].style.left=value+'%';children[13].style.left=value+'%';
+                          children[13].childNodes[1].innerHTML=this.value;" />
+                                        </div>
+                                        <!-- End Range Slider HTML -->
+
+
+                                    </div>
+
+                                </div>
+
+                                <div class="mb-5 tuition-fee-div">
+                                    <label style="font-size: 18px; " for="exampleFormControlInput1" class="form-label tuition-fee ">Application Fee</label>
+
+                                </div>
+
+
+                                <div class="mb-2">
+
+                                    <div class="Scriptcontent">
+
+                                        <!-- Range Slider HTML -->
+                                        <div slider id="slider-distance">
+                                            <div>
+                                                <div inverse-left style="width:70%;"></div>
+                                                <div inverse-right style="width:70%;"></div>
+                                                <div range style="left:0%;right:0%;"></div>
+                                                <span thumb style="left:0%;"></span>
+                                                <span thumb style="left:100%;"></span>
+                                                <div sign style="left:0%; font-size:16px; font-weight:500;">
+                                                    <span id="value">0</span>k
+                                                </div>
+                                                <div sign style="left:100%; font-size:16px; font-weight:500;">
+                                                    <span id="value">500</span>k
+                                                </div>
+                                            </div>
+                                            <input type="range" tabindex="0" value="0" max="100" min="0" step="1" oninput="
+                          this.value=Math.min(this.value,this.parentNode.childNodes[5].value-1);
+                          var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)-(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
+                          var children = this.parentNode.childNodes[1].childNodes;
+                          children[1].style.width=100+'%';
+                          children[5].style.left=value+'%';
+                          children[7].style.left=value+'%';children[11].style.left=value+'%';
+                          children[11].childNodes[1].innerHTML=this.value;" />
+
+                                            <input type="range" tabindex="0" value="100" max="100" min="0" step="1" oninput="
+                          this.value=Math.max(this.value,this.parentNode.childNodes[3].value-(-1));
+                          var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)-(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
+                          var children = this.parentNode.childNodes[1].childNodes;
+                          children[3].style.width=(100-value)+'%';
+                          children[5].style.right=(100-value)+'%';
+                          children[9].style.left=value+'%';children[13].style.left=value+'%';
+                          children[13].childNodes[1].innerHTML=this.value;" />
+                                        </div>
+                                        <!-- End Range Slider HTML -->
+
+
+                                    </div>
+
+                                </div>
+
+                                
+
+
+
+                            </form>
+
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- 8 column -->
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12 col-12">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link button-tab active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Programs</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link button-tab" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Schools</button>
+                            </li>
+                        </ul>
+                    </div>
+                    @*<div class="col-md-3 col-4 p-0 select-for">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Relevance</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>*@
+                </div>
+                <hr>
+                <!-- 1 -->
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        @foreach (var item in Model.SearchUni)
+                        {
+                            <div class="main-tab-co mt-3">
+                                <div class="row svg-co">
+                                    <div class="col-lg-3 col-md-12 col-12 d-flex justify-content-center">
+                                        <img src="@(string.IsNullOrEmpty(item.University.UniversityIcon)?"/study-abroad/img/3-1-removebg-preview.png":"/Images/"+ item.University.UniversityIcon)" alt="" class="tabOneImg">
+                                    </div>
+                                    <div class="col-lg-9 col-md-12 col-12 cheshire">
+                                        <h3>@item.University.UniversityName</h3>
+                                        <div class="row" style="display: flex; align-items: baseline;">
+                                            <div class="col-md-7">
+                                                @if (!string.IsNullOrEmpty(item.University.Countries.CountryImage))
+                                                {
+                                                    <img src="@("/Images/" + item.University.Countries.CountryImage)" alt="">
+                                                }
+                                                else
+                                                {
+                                                    <svg id="Group_2981" data-name="Group 2981" xmlns="http://www.w3.org/2000/svg" width="24.368" height="24.367" viewBox="0 0 24.368 24.367">
+                                                        <path id="Path_817" data-name="Path 817" d="M2587.325,1717.872a12.181,12.181,0,1,1,8.9,14.75,12.179,12.179,0,0,1-8.9-14.75" transform="translate(-2586.965 -1708.615)" fill="#edeeef" />
+                                                        <path id="Path_818" data-name="Path 818" d="M2615.494,1718.306h-9.437v1.865h10.036a12.158,12.158,0,0,0-.6-1.865m-2.409-3.732h-7.028v1.867h8.474a12.222,12.222,0,0,0-1.446-1.867m-17.656,16.79h17.6a12.107,12.107,0,0,0,1.468-1.865h-20.53a12.222,12.222,0,0,0,1.465,1.865m11.725-20.25c-.366-.091-.732-.162-1.1-.219v1.813h4.79a12.162,12.162,0,0,0-3.693-1.595m9.224,10.922h-10.321v1.867h10.314a12.129,12.129,0,0,0,.007-1.867m-23.39,5.6h22.481a12.286,12.286,0,0,0,.583-1.77c.008-.032.015-.064.022-.1h-23.7a12.172,12.172,0,0,0,.61,1.867m8.313,7.127a12.256,12.256,0,0,0,2.158.334h1.55a12.182,12.182,0,0,0,5.734-1.867h-13.038a12.162,12.162,0,0,0,3.6,1.532" transform="translate(-2592.044 -1710.755)" fill="#e71e1a" />
+                                                        <path id="Path_819" data-name="Path 819" d="M2600.065,1721.236l-.263-.192-.264.192.1-.309-.263-.192h.325l.1-.309.1.309h.326l-.263.192Zm-1.294-9.817.1.311-.263-.192-.264.192.1-.311-.264-.19h.325l.1-.311.1.311h.326Zm0,2.8.1.309-.263-.192-.264.192.1-.309-.264-.192h.325l.1-.309.1.309h.326Zm-.024,2.748.1.309-.264-.192-.263.192.1-.309-.264-.192h.326l.1-.309.1.309h.326Zm.076,3.025-.264-.192-.263.192.1-.309-.263-.192h.326l.1-.309.1.309h.326l-.264.192Zm-1.295-7.219.1.309-.263-.19-.264.19.1-.309-.263-.192h.325l.1-.309.1.309h.325Zm0,2.718.1.309-.263-.192-.264.192.1-.309-.263-.192h.325l.1-.309.1.309h.325Zm0,2.778.1.311-.263-.192-.264.192.1-.311-.263-.19h.325l.1-.311.1.311h.325Zm.1,2.963-.263-.192-.264.192.1-.309-.263-.192h.325l.1-.309.1.309h.325l-.263.192Zm-1.295-9.817.1.311-.264-.192-.264.192.1-.311-.263-.19h.325l.1-.311.1.311h.326Zm0,2.8.1.309-.264-.192-.264.192.1-.309-.263-.192h.325l.1-.309.1.309h.326Zm-.023,2.748.1.309-.264-.192-.263.192.1-.309-.264-.192h.325l.1-.309.1.309h.326Zm.076,3.025-.263-.192-.264.192.1-.309-.263-.192h.325l.1-.309.1.309h.325l-.263.192Zm-1.294-9.934.1.309-.263-.192-.264.192.1-.309-.263-.192h.326l.1-.309.1.309h.326Zm0,2.716.1.309-.263-.19-.264.19.1-.309-.263-.192h.326l.1-.309.1.309h.326Zm0,2.718.1.309-.263-.192-.264.192.1-.309-.263-.192h.326l.1-.309.1.309h.326Zm0,2.778.1.311-.263-.192-.264.192.1-.311-.263-.19h.326l.1-.311.1.311h.326Zm.1,2.963-.263-.192-.264.192.1-.309-.263-.192h.326l.1-.309.1.309h.326l-.264.192Zm-1.294-9.915.1.311-.265-.192-.263.192.1-.311-.264-.19h.325l.1-.309.1.309h.325Zm0,2.8.1.309-.265-.19-.263.19.1-.309-.264-.192h.325l.1-.309.1.309h.325Zm-.025,2.748.1.309-.263-.192-.265.192.1-.309-.263-.192h.325l.1-.309.1.309h.326Zm.077,3.027-.264-.192-.263.192.1-.311-.264-.19h.325l.1-.309.1.309h.326l-.263.19Zm-1.294-7.123.1.309-.263-.19-.265.19.1-.309-.263-.192h.324l.1-.309.1.309h.325Zm0,2.718.1.309-.263-.192-.265.192.1-.309-.263-.192h.324l.1-.309.1.309h.325Zm0,2.778.1.311-.263-.192-.265.192.1-.311-.263-.19h.324l.1-.311.1.311h.325Zm.1,2.963-.263-.192-.265.192.1-.309-.263-.192h.324l.1-.309.1.309h.325l-.263.192Zm-1.295-7.137.1.309-.263-.192-.264.192.1-.309-.264-.192h.326l.1-.309.1.309h.326Zm-.024,2.748.1.309-.263-.192-.264.192.1-.309-.263-.192h.325l.1-.309.1.309h.326Zm.076,3.025-.263-.192-.263.192.1-.309-.264-.192h.326l.1-.309.1.309h.325l-.264.192Zm5.749-10,.1-.309.1.309h.325l-.263.192.1.309-.263-.192-.264.192.1-.309-.263-.192Zm2.435,8.213.1-.311.1.311h.326l-.263.19.1.311-.263-.192-.264.192.1-.311-.263-.19Zm0-2.78.1-.309.1.309h.326l-.263.192.1.309-.263-.192-.264.192.1-.309-.263-.192Zm0-2.718.1-.309.1.309h.326l-.263.192.1.309-.263-.19-.264.19.1-.309-.263-.192Zm0-2.716.1-.309.1.309h.326l-.263.192.1.309-.263-.192-.264.192.1-.309-.263-.192Zm-9.478,5.625.1.309-.264-.192-.263.192.1-.309-.264-.192h.325l.1-.309.1.309h.326Zm0,2.778.1.311-.264-.192-.263.192.1-.311-.264-.19h.325l.1-.311.1.311h.326Zm.1,2.963-.264-.192-.262.192.1-.309-.264-.192h.325l.1-.309.1.309h.326l-.263.192ZM2589,1716.8l.1.309-.264-.192-.263.192.1-.309-.264-.192h.326l.1-.309.1.309h.325Zm.077,3.025-.263-.192-.265.192.1-.309-.263-.192h.325l.1-.309.1.309h.326l-.264.192Zm-1.193,1.412-.263-.192-.264.192.1-.309-.263-.192h.326l.1-.309.1.309h.324l-.262.192Zm13.1-12.323c-.12-.018-1.008-.116-1.127-.13l-2.19.081a12.212,12.212,0,0,0-6.152,2.6l.045.138-.114-.083a12.17,12.17,0,0,0-1.145,1.064h.18l-.263.192.1.309-.264-.19-.1.076q-.369.424-.7.885h.036l-.076.055q-.08.113-.158.228l.071.218-.145-.1a12.166,12.166,0,0,0-1.649,3.775l-.013.054h.2l.1-.311.1.311h.324l-.262.19.1.311-.263-.192-.264.192.1-.311-.157-.114a12.164,12.164,0,0,0-.289,3.776h13.974Z" transform="translate(-2586.975 -1708.772)" fill="#0b2e60" />
+                                                    </svg>
+                                                }
+                                                &nbsp; &nbsp; &nbsp;
+                                                <span>@item.University.States.StateName</span>
+                                            </div>
+                                            <div class="col-md-5 icon-span">
+                                                <a href="/Home/University/@item.University.UniversityId">
+                                                    SEE @item.Courses.Count() MORE PROGRAMS <span class="material-symbols-outlined">
+                                                        chevron_right
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @foreach (var item1 in item.Courses.Take(2))
+                                {
+                                    <div class="p-3">
+                                        <div class="row level-main">
+                                            <div class="col-md-8 level" style="cursor:pointer">
+                                                <p class="t-level" onclick="onProgramById(@item1.CourseId)">@item1.CourseName</p>
+                                                <div class="row">
+                                                    <div class="col-md-12 tuition" onclick="onProgramById(@item1.CourseId)">
+                                                        <span>TUITION FEE</span>
+                                                        <p> @item1.CourseTutionFee</p>
+                                                    </div>
+                                                    @*<div class="col-md-6 tuition">
+                                                            <span>APPLICATION FEE</span>
+                                                            <p>Free</p>
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a class="btn btn-apply" href="/StudentProfiles/ApplyStudent?id=@Model.studentProfile.StudentId&courseId=@item1.CourseId&UniId=@item.University.UniversityId">APPLY</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        }
+
+                        <!--  -->
+                    </div>
+
+
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        @foreach (var item in Model.SearchUni)
+                        {
+                            <div class="main-tab-co2 mt-3">
+                                <div class="row svg-co">
+                                    <div class="col-lg-3 col-md-12 col-12 d-flex justify-content-center">
+                                        <img src="@(string.IsNullOrEmpty(item.University.UniversityIcon)?"/study-abroad/img/3-1-removebg-preview.png":"/Images/"+ item.University.UniversityIcon)" class="tabOneImg" alt="">
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-12 cheshiree">
+                                        <h3>@item.University.UniversityName</h3>
+                                        @if (!string.IsNullOrEmpty(item.University.Countries.CountryImage))
+                                        {
+                                            <img src="@("/Images/" + item.University.Countries.CountryImage)" alt="">
+                                        }
+                                        else
+                                        {
+                                            <svg id="Group_2981" data-name="Group 2981" xmlns="http://www.w3.org/2000/svg" width="24.368" height="24.367" viewBox="0 0 24.368 24.367">
+                                                <path id="Path_817" data-name="Path 817" d="M2587.325,1717.872a12.181,12.181,0,1,1,8.9,14.75,12.179,12.179,0,0,1-8.9-14.75" transform="translate(-2586.965 -1708.615)" fill="#edeeef" />
+                                                <path id="Path_818" data-name="Path 818" d="M2615.494,1718.306h-9.437v1.865h10.036a12.158,12.158,0,0,0-.6-1.865m-2.409-3.732h-7.028v1.867h8.474a12.222,12.222,0,0,0-1.446-1.867m-17.656,16.79h17.6a12.107,12.107,0,0,0,1.468-1.865h-20.53a12.222,12.222,0,0,0,1.465,1.865m11.725-20.25c-.366-.091-.732-.162-1.1-.219v1.813h4.79a12.162,12.162,0,0,0-3.693-1.595m9.224,10.922h-10.321v1.867h10.314a12.129,12.129,0,0,0,.007-1.867m-23.39,5.6h22.481a12.286,12.286,0,0,0,.583-1.77c.008-.032.015-.064.022-.1h-23.7a12.172,12.172,0,0,0,.61,1.867m8.313,7.127a12.256,12.256,0,0,0,2.158.334h1.55a12.182,12.182,0,0,0,5.734-1.867h-13.038a12.162,12.162,0,0,0,3.6,1.532" transform="translate(-2592.044 -1710.755)" fill="#e71e1a" />
+                                                <path id="Path_819" data-name="Path 819" d="M2600.065,1721.236l-.263-.192-.264.192.1-.309-.263-.192h.325l.1-.309.1.309h.326l-.263.192Zm-1.294-9.817.1.311-.263-.192-.264.192.1-.311-.264-.19h.325l.1-.311.1.311h.326Zm0,2.8.1.309-.263-.192-.264.192.1-.309-.264-.192h.325l.1-.309.1.309h.326Zm-.024,2.748.1.309-.264-.192-.263.192.1-.309-.264-.192h.326l.1-.309.1.309h.326Zm.076,3.025-.264-.192-.263.192.1-.309-.263-.192h.326l.1-.309.1.309h.326l-.264.192Zm-1.295-7.219.1.309-.263-.19-.264.19.1-.309-.263-.192h.325l.1-.309.1.309h.325Zm0,2.718.1.309-.263-.192-.264.192.1-.309-.263-.192h.325l.1-.309.1.309h.325Zm0,2.778.1.311-.263-.192-.264.192.1-.311-.263-.19h.325l.1-.311.1.311h.325Zm.1,2.963-.263-.192-.264.192.1-.309-.263-.192h.325l.1-.309.1.309h.325l-.263.192Zm-1.295-9.817.1.311-.264-.192-.264.192.1-.311-.263-.19h.325l.1-.311.1.311h.326Zm0,2.8.1.309-.264-.192-.264.192.1-.309-.263-.192h.325l.1-.309.1.309h.326Zm-.023,2.748.1.309-.264-.192-.263.192.1-.309-.264-.192h.325l.1-.309.1.309h.326Zm.076,3.025-.263-.192-.264.192.1-.309-.263-.192h.325l.1-.309.1.309h.325l-.263.192Zm-1.294-9.934.1.309-.263-.192-.264.192.1-.309-.263-.192h.326l.1-.309.1.309h.326Zm0,2.716.1.309-.263-.19-.264.19.1-.309-.263-.192h.326l.1-.309.1.309h.326Zm0,2.718.1.309-.263-.192-.264.192.1-.309-.263-.192h.326l.1-.309.1.309h.326Zm0,2.778.1.311-.263-.192-.264.192.1-.311-.263-.19h.326l.1-.311.1.311h.326Zm.1,2.963-.263-.192-.264.192.1-.309-.263-.192h.326l.1-.309.1.309h.326l-.264.192Zm-1.294-9.915.1.311-.265-.192-.263.192.1-.311-.264-.19h.325l.1-.309.1.309h.325Zm0,2.8.1.309-.265-.19-.263.19.1-.309-.264-.192h.325l.1-.309.1.309h.325Zm-.025,2.748.1.309-.263-.192-.265.192.1-.309-.263-.192h.325l.1-.309.1.309h.326Zm.077,3.027-.264-.192-.263.192.1-.311-.264-.19h.325l.1-.309.1.309h.326l-.263.19Zm-1.294-7.123.1.309-.263-.19-.265.19.1-.309-.263-.192h.324l.1-.309.1.309h.325Zm0,2.718.1.309-.263-.192-.265.192.1-.309-.263-.192h.324l.1-.309.1.309h.325Zm0,2.778.1.311-.263-.192-.265.192.1-.311-.263-.19h.324l.1-.311.1.311h.325Zm.1,2.963-.263-.192-.265.192.1-.309-.263-.192h.324l.1-.309.1.309h.325l-.263.192Zm-1.295-7.137.1.309-.263-.192-.264.192.1-.309-.264-.192h.326l.1-.309.1.309h.326Zm-.024,2.748.1.309-.263-.192-.264.192.1-.309-.263-.192h.325l.1-.309.1.309h.326Zm.076,3.025-.263-.192-.263.192.1-.309-.264-.192h.326l.1-.309.1.309h.325l-.264.192Zm5.749-10,.1-.309.1.309h.325l-.263.192.1.309-.263-.192-.264.192.1-.309-.263-.192Zm2.435,8.213.1-.311.1.311h.326l-.263.19.1.311-.263-.192-.264.192.1-.311-.263-.19Zm0-2.78.1-.309.1.309h.326l-.263.192.1.309-.263-.192-.264.192.1-.309-.263-.192Zm0-2.718.1-.309.1.309h.326l-.263.192.1.309-.263-.19-.264.19.1-.309-.263-.192Zm0-2.716.1-.309.1.309h.326l-.263.192.1.309-.263-.192-.264.192.1-.309-.263-.192Zm-9.478,5.625.1.309-.264-.192-.263.192.1-.309-.264-.192h.325l.1-.309.1.309h.326Zm0,2.778.1.311-.264-.192-.263.192.1-.311-.264-.19h.325l.1-.311.1.311h.326Zm.1,2.963-.264-.192-.262.192.1-.309-.264-.192h.325l.1-.309.1.309h.326l-.263.192ZM2589,1716.8l.1.309-.264-.192-.263.192.1-.309-.264-.192h.326l.1-.309.1.309h.325Zm.077,3.025-.263-.192-.265.192.1-.309-.263-.192h.325l.1-.309.1.309h.326l-.264.192Zm-1.193,1.412-.263-.192-.264.192.1-.309-.263-.192h.326l.1-.309.1.309h.324l-.262.192Zm13.1-12.323c-.12-.018-1.008-.116-1.127-.13l-2.19.081a12.212,12.212,0,0,0-6.152,2.6l.045.138-.114-.083a12.17,12.17,0,0,0-1.145,1.064h.18l-.263.192.1.309-.264-.19-.1.076q-.369.424-.7.885h.036l-.076.055q-.08.113-.158.228l.071.218-.145-.1a12.166,12.166,0,0,0-1.649,3.775l-.013.054h.2l.1-.311.1.311h.324l-.262.19.1.311-.263-.192-.264.192.1-.311-.157-.114a12.164,12.164,0,0,0-.289,3.776h13.974Z" transform="translate(-2586.975 -1708.772)" fill="#0b2e60" />
+                                            </svg>
+                                        }
+                                        &nbsp; &nbsp; &nbsp;
+                                        <span>@item.University.States.StateName</span>
+                                    </div>
+                                    <div class="col-md-3 icon-span">
+                                        <button class="btn btn-view" onclick="window.location.href='/Home/University/@item.University.UniversityId'">View Detail</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        }
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Script{
+
+    <script src="~/study-abroad/js/sessionstorage.js"></script>
+    <script>
+        let session = new Session();
+        let filter = {
+            course: "",
+            university: ""
+            //countryId: 0,
+            //school:0
+        }
+
+        let courseInput = document.getElementById('courseId');
+        let courses = document.getElementById('course-list');
+
+        for (let option of courses.options) {
+            option.onclick = function () {
+                filter.course = courseInput.value = option.value;
+                // filter.courseId = option.getAttribute('data-courseId');
+                session.set('filter', filter);
+                // console.log(filter)
+                courses.style.display = 'none';
+                courseInput.style.borderRadius = "5px";
+            };
+        };
+        courseInput.onfocus = function () {
+            if (universities.style.display == 'block')
+                universities.style.display = 'none';
+            courses.style.display = 'block';
+            courses.style.maxWidth = courseInput.offsetWidth + "px";
+            courseInput.style.borderRadius = "5px 5px 0 0";
+        };
+
+        courseInput.oninput = function () {
+            currentCourseFocus = -1;
+            var text = courseInput.value.toUpperCase();
+            for (let option of courses.options) {
+                if (option.value.toUpperCase().indexOf(text) > -1) {
+                    option.style.display = "block";
+                } else {
+                    option.style.display = "none";
+                }
+            };
+        }
+
+        var currentCourseFocus = -1;
+        courseInput.onkeydown = function (e) {
+            if (e.keyCode == 40) {
+                currentCourseFocus++
+                addActiveCourse(courses.options);
+            }
+            else if (e.keyCode == 38) {
+                currentCourseFocus--
+                addActiveCourse(courses.options);
+            }
+            else if (e.keyCode == 13) {
+                e.preventDefault();
+                if (currentCourseFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (courses.options) courses.options[currentCourseFocus].click();
+                }
+            }
+        }
+
+        function addActiveCourse(x) {
+            if (!x) return false;
+            removeActive(x);
+            if (currentCourseFocus >= x.length) currentCourseFocus = 0;
+            if (currentCourseFocus < 0) currentCourseFocus = (x.length - 1);
+            x[currentCourseFocus].classList.add("active");
+        }
+
+
+        let uniInput = document.getElementById('universityId');
+        let universities = document.getElementById('university-list');
+        for (let option of universities.options) {
+            option.onclick = function () {
+                filter.university = uniInput.value = option.value;
+
+                //filter.universityId = option.getAttribute('data-uniId');
+
+                session.set('filter', filter);
+                universities.style.display = 'none';
+                uniInput.style.borderRadius = "5px";
+            }
+        };
+        uniInput.onfocus = function () {
+            if (courses.style.display == 'block')
+                courses.style.display = 'none';
+            universities.style.display = 'block';
+            universities.style.maxWidth = uniInput.offsetWidth + "px";
+            universities.style.borderRadius = "5px 5px 0 0";
+        };
+        uniInput.oninput = function () {
+            currentUniFocus = -1;
+            var text = uniInput.value.toUpperCase();
+            for (let option of universities.options) {
+                if (option.value.toUpperCase().indexOf(text) > -1) {
+                    option.style.display = "block";
+                } else {
+                    option.style.display = "none";
+                }
+            };
+        }
+
+        var currentUniFocus = -1;
+        uniInput.onkeydown = function (e) {
+            if (e.keyCode == 40) {
+                currentUniFocus++
+                addActiveUni(universities.options);
+            }
+            else if (e.keyCode == 38) {
+                currentUniFocus--
+                addActiveUni(universities.options);
+            }
+            else if (e.keyCode == 13) {
+                e.preventDefault();
+                if (currentUniFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (universities.options) universities.options[currentUniFocus].click();
+                }
+            }
+        }
+        function addActiveUni(x) {
+            if (!x) return false;
+            removeActive(x);
+            if (currentUniFocus >= x.length) currentUniFocus = 0;
+            if (currentUniFocus < 0) currentUniFocus = (x.length - 1);
+            x[currentUniFocus].classList.add("active");
+        }
+        function removeActive(x) {
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("active");
+            }
+        }
+
+        let courseDiv = document.getElementById('course-div');
+        let universityDiv = document.getElementById('university-div');
+        document.addEventListener('click', function (event) {
+            if (courseDiv !== event.target && !courseDiv.contains(event.target) && universityDiv !== event.target && !universityDiv.contains(event.target)) {
+                //console.log('clicking outside the div');
+                if (courses.style.display == 'block')
+                    courses.style.display = 'none';
+                else if (universities.style.display == 'block')
+                    universities.style.display = 'none';
+            }
+        });
+
+        function onSearch() {
+              var studentProfile = @Html.Raw(Json.Serialize(Model.studentProfile.StudentId));
+            if (session.get("filter"))
+                filte = session.get("filter");
+            var url = "/StudentProfiles/Search?id=" + studentProfile;
+
+            if (courseInput.value)
+                url = url + (!url.includes("/StudentProfiles/Search?id=" + studentProfile) ? "?" : "&") + "course=" + courseInput.value;
+                //url = url + "?course=" + courseInput.value;
+
+            if (uniInput.value)
+                //url = url  + "?university=" + uniInput.value;
+                url = url + (!url.includes("/StudentProfiles/Search?id=" + studentProfile) ? "?" : "&") + "university=" + uniInput.value;
+
+            //if (filter.countryId)
+            //    url = url + (!url.includes("/StudentProfiles/Search?") ? "?" : "&") + "countryId=" + filter.countryId;
+            
+            filter.course = courseInput.value;
+            filter.university = uniInput.value;
+            session.set('filter', filter);
+            window.location.href = url;
+            //console.log(url)
+        }
+
+        $(document).ready(function () {
+            var obj = session.get("filter");
+            if (obj)
+                filter = obj;
+            if (filter.course)
+                courseInput.value = filter.course;
+            if (filter.university)
+                uniInput.value = filter.university;
+        })
+
+        function onProgramById(id) {
+            var url = "/Home/Program/" + id;
+            window.location.href = url;
+            //console.log(url)
+        }
+
+    </script>
+
+    @*---------------------------Taimoor Work------------------------------------*@
+
+<script>
+
+    function Eligibility() {
+
+        var studentProfile = @Html.Raw(Json.Serialize(Model.studentProfile.StudentId));
+        var url = "/StudentProfiles/Search/" + studentProfile;
+        window.location.href = url;
+
+    }
+
+    function EnglishTest(eve) {
+
+        var stdLanguage = @Html.Raw(Json.Serialize(Model.LanguageTest));
+            //console.log(eve.value);
+
+            var option = document.getElementById("TestType");
+            console.log(option.value);
+            var TestForm = document.getElementById("LanguageTest");
+
+            //option.value = stdLanguage.Language_Type;
+
+            if (option.value == "Dont have") {
+                TestForm.innerHTML = "";
+            }
+            if (option.value == "Later") {
+                TestForm.innerHTML = "Note: You will be able to apply for conditional admission by enrolling in an ESL program if the academic program does not accept delayed submission of English Language Proficiency scores.";
+            }
+
+
+            if (option.value == "IELTS") {
+                TestForm.innerHTML = "";
+                var newDiv = document.createElement("div");
+                newDiv.className = "row";
+                var newForm = '<div class="col-sm-4"><div class="form-group"><label>Reading</label> <input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Listening</label> <input type="text" class="form-control" id="Listening" name="LanguageTest.Listening_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Speaking</label> <input type="text" class="form-control" id="Speaking" name="LanguageTest.Speaking_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Writing</label><input type="text" class="form-control" id="Writing" name="LanguageTest.Writing_Score" ></div></div>'
+
+                newDiv.innerHTML = newForm;
+                TestForm.appendChild(newDiv);
+
+            }
+
+            if (option.value == "TOEFL") {
+                TestForm.innerHTML = "";
+                var newDiv = document.createElement("div");
+                newDiv.className = "row";
+                var newForm = '<div class="col-sm-4"><div class="form-group"><label>Reading</label> <input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Listening</label> <input type="text" class="form-control" id="Listening" name="LanguageTest.Listening_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Speaking</label> <input type="text" class="form-control" id="Speaking" name="LanguageTest.Speaking_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Writing</label><input type="text" class="form-control" id="Writing" name="LanguageTest.Writing_Score" ></div></div>'
+
+                newDiv.innerHTML = newForm;
+                TestForm.appendChild(newDiv);
+
+            }
+            if (option.value == "Duolingo") {
+                TestForm.innerHTML = "";
+                var newDiv = document.createElement("div");
+                newDiv.className = "row";
+                var newForm = '' +
+                    '<div class="col-sm-5"><div class="form-group"><label>Overall</label><input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score"></div></div>'
+
+                newDiv.innerHTML = newForm;
+                TestForm.appendChild(newDiv);
+
+            }
+            if (option.value == "PTE") {
+                TestForm.innerHTML = "";
+                var newDiv = document.createElement("div");
+                newDiv.className = "row";
+                var newForm = '<div class="col-sm-4"><div class="form-group"><label>Reading</label> <input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Listening</label> <input type="text" class="form-control" id="Listening" name="LanguageTest.Listening_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Speaking</label> <input type="text" class="form-control" id="Speaking" name="LanguageTest.Speaking_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Writing</label><input type="text" class="form-control" id="Writing" name="LanguageTest.Writing_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Overall</label><input type="text" class="form-control" id="Overall" name="LanguageTest.Overall_Score"></div></div>'
+
+                newDiv.innerHTML = newForm;
+                TestForm.appendChild(newDiv);
+            }
+    }
+
+        function GRETEst(eve) {
+
+            var check = document.getElementById("customSwitch1");
+            console.log(check.value);
+
+            var OnChecked = document.getElementById("GRE-Checked")
+
+            if (check.checked == true) {
+                check.value = true;
+
+                var newDiv = document.createElement("div");
+                newDiv.className = "col-12";
+                newForm = '<div class="row"><label class="mb-1">Verbal</label>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type = "text" class="form-control"  id = "GRE_Verbal" placeholder = "Score" ></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Verbal_Rank" placeholder="Rank%"></div></div>' +
+                    '<label class="mb-1 mt-2">Quantitative</label>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Quantitative" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Quantitative_Rank"  placeholder="Rank%"></div></div>' +
+                    '<label class="mb-1 mt-2">Writing</label>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Writting" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Writting_Rank"  placeholder="Rank%"></div></div></div>'
+
+                newDiv.innerHTML = newForm;
+                OnChecked.appendChild(newDiv);
+            }
+            else {
+                OnChecked.innerHTML = "";
+            }
+
+        }
+
+        function GMATTest(eve) {
+
+            var check = document.getElementById("customSwitch2");
+            console.log(check.value);
+
+            var OnChecked = document.getElementById("GMAT-Checked")
+
+            if (check.checked == true) {
+                check.value = true;
+                var newDiv = document.createElement("div");
+                newDiv.className = "col-12";
+                newForm = '<div class="row"><label class="mb-1">Verbal</label>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type = "text" class="form-control"  id = "GRE_Verbal" placeholder = "Score" ></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Verbal_Rank" placeholder="Rank%"></div></div>' +
+                    '<label class="mb-1 mt-2">Quantitative</label>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Quantitative" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Quantitative_Rank"  placeholder="Rank%"></div></div>' +
+                    '<label class="mb-1 mt-2">Writing</label>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Writting" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Writting_Rank"  placeholder="Rank%"></div></div>' +
+                    '<label class="mb-1 mt-2">Total</label> ' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GMAT_Total" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GMAT_Total_Rank"  placeholder="Rank%"></div></div></div>'
+
+                newDiv.innerHTML = newForm;
+                OnChecked.appendChild(newDiv);
+            }
+            else {
+                OnChecked.innerHTML = "";
+            }
+
+        }
+
+
+    window.onload = function () {
+
+                var stdLanguage = @Html.Raw(Json.Serialize(Model.LanguageTest));
+
+        var langdt = new Date(stdLanguage.Exam_Date).toISOString().split('T')[0];
+
+        var option = document.getElementById("TestType");
+        console.log(option.value);
+        var TestForm = document.getElementById("LanguageTest");
+
+        if (stdLanguage == null) {
+            TestForm.innerHTML = "";
+        }
+        else {
+
+            if (stdLanguage.Language_Type == "Dont have") {
+                TestForm.innerHTML = "";
+                option.value = stdLanguage.Language_Type;
+            }
+            if (stdLanguage.Language_Type == "Later") {
+                TestForm.innerHTML = "Note: You will be able to apply for conditional admission by enrolling in an ESL program if the academic program does not accept delayed submission of English Language Proficiency scores.";
+                option.value = stdLanguage.Language_Type;
+            }
+
+            if (stdLanguage.Language_Type == "IELTS") {
+                TestForm.innerHTML = "";
+                var newDiv = document.createElement("div");
+                newDiv.className = "row";
+                var newForm = '<div class="col-sm-4"><div class="form-group"><label>Reading</label> <input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Listening</label> <input type="text" class="form-control" id="Listening" name="LanguageTest.Listening_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Speaking</label> <input type="text" class="form-control" id="Speaking" name="LanguageTest.Speaking_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Writing</label><input type="text" class="form-control" id="Writing" name="LanguageTest.Writing_Score" ></div></div>'
+
+                newDiv.innerHTML = newForm;
+                TestForm.appendChild(newDiv);
+
+                option.value = stdLanguage.Language_Type;
+                document.getElementById("Reading").value = stdLanguage.Reading_Score;;
+                document.getElementById("Writing").value = stdLanguage.Writing_Score;
+                document.getElementById("Speaking").value = stdLanguage.Speaking_Score;
+                document.getElementById("Listening").value = stdLanguage.Listening_Score;
+
+            }
+
+            if (stdLanguage.Language_Type == "TOEFL") {
+                TestForm.innerHTML = "";
+                var newDiv = document.createElement("div");
+                newDiv.className = "row";
+                var newForm = '<div class="col-sm-4"><div class="form-group"><label>Reading</label> <input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Listening</label> <input type="text" class="form-control" id="Listening" name="LanguageTest.Listening_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Speaking</label> <input type="text" class="form-control" id="Speaking" name="LanguageTest.Speaking_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Writing</label><input type="text" class="form-control" id="Writing" name="LanguageTest.Writing_Score" ></div></div>'
+
+                newDiv.innerHTML = newForm;
+                TestForm.appendChild(newDiv);
+
+                option.value = stdLanguage.Language_Type;
+                document.getElementById("Reading").value = stdLanguage.Reading_Score;;
+                document.getElementById("Writing").value = stdLanguage.Writing_Score;
+                document.getElementById("Speaking").value = stdLanguage.Speaking_Score;
+                document.getElementById("Listening").value = stdLanguage.Listening_Score;
+
+            }
+            if (stdLanguage.Language_Type == "Duolingo") {
+                TestForm.innerHTML = "";
+                var newDiv = document.createElement("div");
+                newDiv.className = "row";
+                var newForm = '' +
+                    '<div class="col-sm-5"><div class="form-group"><label>Overall</label><input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score"></div></div>'
+
+                newDiv.innerHTML = newForm;
+                TestForm.appendChild(newDiv);
+
+                option.value = stdLanguage.Language_Type;
+                document.getElementById("TestDate").value = langdt;
+                document.getElementById("Reading").value = stdLanguage.Reading_Score;
+
+            }
+            if (stdLanguage.Language_Type == "PTE") {
+                TestForm.innerHTML = "";
+                var newDiv = document.createElement("div");
+                newDiv.className = "row";
+                var newForm = '<div class="col-sm-4"><div class="form-group"><label>Reading</label> <input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Listening</label> <input type="text" class="form-control" id="Listening" name="LanguageTest.Listening_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Speaking</label> <input type="text" class="form-control" id="Speaking" name="LanguageTest.Speaking_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Writing</label><input type="text" class="form-control" id="Writing" name="LanguageTest.Writing_Score" ></div></div>' +
+                    '<div class="col-sm-4"><div class="form-group"><label>Overall</label><input type="text" class="form-control" id="Overall" name="LanguageTest.Overall_Score"></div></div>'
+
+                newDiv.innerHTML = newForm;
+                TestForm.appendChild(newDiv);
+
+                option.value = stdLanguage.Language_Type;
+                document.getElementById("Reading").value = stdLanguage.Reading_Score;;
+                document.getElementById("Writing").value = stdLanguage.Writing_Score;
+                document.getElementById("Speaking").value = stdLanguage.Speaking_Score;
+                document.getElementById("Listening").value = stdLanguage.Listening_Score;
+                document.getElementById("Overall").value = stdLanguage.Overall_Score;
+            }
+        }
+
+
+
+
+            //----------------------------------------GreTest---------------------------------------------------//
+
+        var GreTestDb = @Html.Raw(Json.Serialize(Model.GreTests));
+
+        var check = document.getElementById("customSwitch1");
+        console.log(check.value);
+        var OnChecked = document.getElementById("GRE-Checked")
+
+        if (GreTestDb.GRE_Exame == false) {
+            check.checked = false;
+        }
+        else {
+            check.checked = true;
+            if (check.checked == true) {
+
+                var newDiv = document.createElement("div");
+                newDiv.className = "col-12";
+                newForm = '<div class="row"><label class="mb-1">Verbal</label>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type = "text" class="form-control"  id = "GRE_Verbal" placeholder = "Score" ></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Verbal_Rank" placeholder="Rank%"></div></div>' +
+                    '<label class="mb-1 mt-2">Quantitative</label>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Quantitative" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Quantitative_Rank"  placeholder="Rank%"></div></div>' +
+                    '<label class="mb-1 mt-2">Writing</label>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Writting" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GRE_Writting_Rank"  placeholder="Rank%"></div></div></div>'
+
+                newDiv.innerHTML = newForm;
+                OnChecked.appendChild(newDiv);
+
+                check.value = GreTestDb.GRE_Exame;
+                document.getElementById("GRE_Verbal").value = GreTestDb.GRE_Verbal;
+                document.getElementById("GRE_Quantitative").value = GreTestDb.GRE_Quantitative;
+                document.getElementById("GRE_Writting").value = GreTestDb.GRE_Writting;
+                document.getElementById("GRE_Verbal_Rank").value = GreTestDb.GRE_Verbal_Rank;
+                document.getElementById("GRE_Quantitative_Rank").value = GreTestDb.GRE_Quantitative;
+                document.getElementById("GRE_Writting_Rank").value = GreTestDb.GRE_Writting_Rank;
+            }
+
+        }
+
+            //----------------------------------------GmateTest---------------------------------------------------//
+
+        var GmateTestDb = @Html.Raw(Json.Serialize(Model.GmatTest));
+
+
+        var check = document.getElementById("customSwitch2");
+        console.log(check.value);
+        var OnChecked = document.getElementById("GMAT-Checked");
+        if (GmateTestDb.GMAT_Exame == false) {
+            check.value = GmateTestDb.GMAT_Exame;
+        }
+        else {
+            check.checked = true;
+            if (check.checked == true) {
+
+                var newDiv = document.createElement("div");
+                newDiv.className = "col-12";
+                newForm = '<div class="row"><label class="mb-1">Verbal</label>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type = "text" class="form-control"  id = "GMAT_Verbal" placeholder = "Score" ></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GMAT_Verbal_Rank" placeholder="Rank%"></div></div>' +
+                    '<label class="mb-1 mt-2">Quantitative</label>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GMAT_Quantitative" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GMAT_Quantitative_Rank"  placeholder="Rank%"></div></div>' +
+                    '<label class="mb-1 mt-2">Writing</label>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GMAT_Writting" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GMAT_Writting_Rank"  placeholder="Rank%"></div></div>' +
+                    '<label class="mb-1 mt-2">Total</label> ' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GMAT_Total" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-6"><div class="form-group"><input type="text" class="form-control" id="GMAT_Total_Rank"  placeholder="Rank%"></div></div></div>'
+
+                newDiv.innerHTML = newForm;
+                OnChecked.appendChild(newDiv);
+
+                check.value = GmateTestDb.GMAT_Exame;
+                document.getElementById("GMAT_Verbal").value = GmateTestDb.GMAT_Verbal;
+                document.getElementById("GMAT_Verbal_Rank").value = GmateTestDb.GMAT_Verbal_Rank;
+                document.getElementById("GMAT_Quantitative").value = GmateTestDb.GMAT_Quantitative;
+                document.getElementById("GMAT_Quantitative_Rank").value = GmateTestDb.GMAT_Quantitative_Rank;
+                document.getElementById("GMAT_Writting").value = GmateTestDb.GMAT_Writting;
+                document.getElementById("GMAT_Writting_Rank").value = GmateTestDb.GMAT_Writting_Rank;
+                document.getElementById("GMAT_Total").value = GmateTestDb.GMAT_Total;
+                document.getElementById("GMAT_Total_Rank").value = GmateTestDb.GMAT_Total_Rank;
+            }
+
+        }
+    }
+
+</script>
+<script>
+
+    var Country = document.getElementById("CountryName");
+    var state = document.getElementById('StateName');
+    var City = document.getElementById('CityName');
+    var alluniversity = document.getElementById("alluniversity");
+    var subDisipline = document.getElementById('subDisipline');
+    var disipline = document.getElementById('disipline');
+    var intak = document.getElementById('intak');
+    var Programlevel = document.getElementById('Programlevel');
+
+
+    var tutionStart = document.getElementById("tutionStart");
+    var tutionEnd = document.getElementById("tutionEnd");
+
+    function SearchUni() {
+        var studentProfile = @Html.Raw(Json.Serialize(Model.studentProfile.StudentId));
+
+
+  
+
+
+            //if (session.get("filter"))
+            //    filte = session.get("filter");
+        var url = "/StudentProfiles/Search?id=" + studentProfile;
+
+        if (Country.value) {
+            url = url + (!url.includes("/StudentProfiles/Search?") ? "?" : "&") + "countryId=" + Country.value;
+            //url = url + "?countryId=" + Country.value;
+        }
+
+        if (state.value) {
+            url = url + (!url.includes("/StudentProfiles/Search?") ? "?" : "&") + "stateId=" + state.value;
+            //url = url + "?countryId=" + Country.value;
+        }
+
+        if (alluniversity.value) {
+            //url = url  + "?university=" + uniInput.value;
+            url = url + (!url.includes("/StudentProfiles/Search?") ? "?" : "&") + "school=" + alluniversity.value;
+        }
+
+        if (Programlevel.value) {
+            url = url + (!url.includes("/StudentProfiles/Search?") ? "?" : "&") + "levelId=" + Programlevel.value;
+            //url = url + "?countryId=" + Country.value;
+        }
+
+        if (intak.value) {
+            url = url + (!url.includes("/StudentProfiles/Search?") ? "?" : "&") + "intakId=" + intak.value;
+            //url = url + "?countryId=" + Country.value;
+        }
+
+        if (disipline.value) {
+            url = url + (!url.includes("/StudentProfiles/Search?") ? "?" : "&") + "disiplineId=" + disipline.value;
+            //url = url + "?countryId=" + Country.value;
+        }
+
+        if (tutionStart.value) {
+            url = url + (!url.includes("/StudentProfiles/Search?") ? "?" : "&") + "tutionStart=" + tutionStart.value;
+            //url = url + "?countryId=" + Country.value;
+        }
+
+        if (tutionEnd.value) {
+            url = url + (!url.includes("/StudentProfiles/Search?") ? "?" : "&") + "tutionEnd=" + tutionEnd.value;
+            //url = url + "?countryId=" + Country.value;
+        }
+
+           
+
+   
+        //filter.course = courseInput.value;
+        //filter.school = alluniversity.value;
+        //filter.countryId = Country.value;
+        //session.set('filter', filter);
+        
+        window.location.href = url;
+
+    }
+
+
+
+
+
+    //if (Country.value = "Select Country") {
+    //    state.innerHTML = "";
+    //}
+    if (state.value == "Select State") {
+        City.innerHTML = "";
+    }
+
+    function CountryChange(eve) {
+
+        console.log(eve.value)
+        $.ajax({
+            type: 'GET',
+            url: "/Universities/getCountry?id=" + eve.value,
+            success: function (response) {
+                console.log(response);
+
+
+                var newOption = "";
+                for (var i = 0; i < response.state.length; i++) {
+
+                    newOption = newOption + '<option Value="' + response.state[i].StateId + '">' + response.state[i].StateName + '</option>'
+
+                }
+                state.innerHTML = newOption;
+
+                StateChange(state);
+
+            }
+        });
+    };
+
+    //function StateChange(eve) {
+    //    console.log(eve.value)
+    //    $.ajax({
+    //        type: 'GET',
+    //        url: "/Universities/getCity?id=" + eve.value,
+    //        success: function (response) {
+    //            console.log(response);
+
+    //            var newOption = "";
+    //            for (var i = 0; i < response.City.length; i++) {
+
+    //                newOption = newOption + '<option Value="' + response.City[i].CityId + '">' + response.City[i].CityName + '</option>'
+    //            }
+    //            City.innerHTML = newOption;
+
+
+
+    //        }
+    //    });
+    //};
+
+
+    var university = document.getElementById("university");
+    var institute = document.getElementById("institute");
+    var college = document.getElementById("college");
+    var school = document.getElementById("school");
+ 
+    var Clearfilter = document.getElementById("Clearfilter");
+    var universityDb = @Html.Raw(Json.Serialize(Model.university));
+
+    function UniversityChange(chk) {
+        console.log(chk.value);
+
+        if (university.checked == true ) {
+
+            $.ajax({
+                type: "GET",
+                url: "/StudentProfiles/UniversityChange?id=" + chk.value,
+                success: function (response) {
+                    console.log(response);
+
+                    var newOption = "";
+                    for (var i = 0; i < response.University.length; i++) {
+
+                        newOption = newOption + '<option Value="' + response.University[i].UniversityId + '">' + response.University[i].UniversityName + '</option>'
+                    }
+                    alluniversity.innerHTML = newOption;
+                }
+
+
+            });
+        }
+        else {
+                   var newOption = "";
+            for (var i = 0; i < universityDb.length; i++) {
+
+                newOption = newOption + '<option Value="' + universityDb[i].Value + '">' + universityDb[i].Text + '</option>'
+            }
+            alluniversity.innerHTML = newOption;
+        }
+
+    }
+
+    function InstituteChange(chk) {
+        console.log(chk.value);
+
+        if (institute.checked == true) {
+
+            $.ajax({
+                type: "GET",
+                url: "/StudentProfiles/UniversityChange?id=" + chk.value,
+                success: function (response) {
+                    console.log(response);
+
+                    var newOption = "";
+                    for (var i = 0; i < response.University.length; i++) {
+
+                        newOption = newOption + '<option Value="' + response.University[i].UniversityId + '">' + response.University[i].UniversityName + '</option>'
+                    }
+                    alluniversity.innerHTML = newOption;
+                }
+
+
+            });
+        }
+        else {
+            var newOption = "";
+            for (var i = 0; i < universityDb.length; i++) {
+
+                newOption = newOption + '<option Value="' + universityDb[i].Value + '">' + universityDb[i].Text + '</option>'
+            }
+            alluniversity.innerHTML = newOption;
+        }
+
+    }
+    function CollegeChange(chk) {
+        console.log(chk.value);
+
+        if (college.checked == true) {
+
+            $.ajax({
+                type: "GET",
+                url: "/StudentProfiles/UniversityChange?id=" + chk.value,
+                success: function (response) {
+                    console.log(response);
+
+                    var newOption = "";
+                    for (var i = 0; i < response.University.length; i++) {
+
+                        newOption = newOption + '<option Value="' + response.University[i].UniversityId + '">' + response.University[i].UniversityName + '</option>'
+                    }
+                    alluniversity.innerHTML = newOption;
+                }
+
+
+            });
+        }
+        else {
+            var newOption = "";
+            for (var i = 0; i < universityDb.length; i++) {
+
+                newOption = newOption + '<option Value="' + universityDb[i].Value + '">' + universityDb[i].Text + '</option>'
+            }
+            alluniversity.innerHTML = newOption;
+        }
+
+    }
+    function SchoolChange(chk) {
+        console.log(chk.value);
+
+        if (school.checked == true) {
+
+            $.ajax({
+                type: "GET",
+                url: "/StudentProfiles/UniversityChange?id=" + chk.value,
+                success: function (response) {
+                    console.log(response);
+
+                    var newOption = "";
+                    for (var i = 0; i < response.University.length; i++) {
+
+                        newOption = newOption + '<option Value="' + response.University[i].UniversityId + '">' + response.University[i].UniversityName + '</option>'
+                    }
+                    alluniversity.innerHTML = newOption;
+                }
+
+
+            });
+        }
+        else {
+            var newOption = "";
+            for (var i = 0; i < universityDb.length; i++) {
+
+                newOption = newOption + '<option Value="' + universityDb[i].Value + '">' + universityDb[i].Text + '</option>'
+            }
+            alluniversity.innerHTML = newOption;
+        }
+
+    }
+
+
+
+
+
+
+    function ClearAll() {
+
+        Country.value = "Select";
+        state.value = "Select";
+        City.value = "";
+        alluniversity.value = "Select";
+        Programlevel.value = "Select";
+        intak.value = "Select";
+        subDisipline.value = "Select";
+        disipline.value = "Select";
+
+
+
+    };
+
+</script>
+
+
+
+
+    }
+

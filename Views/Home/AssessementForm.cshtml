@@ -1,0 +1,227 @@
+﻿@*@model Study_Abroad.Models.AssessmentEducationalBackground*@
+@model Study_Abroad.DTO.AssessmentFormDTO;
+@{
+    ViewData["Title"] = "AssessmentForm";
+    Layout = "_StudyAbroadLayout2";
+}
+@section CSS{
+    <link rel="stylesheet" type="text/css" href="~/study-abroad/css/our-services.css" />
+    <link rel="stylesheet" href="~/study-abroad/css/contact.css">
+}
+
+<main>
+    <section class="header-section-2">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 text-center">
+                        <h1 class="header-title">Assessment Form</h1>
+                        <p class="services-header-text">
+                            Vestibulum commodo sapien non elit porttitor, vitae volutpat nibh mollis. <br> Nulla porta risus id neque tempor, in efficitur justo imperdiet. <br>Etiam a ex at ante tincidunt imperdiet. Nunc congue ex vel nisl viverra,<br>sit
+                            amet aliquet lectus ullamcorper.
+                        </p>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <form asp-action="AssessementForm">
+        <div class="input-section " style="padding-bottom: 150px; ">
+            <div class="container-fluid ">
+                <div class="container ">
+                    <div class="row ">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 mt-5">
+                            <div class="color">
+                                <h2>Professional Information</h2>
+                            </div>
+                            <div class="cards py-5 pb-150px" id="form1 ">
+                                <div class="form-data">
+                                    <div class="forms-inputs " style="margin-bottom: 40px; ">
+                                        <span> Country Of Interest </span>
+                                        <select asp-for="Assessments.CountryOfInterest" asp-items="ViewBag.Country" class="{ 'form-control':true} " style="padding-left: 20px;border: 1px solid #202E61;border-radius: 18px;height: 70px;width: 100%;">
+                                            <option>Select</option>
+                                        </select>
+                                    </div>
+                                    <div class="forms-inputs " style="margin-bottom: 40px; ">
+                                        <span> Name </span>
+                                        <input asp-for="Assessments.Name" autocomplete="off " placeholder="Your Name.... " type="text" v-model="password " v-bind:class="{ 'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured} " v-on:blur="passwordBlured=t rue " />
+                                    </div>
+
+                                    <div class="forms-inputs " style="margin-bottom: 40px; ">
+                                        <span> Date of Birth </span>
+                                        <input asp-for="Assessments.DateOfBirth" autocomplete="off " placeholder="Major you want to study.... " type="date" v-bind:class="{ 'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured} "
+                                               v-on:blur="passwordBlured=t rue ">
+                                        <div class="invalid-feedback ">Password must be 8 character!</div>
+                                    </div>
+
+                                    <div class="forms-inputs " style="margin-bottom: 40px; ">
+                                        <span> Phone </span>
+                                        <input asp-for="Assessments.PhoneNumber" autocomplete="off " placeholder="Type Your Phone number " type="number" v-bind:class="{ 'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured} "
+                                               v-on:blur="passwordBlured=t rue ">
+                                        <div class="invalid-feedback ">Password must be 8 character!</div>
+                                    </div>
+
+                                    <div class="forms-inputs " style="margin-bottom: 40px; ">
+                                        <span> Address </span>
+                                        <input asp-for="Assessments.Address" autocomplete="off " placeholder="Type your Address " type="text" v-bind:class="{ 'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured} "
+                                               v-on:blur="passwordBlured=t rue ">
+                                        <div class="invalid-feedback ">Password must be 8 character!</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-section " style="padding-bottom: 30px; ">
+            <div class="container-fluid ">
+                <div class="container ">
+                    <div class="row ">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 mt-5">
+                            <div class="color">
+                                <h2>Educational Backgroung</h2>
+                            </div>
+                            <div class="cards py-5 " id="form1 ">
+                                <div class="form-data " v-if="!submitted ">
+                                    <table id="myTable">
+                                        <thead>
+                                            @*<tr>
+                                                <th>Degree</th>
+                                                <th>Graduating Year</th>
+                                                <th>Course Duration</th>
+                                                <th>% / CGPA</th>
+                                                <th>Institution</th>
+                                                <th>Major Subjects</th>
+                                            </tr>*@
+                                        </thead>
+                                        <tbody id="myTableRow">
+                                            <tr>
+                                                <td><input placeholder="Degree" name="AssessmentEducationalBackgrounds[0].Degree" type="text" class="form-control" /></td>
+                                                <td><input placeholder="Graduating Year" name="AssessmentEducationalBackgrounds[0].GraduatingYear" type="text" onfocus="(this.type='Date')" class="form-control" /></td>
+                                                <td><input placeholder="Course Duration" name="AssessmentEducationalBackgrounds[0].CourseDuration" type="text" class="form-control" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input placeholder="% CGPA" name="AssessmentEducationalBackgrounds[0].CGPA" type="text" class="form-control" /></td>
+                                                <td><input placeholder="Institution" name="AssessmentEducationalBackgrounds[0].Institutions" type="text" class="form-control" /></td>
+                                                <td><input placeholder="Major Subjects" name="AssessmentEducationalBackgrounds[0].MajorSubjects" type="text" class="form-control" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    @*<div class="row">
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="Degree">
+                                        </div>
+                                        <div class="col">
+                                            <input type="date" class="form-control" placeholder="Graduating Year">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="Course Duration">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="% CGPA">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="Institution">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="Major Subjects">
+                                        </div>
+                                    </div>*@
+                                    <div class="bitton mb-3 mt-2">
+                                        <button type="button" class="btn btn " style="padding-left: 15px;padding-right: 15px;" onclick="AddNew()">
+                                            +Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-section " style="padding-bottom: 150px; ">
+            <div class="container-fluid ">
+                <div class="container ">
+                    <div class="row ">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 mt-5">
+                            <div class="color">
+                                <h2>Additional Informations</h2>
+                            </div>
+                            <div class="cards py-5 " id="form1 ">
+                                <div class="form-data " v-if="!submitted ">
+                                    <div class="forms-inputs " style="margin-bottom: 40px; ">
+                                        <span> Select Language Certification </span> 
+                                        <select asp-for="Assessments.LanguageCertification" class="{ 'form-control':true} " style="padding-left: 20px;border: 1px solid #202E61;border-radius: 18px;height: 70px;width: 100%;">
+                                            <option>Select</option>
+                                            <option>Select 2</option>
+                                        </select>
+                                    </div>
+                                    <div class="forms-inputs " style="margin-bottom: 40px; ">
+                                        <span> Courses of Interest </span> 
+                                        <input asp-for="Assessments.CourseOfInterest" type="text" placeholder="Type your name " class="{ 'form-control':true} "
+                                                                                  v-on:blur="passwordBlured=t rue ">
+                                        <div class="invalid-feedback ">Password must be 8 character!</div>
+                                    </div>
+
+                                    <div class="forms-inputs " style="margin-bottom: 40px; ">
+                                        <span> University Of Interest </span> 
+                                        <select asp-for="Assessments.UniversityOfInterest" asp-items="ViewBag.University" class="{ 'form-control':true} "  style="padding-left: 20px;border: 1px solid #202E61;border-radius: 18px;height: 70px;width: 100%;">
+                                            <option>Select</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="bitton mb-3 "> <button type="submit" class="btn btn " required>Submit</button></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+
+@section Script{
+    <script>
+        var table = document.getElementById("myTable");
+        //var trow = table.rows.length;
+        var rowIndex = table.tBodies[0].rows.length-1;
+        //var rowIndex = document.getElementById("myTableRow").rows.length;
+        function AddNewRow() {
+            $("#myTableRow tr:last").after(`<tr><td><input type="text" class="form-control" name="AssessmentEducationalBackgrounds[` + rowIndex + `].Degree"/></td>
+                                          <td><input type="text" class="form-control" name="AssessmentEducationalBackgrounds[` + rowIndex + `].GraduatingYear"/></td>
+                                          <td><input type="text" class="form-control" name="AssessmentEducationalBackgrounds[` + rowIndex + `].CourseDuration"/></td>
+                                          <td><input type="text" class="form-control" name="AssessmentEducationalBackgrounds[` + rowIndex + `].CGPA"/></td>
+                                          <td><input type="text" class="form-control" name="AssessmentEducationalBackgrounds[` + rowIndex + `].Institution"/></td>
+                                          <td><input type="text" class="form-control" name="AssessmentEducationalBackgrounds[` + rowIndex + `].MajorSubjects"/></td></tr>`)
+            rowIndex++;
+        };
+        function AddNew() {
+            $("#myTableRow tr:last").after(`<tr>
+                                                <td><input placeholder="Degree" name="AssessmentEducationalBackgrounds[` + rowIndex + `].Degree" type="text" class="form-control" /></td>
+                                                <td><input placeholder="Graduating Year" name="AssessmentEducationalBackgrounds[` + rowIndex + `].GraduatingYear" type="text" onfocus="(this.type='Date')" class="form-control" /></td>
+                                                <td><input placeholder="Course Duration" name="AssessmentEducationalBackgrounds[` + rowIndex + `].CourseDuration" type="text" class="form-control" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input placeholder="% CGPA" name="AssessmentEducationalBackgrounds[` + rowIndex + `].CGPA" type="text" class="form-control" /></td>
+                                                <td><input placeholder="Institution" name="AssessmentEducationalBackgrounds[` + rowIndex + `].Institutions" type="text" class="form-control" /></td>
+                                                <td><input placeholder="Major Subjects" name="AssessmentEducationalBackgrounds[` + rowIndex + `].MajorSubjects" type="text" class="form-control" /></td>
+                                            </tr>`)
+            rowIndex++;
+        }
+    </script>
+}
+

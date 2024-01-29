@@ -1,0 +1,835 @@
+﻿
+@{ ViewData["Title"] = "_LayoutStudyAbroad"; }
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- OWL CAROUSEL CDN  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <!--CSS LINKS  -->
+    <link rel="stylesheet" href="~/study-abroad/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/study-abroad/css/index.css">
+    <!-- FONTAWESOME CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- JQUERY CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/study-abroad/css/footer.css">
+    <title>Home Page</title>
+    @RenderSection("CSS", required: false)
+</head>
+
+<body>
+    <div class="container-fluid fixed-top p-0">
+        <!-- TOP NAVBAR START  -->
+        <div class="container-fluid navbar-top">
+            <div class="container">
+                <div class="row" style="display:flex;align-items: center;">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-12 navbar-logo top-nav-img">
+                        <img src="~/study-abroad/img/logo@2x.png" class="logo-img">
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-12"></div>
+                    <div class="col-lg-7 col-md-7 col-sm-12 col-12 top-nav-detail" style="display: flex;justify-content: end;align-items: center;">
+                        <p style="margin-left: 0px;" class="number"><i class="fa-solid fa-phone"></i>&nbsp; (761)302-3732</p>
+                        <p style="margin-right: 30px;" class="number" id="number"><i class="fa-solid fa-envelope"></i>&nbsp; barbara.griffin@mail.com</p>
+                        <a href="~/Home/Login" class="btn login-button" style="background: #202E61 0% 0% no-repeat padding-box; border-radius: 12px;opacity: 1;color: white;padding: 11px 40px;margin-left: 20px;">LOGIN</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- TOP NAVBAR END  -->
+        <!-- BOTTOM NAVBAR START -->
+        <!-- <nav class="navbar navbar-expand-lg navbar-light home-nav">
+            <div class="container p-0" style="position: relative;">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center b-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active-link" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="our-services.html">Our Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Foreign Universities</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">IELTS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Stories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">FAQ's</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact Us</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav> -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light home-nav">
+            <div class="container">
+                <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 b-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="~/Home/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Home/Aboutus">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Home/OurServices">Our Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Home/Search">Foreign Universities</a>
+                        </li>
+                        @*<li class="nav-item">
+                            <a class="nav-link" href="#">IELTS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Home/Cheshier">Stories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Home/Search">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">FAQ's</a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Home/ContactUs">Contact Us</a>
+                        </li>
+                    </ul>
+                    <!-- <form class="d-flex">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form> -->
+                </div>
+            </div>
+        </nav>
+        <!-- BOTTOM NAVBAR END -->
+    </div>
+    <!-- Start your Journey to Study Abroad START -->
+    @*<div class="container-fluid journey-sec mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6" style="margin-top: 10%;">
+                        <h1>Start your Journey <br> to Study Abroad</h1>
+                        <p class="mt-4">
+                            Vestibulum commodo sapien non elit porttitor, vitae volutpat nibh mollis. Nulla porta risus id neque tempor, in efficitur justo imperdiet. Etiam a ex at ante tincidunt imperdiet. Nunc congue ex vel nisl viverra, sit amet aliquet lectus
+                            ullamcorper. Praesent luctus lacus non lorem
+                        </p>
+                        <div class="input-group mt-4">
+                            <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Search for college or university">
+                             <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                USA
+                                </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                            <select class="btn dropdown-toggle dropdown-toggle-split" style="border-left: 1px solid #202e61;appearance: none;">
+                                <option value="">&nbsp; USA &nbsp;</option>
+                                <option value="">&nbsp; USA &nbsp;</option>
+                                <option value="">&nbsp; USA &nbsp;</option>
+                            </select><span style="margin-left: 0px;display: flex;align-items: center;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="10.799" height="6.126" viewBox="0 0 10.799 6.126">
+                                    <path id="Icon_awesome-caret-down" data-name="Icon awesome-caret-down" d="M1.521,13.5h9.346a.725.725,0,0,1,.512,1.239L6.708,19.413a.728.728,0,0,1-1.028,0L1.009,14.739A.725.725,0,0,1,1.521,13.5Z" transform="translate(-0.794 -13.5)" fill="#202e61" />
+                                </svg>
+                            </span>
+                            <button type="button" class="btn search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="~/study-abroad/img/Group 3448@2x.png" width="100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+         Start your Journey to Study Abroad END
+         Featured Universities START
+        <div class="container-fluid featured-sec mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 mt-5">
+                        <h1>Featured Universities</h1>
+                    </div>
+                </div>
+                <div class="owl-one owl-carousel owl-theme">
+                    <div class="item">
+                        <img src="~/study-abroad/img/feature1.png" width="100%">
+                    </div>
+                    <div class="item">
+                        <img src="~/study-abroad/img/feature2.png" width="100%">
+                    </div>
+                    <div class="item">
+                        <img src="~/study-abroad/img/feature3.png" width="100%">
+                    </div>
+                    <div class="item">
+                        <img src="~/study-abroad/img/feature4.png" width="100%">
+                    </div>
+
+                    <div class="item">
+                        <img src="~/study-abroad/img/feature1.png" width="100%">
+                    </div>
+                    <div class="item">
+                        <img src="~/study-abroad/img/feature2.png" width="100%">
+                    </div>
+                    <div class="item">
+                        <img src="~/study-abroad/img/feature3.png" width="100%">
+                    </div>
+                    <div class="item">
+                        <img src="~/study-abroad/img/feature4.png" width="100%">
+                    </div>
+
+                    <div class="item">
+                        <img src="~/study-abroad/img/feature1.png" width="100%">
+                    </div>
+                    <div class="item">
+                        <img src="~/study-abroad/img/feature2.png" width="100%">
+                    </div>
+                    <div class="item">
+                        <img src="~/study-abroad/img/feature3.png" width="100%">
+                    </div>
+                    <div class="item">
+                        <img src="~/study-abroad/img/feature4.png" width="100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+         Featured Universities END
+         From Career Counselling START
+        <div class="container-fluid career-sec" style="margin-top: 10%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="~/study-abroad/img/Group 3449@2x.png" width="100%">
+                    </div>
+                    <div class="col-md-6 mt-5">
+                        <img src="~/study-abroad/img/Group 1482@2x.png" class="top-heading-img">
+                        <br>
+                        <br>
+                        <h1>
+                            From Career Counselling
+                            <br>
+                            <span>To University Admissions</span>
+                        </h1>
+                        <p class="mt-4">
+                            Vestibulum commodo sapien non elit porttitor, vitae volutpat nibh mollis. Nulla porta risus id neque tempor, in efficitur justo imperdiet. Etiam a ex at ante tincidunt imperdiet. Nunc congue ex vel nisl viverra, sit amet aliquet lectus
+                            ullamcorper. Praesent
+                            <span id="text" style="display: none;">
+                                CSS is designed primarily to enable the separation of document content from document presentation, including aspects such as the layout, colors, and fonts. This separation can improve content accessibility, provide more flexibility and control in the specification of presentation characteristics, enable multiple HTML pages to share formatting by specifying the relevant CSS in a separate .css file, and reduce complexity and repetition in the structural content.
+                                 <a href="#">Read more....</a>
+                                <div class="btn-container">
+                                    <button id="toggle">Read More</button>
+                                </div>
+                        </p>
+                        <button type="button" class="btn btn-outline-primary mt-4">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         From Career Counselling END
+         From Visa Consultancy START
+        <div class="container-fluid career-sec" style="margin-top: 10%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mt-5">
+                        <img src="~/study-abroad/img/Group 3450@2x.png" class="top-heading-img">
+                        <br>
+                        <br>
+                        <h1>
+                            From Visa Consultancy
+                            <br>
+                            <span>To Accomodation</span>
+                        </h1>
+                        <p class="mt-4">
+                            Vestibulum commodo sapien non elit porttitor, vitae volutpat nibh mollis. Nulla porta risus id neque tempor, in efficitur justo imperdiet. Etiam a ex at ante tincidunt imperdiet. Nunc congue ex vel nisl viverra, sit amet aliquet
+                            lectus ullamcorper. Praesent
+                            <span id="text1" style="display: none;">
+                                CSS is designed primarily to enable the separation of document content from document presentation, including aspects such as the layout, colors, and fonts. This separation can improve content accessibility, provide more flexibility and control in the specification of presentation characteristics, enable multiple HTML pages to share formatting by specifying the relevant CSS in a separate .css file, and reduce complexity and repetition in the structural content.
+                                 <a href="#">Read more....</a>
+                                <div class="btn-container">
+                                    <button id="toggle1">Read More</button>
+                                </div>
+                        </p>
+                        <button type="button" class="btn btn-outline-primary mt-4">GET STARTED</button>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="~/study-abroad/img/kinza.png" width="100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+         From Visa Consultancy END
+         Pre Departure Briefing START
+        <div class="container-fluid career-sec" style="margin-top: 10%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="~/study-abroad/img/Group 3451@2x.png" width="100%">
+                    </div>
+                    <div class="col-md-6 mt-5">
+                        <img src="~/study-abroad/img/Group 3452@2x.png" class="top-heading-img">
+                        <br>
+                        <br>
+                        <h1>
+                            Pre Departure Briefing
+                            <br>
+                            <span>To On Sight Support</span>
+                        </h1>
+                        <p class="mt-4">
+                            Vestibulum commodo sapien non elit porttitor, vitae volutpat nibh mollis. Nulla porta risus id neque tempor, in efficitur justo imperdiet. Etiam a ex at ante tincidunt imperdiet. Nunc congue ex vel nisl viverra, sit amet aliquet
+                            lectus ullamcorper. Praesent
+                            <span id="text2" style="display: none;">
+                                CSS is designed primarily to enable the separation of document content from document presentation, including aspects such as the layout, colors, and fonts. This separation can improve content accessibility, provide more flexibility and control in the specification of presentation characteristics, enable multiple HTML pages to share formatting by specifying the relevant CSS in a separate .css file, and reduce complexity and repetition in the structural content.
+                                 <a href="#">Read more....</a>
+                                <div class="btn-container">
+                                    <button id="toggle2">Read More</button>
+                                </div>
+                        </p>
+                        <button type="button" class="btn btn-outline-primary mt-4">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         Pre Departure Briefing END
+         Tied Up Universities START
+        <div class="container-fluid universities-sec" style="margin-top: 10%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 mt-5">
+                        <h1>
+                            Tied Up Universities
+                            <br>
+                            <span>across various countries</span>
+                        </h1>
+                    </div>
+                    <div class="col-md-2 mt-5">
+                        <span>
+                            <button type="button" class="customNextBtn btn btn-primary" style="border-radius: 100%;background-color: #EFEEEE;border: none; color: #202E61;padding: 10px 18px;">
+                                <i class="fa-solid fa-angle-left"></i>
+                            </button>
+                            <button type="button" class="customPrevBtn btn btn-primary" style="border-radius: 100%;background-color: #202E61;border: none;padding: 10px 18px;">
+                                <i class="fa-solid fa-angle-right"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="owl-two owl-carousel owl-theme mt-5">
+                    <div class="item">
+                        <div class="card mb-3" style="max-width: 100%;">
+                            <div class="row g-0">
+                                <div class="col-md-4 col-4">
+                                    <img src="~/study-abroad/img/Mask Group 12@2x.png" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-8 col-8">
+                                    <div class="card-body">
+                                        <p>Study in</p>
+                                        <h5>Austrailia</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card mb-3" style="max-width: 100%;">
+                            <div class="row g-0">
+                                <div class="col-md-4 col-4">
+                                    <img src="~/study-abroad/img/Mask Group 12-2@2x.png" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-8 col-8">
+                                    <div class="card-body">
+                                        <p>Study in</p>
+                                        <h5>United Kingdom</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card mb-3" style="max-width: 100%;">
+                            <div class="row g-0">
+                                <div class="col-md-4 col-4">
+                                    <img src="~/study-abroad/img/Mask Group 12-1@2x.png" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-8 col-8">
+                                    <div class="card-body">
+                                        <p>Study in</p>
+                                        <h5>Austrailia</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="card mb-3" style="max-width: 100%;">
+                            <div class="row g-0">
+                                <div class="col-md-4 col-4">
+                                    <img src="~/study-abroad/img/Mask Group 12@2x.png" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-8 col-8">
+                                    <div class="card-body">
+                                        <p>Study in</p>
+                                        <h5>Austrailia</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card mb-3" style="max-width: 100%;">
+                            <div class="row g-0">
+                                <div class="col-md-4 col-4">
+                                    <img src="~/study-abroad/img/Mask Group 12-2@2x.png" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-8 col-8">
+                                    <div class="card-body">
+                                        <p>Study in</p>
+                                        <h5>United Kingdom</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card mb-3" style="max-width: 100%;">
+                            <div class="row g-0">
+                                <div class="col-md-4 col-4">
+                                    <img src="~/study-abroad/img/Mask Group 12-1@2x.png" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-8 col-8">
+                                    <div class="card-body">
+                                        <p>Study in</p>
+                                        <h5>Austrailia</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="card mb-3" style="max-width: 100%;">
+                            <div class="row g-0">
+                                <div class="col-md-4 col-4">
+                                    <img src="~/study-abroad/img/Mask Group 12@2x.png" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-8 col-8">
+                                    <div class="card-body">
+                                        <p>Study in</p>
+                                        <h5>Austrailia</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card mb-3" style="max-width: 100%;">
+                            <div class="row g-0">
+                                <div class="col-md-4 col-4">
+                                    <img src="~/study-abroad/img/Mask Group 12-2@2x.png" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-8 col-8">
+                                    <div class="card-body">
+                                        <p>Study in</p>
+                                        <h5>United Kingdom</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card mb-3" style="max-width: 100%;">
+                            <div class="row g-0">
+                                <div class="col-md-4 col-4">
+                                    <img src="~/study-abroad/img/Mask Group 12-1@2x.png" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-8 col-8">
+                                    <div class="card-body">
+                                        <p>Study in</p>
+                                        <h5>Austrailia</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         Tied Up Universities END
+         Testimonials START
+        <div class="container-fluid testimonial-sec" style="margin-top: 10%;">
+            <div class="container">
+                <div class="row">
+                    <h1>Testimonials</h1>
+                </div>
+                <div class="owl-three owl-carousel owl-theme mt-5">
+                    <div class="item">
+                        <div class="card" style="width: 100%;">
+                            <center>
+                                <img src="~/study-abroad/img/Ellipse 33-2@2x.png" class="card-img-top">
+                            </center>
+                            <div class="card-body text-center">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label>
+
+                                    <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+
+                                    <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="Meh - 3 stars"></label>
+
+                                    <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+
+                                    <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+
+                                </fieldset>
+                                <h5 class="card-title">Kathryn Hart</h5>
+                                <p class="card-text">Mauris neque nisi, faucibus non elementum in, convallis et eros. Sed pretium sem libero, vel pellentesque purus ultrices ut. In quis leo id</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card" style="width: 100%;">
+                            <center>
+                                <img src="~/study-abroad/img/Ellipse 33@2x.png" class="card-img-top">
+                            </center>
+                            <div class="card-body text-center">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star51" name="rating" value="5" /><label class="full" for="star51" title="Awesome - 5 stars"></label>
+
+                                    <input type="radio" id="star41" name="rating" value="4" /><label class="full" for="star41" title="Pretty good - 4 stars"></label>
+
+                                    <input type="radio" id="star31" name="rating" value="3" /><label class="full" for="star31" title="Meh - 3 stars"></label>
+
+                                    <input type="radio" id="star21" name="rating" value="2" /><label class="full" for="star21" title="Kinda bad - 2 stars"></label>
+
+                                    <input type="radio" id="star11" name="rating" value="1" /><label class="full" for="star11" title="Sucks big time - 1 star"></label>
+
+                                </fieldset>
+                                <h5 class="card-title">Johnny Valdez</h5>
+                                <p class="card-text">Mauris neque nisi, faucibus non elementum in, convallis et eros. Sed pretium sem libero, vel pellentesque purus ultrices ut. In quis leo id</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card" style="width: 100%;">
+                            <center>
+                                <img src="~/study-abroad/img/Ellipse 33-1@2x.png" class="card-img-top">
+                            </center>
+                            <div class="card-body text-center">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star52" name="rating" value="5" /><label class="full" for="star52" title="Awesome - 5 stars"></label>
+
+                                    <input type="radio" id="star42" name="rating" value="4" /><label class="full" for="star42" title="Pretty good - 4 stars"></label>
+
+                                    <input type="radio" id="star32" name="rating" value="3" /><label class="full" for="star32" title="Meh - 3 stars"></label>
+
+                                    <input type="radio" id="star22" name="rating" value="2" /><label class="full" for="star22" title="Kinda bad - 2 stars"></label>
+
+                                    <input type="radio" id="star12" name="rating" value="1" /><label class="full" for="star12" title="Sucks big time - 1 star"></label>
+
+                                </fieldset>
+                                <h5 class="card-title">Marie Barrett</h5>
+                                <p class="card-text">Mauris neque nisi, faucibus non elementum in, convallis et eros. Sed pretium sem libero, vel pellentesque purus ultrices ut. In quis leo id</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="card" style="width: 100%;">
+                            <center>
+                                <img src="~/study-abroad/img/Ellipse 33-2@2x.png" class="card-img-top">
+                            </center>
+                            <div class="card-body text-center">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star53" name="rating" value="5" /><label class="full" for="star53" title="Awesome - 5 stars"></label>
+
+                                    <input type="radio" id="star43" name="rating" value="4" /><label class="full" for="star43" title="Pretty good - 4 stars"></label>
+
+                                    <input type="radio" id="star33" name="rating" value="3" /><label class="full" for="star33" title="Meh - 3 stars"></label>
+
+                                    <input type="radio" id="star23" name="rating" value="2" /><label class="full" for="star23" title="Kinda bad - 2 stars"></label>
+
+                                    <input type="radio" id="star13" name="rating" value="1" /><label class="full" for="star13" title="Sucks big time - 1 star"></label>
+
+                                </fieldset>
+                                <h5 class="card-title">Kathryn Hart</h5>
+                                <p class="card-text">Mauris neque nisi, faucibus non elementum in, convallis et eros. Sed pretium sem libero, vel pellentesque purus ultrices ut. In quis leo id</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card" style="width: 100%;">
+                            <center>
+                                <img src="~/study-abroad/img/Ellipse 33@2x.png" class="card-img-top">
+                            </center>
+                            <div class="card-body text-center">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star54" name="rating" value="5" /><label class="full" for="star54" title="Awesome - 5 stars"></label>
+
+                                    <input type="radio" id="star44" name="rating" value="4" /><label class="full" for="star44" title="Pretty good - 4 stars"></label>
+
+                                    <input type="radio" id="star34" name="rating" value="3" /><label class="full" for="star34" title="Meh - 3 stars"></label>
+
+                                    <input type="radio" id="star24" name="rating" value="2" /><label class="full" for="star24" title="Kinda bad - 2 stars"></label>
+
+                                    <input type="radio" id="star14" name="rating" value="1" /><label class="full" for="star14" title="Sucks big time - 1 star"></label>
+
+                                </fieldset>
+                                <h5 class="card-title">Johnny Valdez</h5>
+                                <p class="card-text">Mauris neque nisi, faucibus non elementum in, convallis et eros. Sed pretium sem libero, vel pellentesque purus ultrices ut. In quis leo id</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card" style="width: 100%;">
+                            <center>
+                                <img src="~/study-abroad/img/Ellipse 33-1@2x.png" class="card-img-top">
+                            </center>
+                            <div class="card-body text-center">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star55" name="rating" value="5" /><label class="full" for="star55" title="Awesome - 5 stars"></label>
+
+                                    <input type="radio" id="star45" name="rating" value="4" /><label class="full" for="star45" title="Pretty good - 4 stars"></label>
+
+                                    <input type="radio" id="star35" name="rating" value="3" /><label class="full" for="star35" title="Meh - 3 stars"></label>
+
+                                    <input type="radio" id="star25" name="rating" value="2" /><label class="full" for="star25" title="Kinda bad - 2 stars"></label>
+
+                                    <input type="radio" id="star15" name="rating" value="1" /><label class="full" for="star15" title="Sucks big time - 1 star"></label>
+
+                                </fieldset>
+                                <h5 class="card-title">Marie Barrett</h5>
+                                <p class="card-text">Mauris neque nisi, faucibus non elementum in, convallis et eros. Sed pretium sem libero, vel pellentesque purus ultrices ut. In quis leo id</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="card" style="width: 100%;">
+                            <center>
+                                <img src="~/study-abroad/img/Ellipse 33-2@2x.png" class="card-img-top">
+                            </center>
+                            <div class="card-body text-center">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star56" name="rating" value="5" /><label class="full" for="star56" title="Awesome - 5 stars"></label>
+
+                                    <input type="radio" id="star46" name="rating" value="4" /><label class="full" for="star46" title="Pretty good - 4 stars"></label>
+
+                                    <input type="radio" id="star36" name="rating" value="3" /><label class="full" for="star36" title="Meh - 3 stars"></label>
+
+                                    <input type="radio" id="star26" name="rating" value="2" /><label class="full" for="star26" title="Kinda bad - 2 stars"></label>
+
+                                    <input type="radio" id="star16" name="rating" value="1" /><label class="full" for="star16" title="Sucks big time - 1 star"></label>
+
+                                </fieldset>
+                                <h5 class="card-title">Kathryn Hart</h5>
+                                <p class="card-text">Mauris neque nisi, faucibus non elementum in, convallis et eros. Sed pretium sem libero, vel pellentesque purus ultrices ut. In quis leo id</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card" style="width: 100%;">
+                            <center>
+                                <img src="~/study-abroad/img/Ellipse 33@2x.png" class="card-img-top">
+                            </center>
+                            <div class="card-body text-center">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star57" name="rating" value="5" /><label class="full" for="star57" title="Awesome - 5 stars"></label>
+
+                                    <input type="radio" id="star47" name="rating" value="4" /><label class="full" for="star47" title="Pretty good - 4 stars"></label>
+
+                                    <input type="radio" id="star37" name="rating" value="3" /><label class="full" for="star37" title="Meh - 3 stars"></label>
+
+                                    <input type="radio" id="star27" name="rating" value="2" /><label class="full" for="star27" title="Kinda bad - 2 stars"></label>
+
+                                    <input type="radio" id="star17" name="rating" value="1" /><label class="full" for="star17" title="Sucks big time - 1 star"></label>
+
+                                </fieldset>
+                                <h5 class="card-title">Johnny Valdez</h5>
+                                <p class="card-text">Mauris neque nisi, faucibus non elementum in, convallis et eros. Sed pretium sem libero, vel pellentesque purus ultrices ut. In quis leo id</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card" style="width: 100%;">
+                            <center>
+                                <img src="~/study-abroad/img/Ellipse 33-1@2x.png" class="card-img-top">
+                            </center>
+                            <div class="card-body text-center">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star58" name="rating" value="5" /><label class="full" for="star58" title="Awesome - 5 stars"></label>
+
+                                    <input type="radio" id="star48" name="rating" value="4" /><label class="full" for="star48" title="Pretty good - 4 stars"></label>
+
+                                    <input type="radio" id="star38" name="rating" value="3" /><label class="full" for="star38" title="Meh - 3 stars"></label>
+
+                                    <input type="radio" id="star28" name="rating" value="2" /><label class="full" for="star28" title="Kinda bad - 2 stars"></label>
+
+                                    <input type="radio" id="star18" name="rating" value="1" /><label class="full" for="star18" title="Sucks big time - 1 star"></label>
+
+                                </fieldset>
+                                <h5 class="card-title">Marie Barrett</h5>
+                                <p class="card-text">Mauris neque nisi, faucibus non elementum in, convallis et eros. Sed pretium sem libero, vel pellentesque purus ultrices ut. In quis leo id</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         Testimonials END
+         Are You Ready To Fly START
+        <div class="conatiner-fluid " style="margin-top: 10%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="readyfly-sec">
+                            <h1>Are You Ready To Fly</h1>
+                            <h2>& Persue your <span> Dreams</span></h2>
+                            <button type="button" class="btn btn-primary mt-4">APPLY ONLINE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <!-- Are You Ready To Fly END -->
+    @RenderBody();
+    <!-- Footer Start -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class=" col-lg-4 col-md-4">
+                    <div class="footer-about">
+                        <img src="~/study-abroad/img/logo@2x.png" width="50%">
+                        <p>
+                            KHM is a global leader in international education services. We help international students such as yourself to study in English speaking countries.
+                        </p>
+                        <div class="footer-social">
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-lg-8 col-md-8">
+                    <div class="row">
+                        <div class=" col-lg-4 col-md-4">
+                            <div class="footer-link">
+                                <!-- <h3>Service Area</h3> -->
+                                <a href="index.html">Home</a>
+                                <a href="about.html">About Us </a>
+                                <a href="our-services.html">Our Services</a>
+                                <a href="">Foreign Universities</a>
+                                <a href="">IELTS</a>
+                            </div>
+                        </div>
+                        <div class=" col-lg-4 col-md-4">
+                            <div class="footer-link">
+                                <!-- <h3>Useful Link</h3> -->
+                                <a href="">FAQ's</a>
+                                <a href="contact.html">Contact Us</a>
+                                <a href="">Stories</a>
+                                <a href="">Countries</a>
+                                <a href="">Blog</a>
+                            </div>
+                        </div>
+                        <div class=" col-lg-4 col-md-4" style="font-weight: 500;">
+                            <div class="footer-link">
+                                <a href="">Student Visa Requirements</a>
+                                <a href="">Top Universities</a>
+                                <a href="">Top Courses</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid copyright mt-5">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>Copyright © 2021 | KHM Consultancy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+    <!-- JS LINKS -->
+    <script src="~/study-abroad/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/study-abroad/js/owl.js"></script>
+    @RenderSection("Script", required: false)
+</body>
+
+</html>
+<script>
+    $(document).ready(function () {
+        $("#toggle").click(function () {
+            var elem = $("#toggle").text();
+            if (elem == "Read More") {
+                //Stuff to do when btn is in the read more state
+                $("#toggle").text("Read Less");
+                $("#text").slideDown();
+            } else {
+                //Stuff to do when btn is in the read less state
+                $("#toggle").text("Read More");
+                $("#text").slideUp();
+            }
+        });
+        var featured_Uni = document.getElementById("featured-universities");
+        if (featured_Uni)
+            $(featured_Uni).load('@Url.Content("/Home/FeaturedUniversities")');
+    });
+    // SECOND SECTION
+    $(document).ready(function () {
+        $("#toggle1").click(function () {
+            var elem = $("#toggle1").text();
+            if (elem == "Read More") {
+                //Stuff to do when btn is in the read more state
+                $("#toggle1").text("Read Less");
+                $("#text1").slideDown();
+            } else {
+                //Stuff to do when btn is in the read less state
+                $("#toggle1").text("Read More");
+                $("#text1").slideUp();
+            }
+        });
+    });
+    // THIRD SECTION
+    $(document).ready(function () {
+        $("#toggle2").click(function () {
+            var elem = $("#toggle2").text();
+            if (elem == "Read More") {
+                //Stuff to do when btn is in the read more state
+                $("#toggle2").text("Read Less");
+                $("#text2").slideDown();
+            } else {
+                //Stuff to do when btn is in the read less state
+                $("#toggle2").text("Read More");
+                $("#text2").slideUp();
+            }
+        });
+    });
+</script>

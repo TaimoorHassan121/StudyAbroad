@@ -1,0 +1,1410 @@
+﻿@model Study_Abroad.Models.ViewModel.StudentProfileVM
+
+@{
+    ViewData["Title"] = "CreateStudent";
+    Layout = "_Layout1";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<!-- BEGIN: Content-->
+<div class="app-content content">
+
+    <div class="content-body">
+
+        <!-- Form wizard with icon tabs section start -->
+        <section id="info-tabs-">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card icon-tab">
+                        <div class="card-header">
+                            <h1 class="card-title">Student Profile</h1>
+                        </div>
+                        <div class="card-body mt-3">
+                            <form asp-action="CreateStudent" class="wizard-horizontal">
+                                @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+
+
+                                @if (Model.LanguageTest == null && Model.GreTests == null && Model.GmatTest == null)
+                                {
+
+                                }
+                                else
+                                {
+                                    @if (Model.LanguageTest.LanguageId != 0 && Model.GreTests.GreId != 0 && Model.GmatTest.GmatId != 0)
+                                    {
+                                        <input type="hidden" asp-for="LanguageTest.LanguageId" />
+                                        <input type="hidden" asp-for="GreTests.GreId" />
+                                        <input type="hidden" asp-for="GmatTest.GmatId" />
+                                    }
+                                }
+
+                                <input type="hidden" name="studentProfile.StudentNum" id="StudentNum" />
+                                <input type="hidden" asp-for="studentProfile.Referral_Source" id="Referral_Source" />
+                                <input type="hidden" asp-for="studentProfile.Country_Of_Intrest" id="Country_Of_Intrest" />
+                                <input type="hidden" asp-for="studentProfile.Service_Of_Intrest" id="Service_Of_Intrest" />
+                                <input type="hidden" asp-for="studentProfile.Confirmation" id="Confirmation" />
+                                <!-- Step 1 -->
+                                <h6>
+                                    <i class="step-icon"></i>
+                                    <span class="fonticon-wrap">
+                                        <i class="livicon-evo" data-options="name:user.svg; size: 50px; style:lines; strokeColor:#adb5bd;"></i>
+                                    </span>
+                                    <span>Personal Information</span>
+                                </h6>
+                                <!-- Step 1 end-->
+                                <!-- body content of step 1 -->
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="py-50">Basic Details</h3>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>FIRST Name</label>
+                                                <input type="text" class="form-control" name="studentProfile.F_Name" id="F_Name" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Middle Name</label>
+                                                <input type="text" class="form-control" name="studentProfile.M_Name" id="M_Name" >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Last Name</label>
+                                                <input type="text" class="form-control" name="studentProfile.L_Name" id="L_Name" >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Date of Birth</label>
+                                                <fieldset class="form-group position-relative has-icon-left">
+                                                    <input type="date" class="form-control " name="studentProfile.DOB" id="DOB" value="" required>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>FIRST Language</label>
+                                                <input type="text" class="form-control" id="F_Language" name="studentProfile.First_Language" placeholder="Enter First Language" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="location">Country of Citizenship</label>
+                                                <select class="select2 form-control" name="studentProfile.CountryId" asp-items="ViewBag.CountryId" id="Country_Citizen" required>
+                                                    <option value="">Select Country</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>Passport Number</label>
+                                                <input type="text" class="form-control" name="studentProfile.Passport_Num" id="Passport_Number" placeholder="Enter Passport Number">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>Passport Expiry Date</label>
+                                                <fieldset class="form-group position-relative has-icon-left">
+                                                    <input type="date" class="form-control pickadate" id="Passport_Expiry" name="studentProfile.Passport_Expiry" placeholder="dd-MM-YYYY">
+                                                </fieldset>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 mt-1">
+                                            <div class="form-group">
+                                                <label class="d-block">Gender</label>
+                                                <div class="custom-control-inline">
+                                                    <div class="radio mr-1">
+                                                        <input type="radio" name="studentProfile.Gender" id="radio5" value="true">
+                                                        <label for="radio5">Male</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <input type="radio" name="studentProfile.Gender" value="false" id="radio888">
+                                                        <label for="radio888">Female</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 mt-1">
+                                            <div class="form-group">
+                                                <label class="d-block">Marital Status</label>
+                                                <div class="custom-control-inline">
+                                                    <div class="radio">
+                                                        <input type="radio" name="studentProfile.Marital_Status" value="true" id="radio1">
+                                                        <label for="radio1">Single</label>
+                                                    </div>
+
+                                                    <div class="radio">
+                                                        <input type="radio" name="studentProfile.Marital_Status" value="false" id="radio2">
+                                                        <label for="radio2">Married</label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="py-50">Address Details</h3>
+                                        </div>
+
+                                        <div class="col-sm-8">
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                <input type="text" class="form-control" name="studentProfile.Address" id="Address" placeholder="Enter Current Address" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="location">City/Town</label>
+                                                <select class="select2 form-control" asp-for="studentProfile.CityId" id="City" asp-items="ViewBag.CityId " required>
+                                                    <option value="">Select City</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="location">State/Province</label>
+                                                <select class="select2 form-control" asp-for="studentProfile.StateId" asp-items="ViewBag.StateId" id="State" >
+                                                    <option value="">Select State/Province</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="location">Country</label>
+                                                <select class="select2 form-control" asp-for="studentProfile.Current_Country" id="Current_Country" asp-items="ViewBag.CountryId " placeholder="Select Country" required>
+                                                    <option value="">Select Country</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Zip Code</label>
+                                                <input type="text" class="form-control" name="studentProfile.Postal_Code" id="ZipCode" placeholder="Enter Postal Code" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>E-Mail</label>
+                                                <input type="text" class="form-control" name="studentProfile.Email" id="Email" placeholder="Enter Email" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Phone Number</label>
+                                                <input type="text" class="form-control" name="studentProfile.PhoneNumber" id="Phone_Number" placeholder="Enter Phone Number" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                </fieldset>
+                                <!-- body content of step 1 end-->
+                                <!-- Step 2-->
+                                <h6>
+                                    <i class="step-icon"></i>
+                                    <span class="fonticon-wrap">
+                                        <i class="livicon-evo" data-options="name:briefcase.svg; size: 50px; style:lines; strokeColor:#adb5bd;"></i>
+                                    </span>
+                                    <span>Education Detail</span>
+                                </h6>
+                                <!-- Step 2 end-->
+                                <!-- body content of step 2 -->
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="py-50">Education Summary</h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="location">Country of Education</label>
+                                                <select class="select2 form-control" name="studentProfile.Country_of_Education" id="Country_of_Education" asp-items="ViewBag.CountryId" placeholder="Select Country">
+                                                    <option value="">Select Country</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="location">Highest Level of Education </label>
+                                                <select class="select2 form-control" name="studentProfile.Education_Level" id="Education_Level" placeholder="Select Education Level">
+                                                    <option value="">Select Education Level</option>
+                                                    <option value="Intermediate">Intermediate</option>
+                                                    <option value="Graduation">Graduation</option>
+                                                    <option value="Master">Master</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="location">Grading Schema </label>
+                                                <select class="select2 form-control" name="studentProfile.Grading_Scheme" id="Grading_Scheme" placeholder="Select Grading Scheme">
+                                                    <option value="">Select Grading Scheme</option>
+                                                    <option value="0-10">0-10</option>
+                                                    <option value="0-100">0-100</option>
+                                                    <option value="other">other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Grading Scale (Out of)</label>
+                                                <input type="number" class="form-control" name="studentProfile.Grade_Scale" id="Grade_Scale" placeholder="Enter Grading Scale">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Grading Score</label>
+                                                <input type="number" class="form-control" name="studentProfile.Grading_Score" id="Grading_Score" placeholder="Enter Score">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="py-50">Education Details</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" id="EducationalDetail">
+                                        <div class="row">
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12" id="myEducation">
+                                        <div class="row">
+
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <!-- basic buttons -->
+                                            <button type="button" onclick="EduDetail()" class="btn btn-info round mr-1 mb-1">Add Education</button>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+                                </fieldset>
+                                <!--Step 2 end-->
+                                <!-- Step 3-->
+                                <h6>
+                                    <i class="step-icon"></i>
+                                    <span class="fonticon-wrap">
+                                        <i class="livicon-evo" data-options="name:users.svg; size: 50px; style:lines; strokeColor:#adb5bd;"></i>
+                                    </span>
+                                    <span>Language/Submit</span>
+                                </h6>
+                                <!-- Step 3 end-->
+                                <!-- body content of step 3 -->
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="py-50">Language Tast and Score</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>English Exam Type</label>
+                                                    <select class="select2 form-control" id="TestType" asp-for="LanguageTest.Language_Type"  onchange="EnglishTest(this)" placeholder="Select Country">
+                                                        <option value="Dont have">I Dont have this</option>
+                                                        <option value="Later">I Will Provide later</option>
+                                                        <option value="IELTS">IELTS</option>
+                                                        <option value="TOEFL">TOEFL</option>
+                                                        <option value="Duolingo">DUOLINGO</option>
+                                                        <option value="PTE">PTE</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="row" id="LanguageTest">
+                                        </div>
+                                    </div>
+
+                                    <hr />
+
+                                    @*-------------------GRE----------------------------*@
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="py-50">Additional Qualification</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <h6 class="py-50">I have GRE Exam Score</h6>
+                                        <div class="row">
+                                            <div class="custom-control custom-switch custom-control-inline mb-1">
+                                                <input type="checkbox" asp-for="GreTests.GRE_Exame" class="custom-control-input" value="false" id="customSwitch1" onchange="GRETEst(this)">
+                                                <label class="custom-control-label mr-1" for="customSwitch1">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12" id="GRE-Checked">
+                                    </div>
+
+
+
+                                    @*-------------------GMAT----------------------------*@
+                                    <div class="col-12">
+                                        <h6 class="py-50">I have GMAT Exam Score</h6>
+                                        <div class="row">
+                                            <div class="custom-control custom-switch custom-control-inline mb-1">
+                                                <input type="checkbox" asp-for="GmatTest.GMAT_Exame" class="custom-control-input" id="customSwitch2" onchange="GMATTest(this)">
+                                                <label class="custom-control-label mr-1" for="customSwitch2"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12" id="GMAT-Checked">
+                                    </div>
+
+                                    <hr />
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="py-50">BackGround Information</h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h6 class="py-50">Have you been refused a visa from Canada, the USA, the United Kingdom, New Zealand, Australia or Ireland?</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="custom-control-inline">
+
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" class="custom-control-input " name="studentProfile.IsValid_Visa" id="customColorRadio1" value="true" checked>
+                                                    <label class="custom-control-label" for="customColorRadio1">Yes</label>
+                                                </div>
+                                                <div class="custom-control custom-radio ml-2">
+                                                    <input type="radio" class="custom-control-input" name="studentProfile.IsValid_Visa" id="customColorRadio2" value="false">
+                                                    <label class="custom-control-label" for="customColorRadio2">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Do you have a valid Study Permit / Visa?</label>
+                                            <input type="text" class="form-control" name="studentProfile.IsStudy_Permit" id="IsStudy_Permit">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label for="label-textarea">If you answered "Yes" to any of the questions above, please provide more details below:</label>
+                                            <fieldset class="form-label-group">
+                                                <textarea class="form-control" id="Comment" rows="3" name="studentProfile.Comment" placeholder="Provide Detail"></textarea>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                                <!-- body content of step 3 end-->
+                                <div class="form-group">
+                                    <input type="submit" value="Create"  class="btn btn-primary" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Form wizard with icon tabs section end -->
+    </div>
+</div>
+
+<!-- BEGIN: Page JS-->
+<script src="~/app-assets/js/scripts/forms/wizard-steps.js"></script>
+<script src="~/app-assets/js/scripts/forms/select/form-select2.js"></script>
+<script src="~/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+
+<script>
+
+    function EduDetail() {
+
+        var myedu = document.getElementById("myEducation");
+        var CountryData = @Html.Raw(Json.Serialize(ViewBag.CountryId));
+
+
+        if (myedu.childElementCount <= 1) {
+            var newDiv = document.createElement("div");
+            newDiv.className = "row";
+            var newForm = '<div class="col-md-4"><div class="form-group"><label for="location">Country of Institute</label>' +
+                '<select class="select2 form-control" id="country_of_Institute" name="educationDetail.Country_Of_Institute"  placeholder="Select Country" ></select></div></div >' +
+                '<div class="col-sm-4"><div class="form-group"><label>Institute Name</label><input type="text" class="form-control" id="Institute_Name" name="educationDetail.Institute_Name" placeholder="Enter Institute Name"></div></div>' +
+                '<div class="col-md-4"><div class="form-group"><label>Education Level</label><select class="select2 form-control" id="Education_Level" name="educationDetail.Education_Level" placeholder="Select Education Lavel">' +
+                '<option value="Intermediate">Intermediate</option><option value="Graduation">Graduation</option><option value="Master">Master</option><option value="Other">Other</option></select></div></div>' +
+                '<div class="col-sm-4"><div class="form-group"><label>Degree Name</label><input type="text" class="form-control" id="Degree_Name" name="educationDetail.Degree_Name" placeholder="Degree Name"></div></div>' +
+                '<div class="col-sm-4"><div class="form-group"><label>Primary Language of Institution</label><input type="text" class="form-control" id="Institute_Language" name="educationDetail.Institute_Language" placeholder="Primary Language of Institution"></div></div>' +
+                '<div class="col-sm-4"><div class="form-group"><label>Degree Start Date</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="Degree_Start" name="educationDetail.Degree_Start" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                '<div class="col-sm-4"><div class="form-group"><label>Degree End Date</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="Degree_End" name="educationDetail.Degree_End" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                '<div class="col-sm-4"><div class="form-group"><label>Graduation Date</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="Graduation_Date" name="educationDetail.Graduation_Date" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                '<div class="col-12 mt-1"><div class="form-group"><div class="checkbox checkbox-primary checkbox-glow"><input type="checkbox" value="" id="checkboxGlow1" name="educationDetail.Graduate_From"><label for="checkboxGlow1">I am Pass from this Institute</label></div></div></div>' +
+                '<div class="col-sm-4"><div class="form-group"><label>Address</label><input type="text" class="form-control" id="Address" name="educationDetail.Address" placeholder="Address"></div></div>' +
+                '<div class="col-sm-4"><div class="form-group"><label>Province/State</label> <input class="select2 form-control" id="StateID" name="educationDetail.EDU_Province"  placeholder="Select Province/State" /></div></div>' +
+                '<div class="col-sm-4"><div class="form-group"><label>City</label> <input class="select2 form-control" id="CityId" name="educationDetail.EDU_City"  placeholder="Select City" /></div></div>' +
+                '<div class="col-sm-4"><div class="form-group"><label>Zip Code</label><input type="text" class="form-control" id="Postal_Code" name="educationDetail.Postal_Code" placeholder="Enter Zip Code"></div></div>' +
+                '<div class="col-12"><div class="form-group"> <button type="submit" value="Create" class="btn btn-primary glow mr-1 mb-1 float-right">Save</button>' +
+                '<button type="button" class="btn btn-light glow mr-1 mb-1 float-right" onclick="DeleteEducation()" >Cancel</button></div></div>'
+
+            newDiv.innerHTML = newForm;
+            myedu.appendChild(newDiv);
+
+            var country_of_Institute = document.getElementById("country_of_Institute");
+            var newOption = "";
+            for (var i = 0; i < CountryData.length; i++) {
+
+                newOption = newOption + '<option Value="' + CountryData[i].Value + '">' + CountryData[i].Text + '</option>'
+            }
+            country_of_Institute.innerHTML = newOption;
+        }
+        else {
+            alert("First Save the Record")
+        }
+
+    }
+
+    function DeleteEducation() {
+        var myedu = document.getElementById("myEducation");
+        myedu.innerHTML = "";
+        window.onload;
+    }
+
+    function EnglishTest(eve) {
+
+        //console.log(eve.value);
+
+        var option = document.getElementById("TestType");
+        console.log(option.value);
+        var TestForm = document.getElementById("LanguageTest");
+
+        if (option.value == "Dont have") {
+            TestForm.innerHTML = "";
+        }
+        if (option.value == "Later") {
+            TestForm.innerHTML = "Note: You will be able to apply for conditional admission by enrolling in an ESL program if the academic program does not accept delayed submission of English Language Proficiency scores.";
+        }
+
+
+        if (option.value == "IELTS") {
+            TestForm.innerHTML = "";
+            var newDiv = document.createElement("div");
+            newDiv.className = "row";
+            var newForm = '<div class="col-sm-3"><div class="form-group"><label>Date of Exam</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="TestDate" name="LanguageTest.Exam_Date" value="dd/MM/yyyy"></fieldset></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label>Enter Exact Score</label> <input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" placeholder="Reading"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label></label> <input type="text" class="form-control" id="Listening" name="LanguageTest.Listening_Score" placeholder="Listening"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label></label> <input type="text" class="form-control" id="Speaking" name="LanguageTest.Speaking_Score" placeholder="Speaking"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label></label><input type="text" class="form-control" id="Writing" name="LanguageTest.Writing_Score" placeholder="Writing"></div></div>'
+
+            newDiv.innerHTML = newForm;
+            TestForm.appendChild(newDiv);
+
+        }
+
+        if (option.value == "TOEFL") {
+            TestForm.innerHTML = "";
+            var newDiv = document.createElement("div");
+            newDiv.className = "row";
+            var newForm = '<div class="col-sm-3"><div class="form-group"><label>Date of Exam</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="TestDate" name="LanguageTest.Exam_Date" value="dd/MM/yyyy"></fieldset></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label>Enter Exact Score</label> <input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" placeholder="Reading"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label></label><input type="text" class="form-control" id="Writing" name="LanguageTest.Writing_Score" placeholder="Writing"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label></label> <input type="text" class="form-control" id="Speaking" name="LanguageTest.Speaking_Score" placeholder="Speaking"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label></label> <input type="text" class="form-control" id="Listening" name="LanguageTest.Listening_Score" placeholder="Listening"></div></div>'
+
+            newDiv.innerHTML = newForm;
+            TestForm.appendChild(newDiv);
+
+        }
+        if (option.value == "Duolingo") {
+            TestForm.innerHTML = "";
+            var newDiv = document.createElement("div");
+            newDiv.className = "row";
+            var newForm = '<div class="col-sm-5"><div class="form-group"><label>Date of Exam</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="TestDate" name="LanguageTest.Exam_Date" value="dd/MM/yyyy"></fieldset></div></div>' +
+                '<div class="col-sm-5"><div class="form-group"><label>Enter Exact Score</label><input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" placeholder="Reading"></div></div>'
+
+            newDiv.innerHTML = newForm;
+            TestForm.appendChild(newDiv);
+
+        }
+        if (option.value == "PTE") {
+            TestForm.innerHTML = "";
+            var newDiv = document.createElement("div");
+            newDiv.className = "row";
+            var newForm = '<div class="col-sm-3"><div class="form-group"><label>Date of Exam</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="TestDate" name="LanguageTest.Exam_Date" value="dd/MM/yyyy"></fieldset></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label>Enter Exact Score</label> <input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" placeholder="Reading"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label></label><input type="text" class="form-control" id="Writing" name="LanguageTest.Writing_Score" placeholder="Writing"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label></label><input type="text" class="form-control" id="Speaking" name="LanguageTest.Speaking_Score" placeholder="Speaking"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label></label><input type="text" class="form-control" id="Listening" name="LanguageTest.Listening_Score" placeholder="Listening"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label></label><input type="text" class="form-control" id="Overall" name="LanguageTest.Overall_Score" placeholder="Overall"></div></div>'
+
+            newDiv.innerHTML = newForm;
+            TestForm.appendChild(newDiv);
+        }
+    }
+
+    function GRETEst(eve) {
+
+        var check = document.getElementById("customSwitch1");
+        console.log(check.value);
+
+        var OnChecked = document.getElementById("GRE-Checked")
+
+        if (check.checked == true) {
+            check.value = true;
+
+            var newDiv = document.createElement("div");
+            newDiv.className = "col-12";
+            newForm = '<div class="row"><div class="col-sm-3"><div class="form-group"><label>Date of Exam</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" name="GreTests.GRE_Exam_Date" id="GRE_Exam_Date"value="dd/MM/yyyy" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label>Verbal</label><input type="text" class="form-control" name="GreTests.GRE_Verbal" id="GRE_Verbal" placeholder="Score"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label>Quantitative</label><input type="text" class="form-control" id="GRE_Quantitative" name="GreTests.GRE_Quantitative" placeholder="Score"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label>Writing</label><input type="text" class="form-control" id="GRE_Writting" name="GreTests.GRE_Writting" placeholder="Score"></div></div></div>' +
+                '<div class="row"><div class="col-sm-3"><div class="form-group"></div></div><div class="col-sm-2"><div class="form-group"><input type="text" class="form-control" id="GRE_Verbal_Rank" name="GreTests.GRE_Verbal_Rank" placeholder="Rank%"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><input type="text" class="form-control" id="GRE_Quantitative_Rank" name="GreTests.GRE_Quantitative_Rank" placeholder="Rank%"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><input type="text" class="form-control" id="GRE_Writting_Rank" name="GreTests.GRE_Writting_Rank" placeholder="Rank%"></div></div></div>'
+
+            newDiv.innerHTML = newForm;
+            OnChecked.appendChild(newDiv);
+        }
+        else {
+            OnChecked.innerHTML = "";
+        }
+
+    }
+
+    function GMATTest(eve) {
+
+        var check = document.getElementById("customSwitch2");
+        console.log(check.value);
+
+        var OnChecked = document.getElementById("GMAT-Checked")
+
+        if (check.checked == true) {
+            check.value = true;
+            var newDiv = document.createElement("div");
+            newDiv.className = "col-12";
+            newForm = '<div class="row"><div class="col-sm-3"><div class="form-group"><label>Date of Exam</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="GMAT_Exam_Date" name="GmatTest.GMAT_Exam_Date" value="dd/MM/yyyy" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label>Verbal</label><input type="text" class="form-control" id="GMAT_Verbal" name="GmatTest.GMAT_Verbal" placeholder="Score"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label>Quantitative</label><input type="text" class="form-control" id="GMAT_Quantitative" name="GmatTest.GMAT_Quantitative" placeholder="Score"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label>Writing</label><input type="text" class="form-control" id="GMAT_Writting" name="GmatTest.GMAT_Writting" placeholder="Score"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><label>Total</label><input type="text" class="form-control" id="GMAT_Total" name="GmatTest.GMAT_Total" placeholder="Score"></div></div></div>' +
+                '<div class="row"><div class="col-sm-3"><div class="form-group"></div></div><div class="col-sm-2"><div class="form-group"><input type="text" id="GMAT_Verbal_Rank" name="GmatTest.GMAT_Verbal_Rank" class="form-control" placeholder="Rank%"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><input type="text" class="form-control" id="GMAT_Quantitative_Rank" name="GmatTest.GMAT_Quantitative_Rank" placeholder="Rank%"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><input type="text" class="form-control" id="GMAT_Writting_Rank" name="GmatTest.GMAT_Writting_Rank" placeholder="Rank%"></div></div>' +
+                '<div class="col-sm-2"><div class="form-group"><input type="text" class="form-control" id="GMAT_Total_Rank" name="GmatTest.GMAT_Total_Rank" placeholder="Rank%"></div></div></div>'
+
+            newDiv.innerHTML = newForm;
+            OnChecked.appendChild(newDiv);
+        }
+        else {
+            OnChecked.innerHTML = "";
+        }
+
+    }
+
+    function formatDate(input) {
+
+        var datePart = input.match(/\d+/g),
+            year = datePart[0].substring(2), // get only two digits
+            month = datePart[1], day = datePart[2];
+
+        return day + '/' + month + '/' + year;
+    }
+
+
+    window.onload = function () {
+
+        //Student Profile-----------------------------------------------//
+        var studentProfile = @Html.Raw(Json.Serialize(Model.studentProfile));
+
+
+        
+        var date_Of_Birth = new Date(studentProfile.DOB).toISOString().split('T')[0];
+        var pasport_Exp_Date = new Date(studentProfile.Passport_Expiry).toISOString().split('T')[0];
+
+        var Firstname = document.getElementById("F_Name");
+        var StudentNum = document.getElementById("StudentNum");
+        var Lastname = document.getElementById("L_Name");
+        var Midname = document.getElementById("M_Name");
+        var DateOfBirth = document.getElementById("DOB");
+        var Countery_Of_Citizen = document.getElementById("Country_Citizen");
+        var Passport_Number = document.getElementById("Passport_Number");
+        var Passport_Expiry = document.getElementById("Passport_Expiry");
+        var Phone_Number = document.getElementById("Phone_Number");
+        var Email = document.getElementById("Email");
+        var First_Language = document.getElementById("F_Language");
+        var Address = document.getElementById("Address");
+        var City = document.getElementById("City");
+        var State = document.getElementById("State");
+        var Current_Country = document.getElementById("Current_Country");
+        var ZipCode = document.getElementById("ZipCode");
+        var Country_of_Education = document.getElementById("Country_of_Education");
+        var Education_Level = document.getElementById("Education_Level");
+        var Grading_Scheme = document.getElementById("Grading_Scheme");
+        var Grade_Scale = document.getElementById("Grade_Scale");
+        var Grading_Score = document.getElementById("Grading_Score");
+        var Male = document.getElementById("radio5");
+        var Female = document.getElementById("radio888");
+        var Married = document.getElementById("radio1");
+        var UnMarried = document.getElementById("radio2");
+        var IsValid_Yes = document.getElementById("customColorRadio1");
+        var IsValid_No = document.getElementById("customColorRadio2");
+        var Referral_Source = document.getElementById("Referral_Source");
+        var Country_Of_Intrest = document.getElementById("Country_Of_Intrest");
+        var Service_Of_Intrest = document.getElementById("Service_Of_Intrest");
+        var Confirmation = document.getElementById("Confirmation");
+        var IsStudy_Permit = document.getElementById("IsStudy_Permit");
+        var Comment = document.getElementById("Comment");
+
+        if (studentProfile.Gender == true) {
+            Male.checked = true;
+        }
+        else {
+            Female.checked = true;
+        }
+        if (studentProfile.Marital_Status == true) {
+            Married.checked = true;
+        }
+        else {
+            UnMarried.checked = true;
+        }
+        if (studentProfile.IsValid_Visa == true) {
+            IsValid_Yes.checked = true;
+        }
+        else {
+            IsValid_No.checked = true;
+        }
+
+        StudentNum.value = studentProfile.StudentNum;
+        First_Language.value = studentProfile.First_Language;
+        Firstname.value = studentProfile.F_Name;
+        Lastname.value = studentProfile.L_Name;
+        Midname.value = studentProfile.M_Name;
+        DateOfBirth.value = date_Of_Birth;
+        Countery_Of_Citizen.value = studentProfile.CountryId;
+        Passport_Number.value = studentProfile.Passport_Num;
+        if (studentProfile.Passport_Expiry == null) {
+            Passport_Expiry.value = studentProfile.Passport_Expiry;
+        }
+        else {
+            Passport_Expiry.value = pasport_Exp_Date;
+        }
+        
+        Phone_Number.value = studentProfile.PhoneNumber;
+        Email.value = studentProfile.Email;
+        Address.value = studentProfile.Address;
+        City.value = studentProfile.CityId;
+        State.value = studentProfile.StateId;
+        Current_Country.value = studentProfile.Current_Country;
+        ZipCode.value = studentProfile.Postal_Code;
+        Country_of_Education.value = studentProfile.Country_of_Education;
+        Education_Level.value = studentProfile.Education_Level;
+        Grading_Scheme.value = studentProfile.Grading_Scheme;
+        Grade_Scale.value = studentProfile.Grade_Scale;
+        Grading_Score.value = studentProfile.Grading_Score;
+        Referral_Source.value = studentProfile.Referral_Source;
+        Country_Of_Intrest.value = studentProfile.Country_Of_Intrest;
+        Service_Of_Intrest.value = studentProfile.Service_Of_Intrest;
+        Confirmation.value = studentProfile.Confirmation;
+        IsStudy_Permit.value = studentProfile.IsStudy_Permit;
+        Comment.value = studentProfile.Comment;
+
+
+
+
+//-----------------------------Language Db----------------------------------------------------------------------------//
+
+        var stdLanguage = @Html.Raw(Json.Serialize(Model.LanguageTest));
+
+        var langdt = new Date(stdLanguage.Exam_Date).toISOString().split('T')[0];
+
+        var option = document.getElementById("TestType");
+        console.log(option.value);
+        var TestForm = document.getElementById("LanguageTest");
+
+        if (stdLanguage == null) {
+            TestForm.innerHTML = "";
+        }
+        else {
+
+            if (stdLanguage.Language_Type == "Dont have") {
+                TestForm.innerHTML = "";
+                option.value = stdLanguage.Language_Type;
+            }
+            if (stdLanguage.Language_Type == "Later") {
+                TestForm.innerHTML = "Note: You will be able to apply for conditional admission by enrolling in an ESL program if the academic program does not accept delayed submission of English Language Proficiency scores.";
+                option.value = stdLanguage.Language_Type;
+            }
+
+            if (stdLanguage.Language_Type == "IELTS") {
+                TestForm.innerHTML = "";
+                var newDiv = document.createElement("div");
+                newDiv.className = "row";
+                var newForm = '<div class="col-sm-3"><div class="form-group"><label>Date of Exam</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="TestDate" name="LanguageTest.Exam_Date" value="dd/MM/yyyy" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label>Enter Exact Score</label> <input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" placeholder="Reading"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label></label> <input type="text" class="form-control" id="Listening" name="LanguageTest.Listening_Score" placeholder="Listening"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label></label> <input type="text" class="form-control" id="Speaking" name="LanguageTest.Speaking_Score" placeholder="Speaking"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label></label><input type="text" class="form-control" id="Writing" name="LanguageTest.Writing_Score" placeholder="Writing"></div></div>'
+
+                newDiv.innerHTML = newForm;
+                TestForm.appendChild(newDiv);
+
+                option.value = stdLanguage.Language_Type;
+                document.getElementById("TestDate").value = langdt;
+                document.getElementById("Reading").value = stdLanguage.Reading_Score;;
+                document.getElementById("Writing").value = stdLanguage.Writing_Score;
+                document.getElementById("Speaking").value = stdLanguage.Speaking_Score;
+                document.getElementById("Listening").value = stdLanguage.Listening_Score;
+
+            }
+
+            if (stdLanguage.Language_Type == "TOEFL") {
+                TestForm.innerHTML = "";
+                var newDiv = document.createElement("div");
+                newDiv.className = "row";
+                var newForm = '<div class="col-sm-3"><div class="form-group"><label>Date of Exam</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="TestDate" name="LanguageTest.Exam_Date" value="dd/MM/yyyy" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label>Enter Exact Score</label> <input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" placeholder="Reading"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label></label><input type="text" class="form-control" id="Writing" name="LanguageTest.Writing_Score" placeholder="Writing"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label></label> <input type="text" class="form-control" id="Speaking" name="LanguageTest.Speaking_Score" placeholder="Speaking"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label></label> <input type="text" class="form-control" id="Listening" name="LanguageTest.Listening_Score" placeholder="Listening"></div></div>'
+
+                newDiv.innerHTML = newForm;
+                TestForm.appendChild(newDiv);
+
+                option.value = stdLanguage.Language_Type;
+                document.getElementById("TestDate").value = langdt;
+                document.getElementById("Reading").value = stdLanguage.Reading_Score;;
+                document.getElementById("Writing").value = stdLanguage.Writing_Score;
+                document.getElementById("Speaking").value = stdLanguage.Speaking_Score;
+                document.getElementById("Listening").value = stdLanguage.Listening_Score;
+
+            }
+            if (stdLanguage.Language_Type == "Duolingo") {
+                TestForm.innerHTML = "";
+                var newDiv = document.createElement("div");
+                newDiv.className = "row";
+                var newForm = '<div class="col-sm-5"><div class="form-group"><label>Date of Exam</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="TestDate" name="LanguageTest.Exam_Date" value="dd/MM/yyyy" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                    '<div class="col-sm-5"><div class="form-group"><label>Enter Exact Score</label><input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" placeholder="Reading"></div></div>'
+
+                newDiv.innerHTML = newForm;
+                TestForm.appendChild(newDiv);
+
+                option.value = stdLanguage.Language_Type;
+                document.getElementById("TestDate").value = langdt;
+                document.getElementById("Reading").value = stdLanguage.Reading_Score;
+
+            }
+            if (stdLanguage.Language_Type == "PTE") {
+                TestForm.innerHTML = "";
+                var newDiv = document.createElement("div");
+                newDiv.className = "row";
+                var newForm = '<div class="col-sm-3"><div class="form-group"><label>Date of Exam</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="TestDate" name="LanguageTest.Exam_Date" value="dd/MM/yyyy" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label>Enter Exact Score</label> <input type="text" class="form-control" id="Reading" name="LanguageTest.Reading_Score" placeholder="Reading"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label></label><input type="text" class="form-control" id="Writing" name="LanguageTest.Writing_Score" placeholder="Writing"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label></label><input type="text" class="form-control" id="Speaking" name="LanguageTest.Speaking_Score" placeholder="Speaking"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label></label><input type="text" class="form-control" id="Listening" name="LanguageTest.Listening_Score" placeholder="Listening"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label></label><input type="text" class="form-control" id="Overall" name="LanguageTest.Overall_Score" placeholder="Overall"></div></div>'
+
+                newDiv.innerHTML = newForm;
+                TestForm.appendChild(newDiv);
+
+                option.value = stdLanguage.Language_Type;
+                document.getElementById("TestDate").value = langdt;
+                document.getElementById("Reading").value = stdLanguage.Reading_Score;;
+                document.getElementById("Writing").value = stdLanguage.Writing_Score;
+                document.getElementById("Speaking").value = stdLanguage.Speaking_Score;
+                document.getElementById("Listening").value = stdLanguage.Listening_Score;
+                document.getElementById("Overall").value = stdLanguage.Overall_Score;
+            }
+        }
+
+             //----------------------------------------GreTest---------------------------------------------------//
+
+        var GreTestDb = @Html.Raw(Json.Serialize(Model.GreTests));
+
+        var Gredt = new Date(GreTestDb.GRE_Exam_Date).toISOString().split('T')[0];
+        var check = document.getElementById("customSwitch1");
+        console.log(check.value);
+        var OnChecked = document.getElementById("GRE-Checked")
+
+        if (GreTestDb.GRE_Exame == false) {
+            check.checked = false;
+        }
+        else {
+            check.checked = true;
+            if (check.checked == true) {
+
+                var newDiv = document.createElement("div");
+                newDiv.className = "col-12";
+                newForm = '<div class="row"><div class="col-sm-3"><div class="form-group"><label>Date of Exam</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" name="GreTests.GRE_Exam_Date" id="GRE_Exam_Date" value="yyyy-MM-dd" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label>Verbal</label><input type="text" class="form-control" name="GreTests.GRE_Verbal" id="GRE_Verbal" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label>Quantitative</label><input type="text" class="form-control" id="GRE_Quantitative" name="GreTests.GRE_Quantitative" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label>Writing</label><input type="text" class="form-control" id="GRE_Writting" name="GreTests.GRE_Writting" placeholder="Score"></div></div></div>' +
+                    '<div class="row"><div class="col-sm-3"><div class="form-group"></div></div><div class="col-sm-2"><div class="form-group"><input type="text" class="form-control" id="GRE_Verbal_Rank" name="GreTests.GRE_Verbal_Rank" placeholder="Rank%"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><input type="text" class="form-control" id="GRE_Quantitative_Rank" name="GreTests.GRE_Quantitative_Rank" placeholder="Rank%"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><input type="text" class="form-control" id="GRE_Writting_Rank" name="GreTests.GRE_Writting_Rank" placeholder="Rank%"></div></div></div>'
+
+                newDiv.innerHTML = newForm;
+                OnChecked.appendChild(newDiv);
+
+                check.value = GreTestDb.GRE_Exame;
+                document.getElementById("GRE_Exam_Date").value = Gredt;
+                document.getElementById("GRE_Verbal").value = GreTestDb.GRE_Verbal;
+                document.getElementById("GRE_Quantitative").value = GreTestDb.GRE_Quantitative;
+                document.getElementById("GRE_Writting").value = GreTestDb.GRE_Writting;
+                document.getElementById("GRE_Verbal_Rank").value = GreTestDb.GRE_Verbal_Rank;
+                document.getElementById("GRE_Quantitative_Rank").value = GreTestDb.GRE_Quantitative;
+                document.getElementById("GRE_Writting_Rank").value = GreTestDb.GRE_Writting_Rank;
+            }
+
+        }
+
+            //----------------------------------------GmateTest---------------------------------------------------//
+
+        var GmateTestDb = @Html.Raw(Json.Serialize(Model.GmatTest));
+
+        var Gmatdt = new Date(GmateTestDb.GMAT_Exame).toISOString().split('T')[0];
+
+        var check = document.getElementById("customSwitch2");
+        console.log(check.value);
+        var OnChecked = document.getElementById("GMAT-Checked")
+
+        if (GmateTestDb.GMAT_Exame == false) {
+            check.value = GmateTestDb.GMAT_Exame;
+        }
+        else {
+            check.checked = true;
+            if (check.checked == true) {
+
+                var newDiv = document.createElement("div");
+                newDiv.className = "col-12";
+                newForm = '<div class="row"><div class="col-sm-3"><div class="form-group"><label>Date of Exam</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="GMAT_Exam_Date" name="GmatTest.GMAT_Exam_Date" value="dd/MM/yyyy" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label>Verbal</label><input type="text" class="form-control" id="GMAT_Verbal" name="GmatTest.GMAT_Verbal" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label>Quantitative</label><input type="text" class="form-control" id="GMAT_Quantitative" name="GmatTest.GMAT_Quantitative" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label>Writing</label><input type="text" class="form-control" id="GMAT_Writting" name="GmatTest.GMAT_Writting" placeholder="Score"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><label>Total</label><input type="text" class="form-control" id="GMAT_Total" name="GmatTest.GMAT_Total" placeholder="Score"></div></div></div>' +
+                    '<div class="row"><div class="col-sm-3"><div class="form-group"></div></div><div class="col-sm-2"><div class="form-group"><input type="text" id="GMAT_Verbal_Rank" name="GmatTest.GMAT_Verbal_Rank" class="form-control" placeholder="Rank%"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><input type="text" class="form-control" id="GMAT_Quantitative_Rank" name="GmatTest.GMAT_Quantitative_Rank" placeholder="Rank%"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><input type="text" class="form-control" id="GMAT_Writting_Rank" name="GmatTest.GMAT_Writting_Rank" placeholder="Rank%"></div></div>' +
+                    '<div class="col-sm-2"><div class="form-group"><input type="text" class="form-control" id="GMAT_Total_Rank" name="GmatTest.GMAT_Total_Rank" placeholder="Rank%"></div></div></div>'
+
+                newDiv.innerHTML = newForm;
+                OnChecked.appendChild(newDiv);
+
+                check.value = GmateTestDb.GMAT_Exame;
+                document.getElementById("GMAT_Exam_Date").value = Gmatdt;
+                document.getElementById("GMAT_Verbal").value = GmateTestDb.GMAT_Verbal;
+                document.getElementById("GMAT_Verbal_Rank").value = GmateTestDb.GMAT_Verbal_Rank;
+                document.getElementById("GMAT_Quantitative").value = GmateTestDb.GMAT_Quantitative;
+                document.getElementById("GMAT_Quantitative_Rank").value = GmateTestDb.GMAT_Quantitative_Rank;
+                document.getElementById("GMAT_Writting").value = GmateTestDb.GMAT_Writting;
+                document.getElementById("GMAT_Writting_Rank").value = GmateTestDb.GMAT_Writting_Rank;
+                document.getElementById("GMAT_Total").value = GmateTestDb.GMAT_Total;
+                document.getElementById("GMAT_Total_Rank").value = GmateTestDb.GMAT_Total_Rank;
+            }
+        }
+
+
+  
+
+            //----------------------------------------Education Detail---------------------------------------------------//
+
+        var Educationaldetail = document.getElementById("EducationalDetail");
+
+        $.ajax({
+            type: 'GET',
+            url: "/StudentProfiles/DetailEducation?id=" + studentProfile.StudentId,
+            success: function (response) {
+                console.log(response); 
+
+                for (var i = 0; i < response.length; i++) {
+                    var newDiv = document.createElement("div");
+                    newDiv.className = "row";
+                    var newForm = '<div class="card-body card-dashboard"><div class="table-responsive"><table class="table zero-configuration">' +
+                        '<thead><tr><th>Institute Name</th><th>Degree Name</th><th>Education Level</th><th>Action</th></tr></thead>' +
+                        '<tbody><tr><td>' + response[i].Institute_Name + '</td><td>' + response[i].Degree_Name + '</td><td>' + response[i].Education_Level + '</td>' +
+                        '<td><a href="/StudentProfiles/DeleteEducation/' + response[i].Edu_Id + '" class="btn btn-primary" >Delete</a>&nbsp&nbsp<a onclick="EditEducation(' + response[i].Edu_Id+')" class="btn btn-primary">Edit</a>    </td> </tr></tbody></table ></div ></div >'
+                    newDiv.innerHTML = newForm;
+                    Educationaldetail.appendChild(newDiv);
+
+                }
+
+                var myedu = document.getElementById("myEducation");
+                myedu.innerHTML = "";
+
+
+            }
+        });
+
+    }
+    function EditEducation(id) {
+        console.log(id.value);
+
+        //var Educationaldetail = document.getElementById("EducationalDetail");
+        //Educationaldetail.innerHTML = "";
+
+        $.ajax({
+            type: 'POST',
+            url: "/StudentProfiles/EditEducation?id=" + id,
+            success: function (response) {
+                console.log(response);
+                var myedu = document.getElementById("myEducation");
+                var CountryData = @Html.Raw(Json.Serialize(ViewBag.CountryId));              
+
+                if (myedu.childElementCount <= 1) {
+                    var newDiv = document.createElement("div");
+                    newDiv.className = "row";
+                    var newForm = '<div class="col-md-4"><div class="form-group"><input type="hidden" class="form-control" id="Edu_Id" name="educationDetail.Edu_Id"><label for="location">Country of Institute</label>' +
+                        '<select class="select2 form-control" id="country_of_Institute" name="educationDetail.Country_Of_Institute"  placeholder="Select Country" ></select></div></div >' +
+                        '<div class="col-sm-4"><div class="form-group"><label>Institute Name</label><input type="text" class="form-control" id="Institute_Name" name="educationDetail.Institute_Name" placeholder="Enter Institute Name"></div></div>' +
+                        '<div class="col-md-4"><div class="form-group"><label>Education Level</label><select class="select2 form-control" id="Edu_Level" name="educationDetail.Education_Level" placeholder="Select Education Lavel">' +
+                        '<option value="Intermediate">Intermediate</option><option value="Graduation">Graduation</option><option value="Master">Master</option><option value="Other">Other</option></select></div></div>' +
+                        '<div class="col-sm-4"><div class="form-group"><label>Degree Name</label><input type="text" class="form-control" id="Degree_Name" name="educationDetail.Degree_Name" placeholder="Degree Name"></div></div>' +
+                        '<div class="col-sm-4"><div class="form-group"><label>Primary Language of Institution</label><input type="text" class="form-control" id="Institute_Language" name="educationDetail.Institute_Language" placeholder="Primary Language of Institution"></div></div>' +
+                        '<div class="col-sm-4"><div class="form-group"><label>Degree Start Date</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="Degree_Start" name="educationDetail.Degree_Start" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                        '<div class="col-sm-4"><div class="form-group"><label>Degree End Date</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="Degree_End" name="educationDetail.Degree_End" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                        '<div class="col-sm-4"><div class="form-group"><label>Graduation Date</label><fieldset class="form-group position-relative has-icon-left"><input type="date" class="form-control pickadate" id="Graduation_Date" name="educationDetail.Graduation_Date" placeholder="dd-MM-YYYY"></fieldset></div></div>' +
+                        '<div class="col-12 mt-1"><div class="form-group"><div class="checkbox checkbox-primary checkbox-glow"><input type="checkbox" value="false" id="checkboxGlow1" name="educationDetail.Graduate_From"><label for="checkboxGlow1">I am Pass from this Institute</label></div></div></div>' +
+                        '<div class="col-sm-4"><div class="form-group"><label>Address</label><input type="text" class="form-control" id="Location" name="educationDetail.Address" placeholder="Address"></div></div>' +
+                        '<div class="col-sm-4"><div class="form-group"><label>Province/State</label> <input class="select2 form-control" id="EDU_Province" name="educationDetail.EDU_Province"  placeholder="Select Province/State" /></div></div>' +
+                        '<div class="col-sm-4"><div class="form-group"><label>City</label> <input class="select2 form-control" id="EDU_City" name="educationDetail.EDU_City"  placeholder="Select City" /></div></div>' +
+                        '<div class="col-sm-4"><div class="form-group"><label>Zip Code</label><input type="text" class="form-control" id="zipcode" name="educationDetail.Postal_Code" placeholder="Enter Zip Code"></div></div>' +
+                        '<div class="col-12"><div class="form-group"> <button type="submit"  value="Edit" class="btn btn-primary glow mr-1 mb-1 float-right">Edit</button>' +
+                        '<button type="button" class="btn btn-light glow mr-1 mb-1 float-right" onclick="DeleteEducation()" >Cancel</button></div></div>'
+
+                    newDiv.innerHTML = newForm;
+                    myedu.appendChild(newDiv);
+
+                    var Degree_Start_dt = new Date(response.Degree_Start).toISOString().split('T')[0];
+                    var Degree_End_dt = new Date(response.Degree_End).toISOString().split('T')[0];
+                    var Graduation_Date = new Date(response.Graduation_Date).toISOString().split('T')[0];
+
+                    var country_of_Institute = document.getElementById("country_of_Institute");
+                    var Graduate_From = document.getElementById("checkboxGlow1");
+                    document.getElementById("Edu_Id").value = response.Edu_Id;
+                    document.getElementById("Institute_Name").value = response.Institute_Name;
+                    document.getElementById("Edu_Level").value = response.Education_Level;
+                    document.getElementById("Degree_Name").value = response.Degree_Name;
+                    document.getElementById("Institute_Language").value = response.Institute_Language;
+                    document.getElementById("Location").value = response.Address;
+                    document.getElementById("EDU_Province").value = response.EDU_Province;
+                    document.getElementById("EDU_City").value = response.EDU_City;
+                    document.getElementById("zipcode").value = response.Postal_Code;
+                    document.getElementById("Degree_Start").value = Degree_Start_dt;
+                    document.getElementById("Degree_End").value = Degree_End_dt;
+                    document.getElementById("Graduation_Date").value = Graduation_Date;
+
+                    if (response.Graduate_From == true) {
+
+                        Graduate_From.checked = true;
+                    }
+                    else {
+                        Graduate_From.checked = false;
+                    }             
+
+                    var newOption = "";
+                    for (var i = 0; i < CountryData.length; i++) {
+
+                        newOption = newOption + '<option Value="' + CountryData[i].Value + '">' + CountryData[i].Text + '</option>'
+                    }
+                    country_of_Institute.innerHTML = newOption;
+                    country_of_Institute.value = response.Country_Of_Institute;
+                }
+                else {
+                    alert("First Save the Record")
+                }
+            }
+
+        });
+    }
+
+
+
+
+    //<a type="submit" href="/StudentProfiles/EditEducations/' + response.Edu_Id + '" value="Edit" class="btn btn-primary glow mr-1 mb-1 float-right" >Edit</a>
+
+</script>
+
+
+
+
+
+
+
+<!--<div class="col-12" id="myEducation">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="location">Country of Institute</label>
+                <select class="select2 form-control" name="educationDetail.Country_Of_Institute" asp-items="ViewBag.CountryId" placeholder="Select Country">
+                    <option value="">Select Country</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Institute Name</label>
+                <input type="text" class="form-control" name="educationDetail.Institute_Name" placeholder="Enter First Name">
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="location">Education Level</label>
+                <select class="select2 form-control" name="educationDetail.Education_Level" placeholder="Select Country">
+                    <option value="">Select Country</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Degree Name</label>
+                <input type="text" class="form-control" name="educationDetail.Degree_Name" placeholder="Degree Name">
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Primary Language of Institution</label>
+                <input type="text" class="form-control" name="educationDetail.Institute_Language" placeholder="Primary Language of Institution">
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Degree Start Date</label>
+                <input type="text" class="form-control" name="educationDetail.Degree_Start" placeholder="Degree Start Date">
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Degree End Date</label>
+                <input type="text" class="form-control" name="educationDetail.Degree_End" placeholder="Degree End Date">
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Graduation Date</label>
+                <input type="text" class="form-control" name="educationDetail.Graduation_Date" placeholder="Graduation Date">
+            </div>
+        </div>
+
+        <div class="col-12 mt-1">
+            <div class="form-group">
+                <div class="checkbox checkbox-primary checkbox-glow">
+                    <input type="checkbox" id="checkboxGlow1" checked>
+                    <label for="checkboxGlow1">I am Pass from this Institute</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Address</label>
+                <input type="text" class="form-control" name="educationDetail.Address" placeholder="Address">
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Province/State</label>
+                <select class="select2 form-control" name="educationDetail.StateID" asp-items="ViewBag.StateId" placeholder="Select Province/State">
+                    <option value="">Select State</option>
+                </select>-->
+@*<input type="text" class="form-control" name="educationDetail.StateID" placeholder="Enter Province/State">*@
+<!--</div>
+</div>
+
+<div class="col-sm-4">
+    <div class="form-group">
+        <label>City</label>
+        <select class="select2 form-control" name="educationDetail.CityId" asp-items="ViewBag.CityId" placeholder="Select City">
+            <option value="">Select City</option>
+        </select>-->
+@*<input type="text" class="form-control" name="educationDetail.CityId" placeholder="Enter Province/City">*@
+<!--</div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Zip Code</label>
+                <input type="text" class="form-control" name="educationDetail.Postal_Code" placeholder="Enter Zip Code">
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary glow mr-1 mb-1 float-right">Save</button>
+                <button type="button" class="btn btn-light glow mr-1 mb-1 float-right" onclick="DeleteEducation()">Cancel</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>-->
+-->
+<!--<!-- body content of step 3 -->
+<!--<fieldset>
+    <div class="row">
+        <div class="col-12">
+            <h3 class="py-50">Language Tast and Score</h3>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>English Exam Type</label>
+                    <select class="select2 form-control" id="TestType" name="location" onchange="EnglishTest(this)" placeholder="Select Country">
+                        <option value="Dont have">I Dont have this</option>
+                        <option value="Later">I Will Provide later</option>
+                        <option value="IELTS">IELTS</option>
+                        <option value="TOEFL">TOEFL</option>
+                        <option value="Duolingo">DUOLINGO</option>
+                        <option value="PTE">PTE</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="row" id="LanguageTest">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label>Date of Exam</label>
+                    <input type="text" class="form-control" placeholder="">
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label>Enter Exact Score</label>
+                    <input type="text" class="form-control" placeholder="Reading">
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label></label>
+                    <input type="text" class="form-control" placeholder="Listening">
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label></label>
+                    <input type="text" class="form-control" placeholder="Speaking">
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label></label>
+                    <input type="text" class="form-control" placeholder="Writing">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <hr />-->
+@*-------------------GRE----------------------------*@
+
+@*<div class="col-12" id="GRE-Checked">
+        <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>GRE Exam Date</label>
+                        <input type="text" class="form-control" asp-for="GreTest.GRE_Exam_Date" placeholder="">
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Verbal</label>
+                        <input type="text" class="form-control" asp-for="GreTest.GRE_Verbal" placeholder="Score">
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Quantitative</label>
+                        <input type="text" class="form-control" asp-for="GreTest.GRE_Quantitative" placeholder="Score">
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Writing</label>
+                        <input type="text" class="form-control" asp-for="GreTest.GRE_Writting" placeholder="Score">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <input type="text" class="form-control" asp-for="GreTest.GRE_Verbal_Rank" placeholder="Rank%">
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <input type="text" class="form-control" asp-for="GreTest.GRE_Quantitative_Rank" placeholder="Rank%">
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <input type="text" class="form-control" asp-for="GreTest.GRE_Writting_Rank" placeholder="Rank%">
+                    </div>
+                </div>
+            </div>
+    </div>*@
+@*-------------------GMAT----------------------------*@
+<!--<div class="col-12">
+        <h6 class="py-50">I have GMAT Exam Score</h6>
+        <div class="row">
+            <div class="custom-control custom-switch custom-control-inline mb-1">
+                <input type="checkbox" class="custom-control-input" id="customSwitch2" onchange="GMATTest(this)">
+                <label class="custom-control-label mr-1" for="customSwitch2"></label>
+            </div>
+        </div>
+    </div>
+
+<div class="col-12" id="GMAT-Checked">
+                                            @*<div class="row">
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label>GRE Exam Date</label>
+                                                            <input type="text" class="form-control" asp-for="GmatTest.GMAT_Exam_Date" placeholder="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label>Verbal</label>
+                                                            <input type="text" class="form-control" asp-for="GmatTest.GMAT_Verbal" placeholder="Score">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label>Quantitative</label>
+                                                            <input type="text" class="form-control" asp-for="GmatTest.GMAT_Quantitative" placeholder="Score">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label>Writing</label>
+                                                            <input type="text" class="form-control" asp-for="GmatTest.GMAT_Writting" placeholder="Score">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label>Total</label>
+                                                            <input type="text" class="form-control" asp-for="GmatTest.GMAT_Total" placeholder="Score">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" asp-for="GmatTest.GMAT_Verbal_Rank" placeholder="Rank%">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" asp-for="GmatTest.GMAT_Quantitative_Rank" placeholder="Rank%">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" asp-for="GmatTest.GMAT_Writting_Rank" placeholder="Rank%">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" asp-for="GmatTest.GMAT_Total_Rank" placeholder="Rank%">
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                        </div>
+
+    </div>
+
+
+
+
+</fieldset>-->
+-->
+<!-- body content of step 3 end-->
+
+
+
+
+
+

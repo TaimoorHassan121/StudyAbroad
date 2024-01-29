@@ -1,0 +1,254 @@
+﻿@model Study_Abroad.Models.ViewModel.ApplyStudentVM
+@{
+    ViewData["Title"] = "ApplyStudent";
+    Layout = "_Layout1";
+}
+
+
+<!-- BEGIN: Content-->
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-body">
+
+            <h3 class="mb-3">New Application</h3>
+
+
+            <!-- Basic Pills start -->
+            <section id="basic-pills">
+                <div class="row match-height">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="card bg-transparent shadow-none border">
+                            <div class="card-header">
+                                <h3 class="card-title">Program: &nbsp;&nbsp; @Model.course.CourseName</h3>
+                                </br>
+                                </br>
+                                <h3 class="card-title">Student: &nbsp;&nbsp; @Model.student.F_Name@Model.student.M_Name@Model.student.L_Name</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Basic Pills end -->
+            <!-- collapse with icon -->
+
+            <section id="collapsible-with-icon">
+                <h3 class="mt-3 mb-2">Prerequistes</h3>
+                <div class="collapsible collapse-icon accordion-icon-rotate">
+                    <div class="card collapse-header ">
+                        <div id="headingCollapse5" class="card-header" data-toggle="collapse" role="button" data-target="#collapse5" aria-expanded="true" aria-controls="collapse5">
+                            <span class="collapse-title">
+                                <span class="align-middle"> 1. English Test Validity</span>
+                            </span>
+                        </div>
+                        <div id="collapse5" role="tabpanel" aria-labelledby="headingCollapse5" class="collapse show">
+                            <div class="card-body">
+                                Please be advised that the English test must be valid at the start date of the desired program.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card collapse-header ">
+                        <div id="headingCollapse6" class="card-header" data-toggle="collapse" role="button" data-target="#collapse6" aria-expanded="true" aria-controls="collapse6">
+                            <span class="collapse-title">
+                                <span class="align-middle">2. Education Background</span>
+                            </span>
+                        </div>
+                        <div id="collapse6" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse show">
+                            <div class="card-body">
+                                This program requires:</br>
+
+
+
+                                A Bachelor's degree in the applicant's clinical field of practice.
+                                And</br>
+
+                                Evidence of continuing professional development, such as professional certificates
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card collapse-header">
+                        <div id="headingCollapse7" class="card-header" data-toggle="collapse" role="button" data-target="#collapse7" aria-expanded="true" aria-controls="collapse7">
+                            <span class="collapse-title">
+                                <span class="align-middle">3. Background Experience</span>
+                            </span>
+                        </div>
+                        <div id="collapse7" role="tabpanel" aria-labelledby="headingCollapse7" class="collapse show">
+                            <div class="card-body">
+                                Please be advised that this program requires:</br>
+
+
+
+                                at least 12 months of clinical experience post qualification
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card collapse-header">
+                        <div id="headingCollapse8" class="card-header" data-toggle="collapse" role="button" data-target="#collapse8" aria-expanded="true" aria-controls="collapse4">
+                            <span class="collapse-title">
+                                <span class="align-middle">4. Country Specific GPA Pakistan</span>
+                            </span>
+                        </div>
+                        <div id="collapse8" role="tabpanel" aria-labelledby="headingCollapse8" class="collapse show">
+                            <div class="card-body">
+                                Candidates educated in Pakistan are required to hold:</br></br>
+
+
+
+                                a four-year Bachelor's degree with a CGPA of 2.6/4.0 or 60% or above</br>
+                                Or</br>
+
+                                a 3 - year Bachelors degree, followed by a Masters degree of one or two years duration, in the same subject</br>
+                                Or</br>
+
+                                2 - year Bachelor's degree, followed by a 2-year Master's degree in the same subject,</br>
+
+
+                                Please note:</br>
+
+                                A 2-year degree followed by a 3-year LLB will count as a full Bachelor’s degree. See Less
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapsible">
+                        <div class="card collapse-header">
+                            <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                <span class="collapse-title">
+                                    5. ESL Important Information
+                                </span>
+                            </div>
+                            <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show">
+                                <div class="card-body">
+                                    Important information to applicants who will/intent to take ESL to meet the English language requirement:</br></br>
+
+
+
+                                    The ESL program intake and length may vary depending on the candidate`s current English language level.
+                                    Please check the link below for more information on ESL program lengths and intakes: See Less
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h3 class="mt-3 mb-2">What to Expect</h3>
+
+                    <div class="card collapse-header">
+                        <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                            <span class="collapse-title">
+                                1. Copy of Passport
+                            </span>
+                        </div>
+                        <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse show">
+                            <div class="card-body">
+                                Please attach a copy of applicant's passport - first and last pages:</br>
+                                <ul>
+                                    <li> acceptable formats: PDF, JPEG or PNG </li>
+                                    <li>the photocopy / scan to have no cut-off at the edges and is clear to read </li>
+                                    <li>  file size limit is 20MB</li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card collapse-header">
+                        <div id="headingCollapse3" class="card-header" data-toggle="collapse" role="button" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                            <span class="collapse-title">
+                                2. List of Refrence
+                            </span>
+                        </div>
+                        <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse show">
+                            <div class="card-body">
+                                Please be advised that the applicant is required to supply the contact details of two academic referees (or one academic reference if applicable to the course/program applied for).
+                                Employment references may be acceptable for specific courses which require them. Please note that the contact email address
+                                of the referee must be an official email address and not a personal one (for example, gmail).
+                                </br> </br>
+
+                                Please make sure the referee(s) is informed to expect an email from the University of Birmingham, requesting them to write a reference. We recommend that the referee sends back the reference in a PDF format as it is preferred that:
+                                </br>
+                                </br>
+                                <ul>
+                                    <li> The reference is on official headed paper with the organization or institution’s logo and address</li>
+                                    <li> It includes the date, the applicant's details and the details of the referee</li>
+                                    <li>
+                                        A summary of how the referee knows the applicant and confirm the applicant's suitability for studying on the course applied for
+                                        It should be signed by the referee with their official contact details.
+                                    </li>
+                                    <li>
+                                        If the referee(s) send back references that are not on the official headed paper, the applicant may be asked to send in additional references.
+                                    </li>
+                                </ul>
+                                </br> </br>
+
+
+                                If the applicant already have a written reference(s) and wants to upload it on behalf of the referee(s),
+                                make sure the reference is a scanned copy of the original and that it is on official headed paper.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card collapse-header">
+                        <div id="headingCollapse4" class="card-header" data-toggle="collapse" role="button" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
+                            <span class="collapse-title">
+                                3. Privacy Statement
+                            </span>
+                        </div>
+                        <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse show">
+                            <div class="card-body">
+                                Please complete and upload the privacy statement form found here.
+                            </div>
+                        </div>
+                    </div>
+
+
+                        <div id="accordionExample3" data-toggle-hover="true">
+                            <div class="accordion  collapse-icon accordion-icon-rotate">
+                                <div class="card collapse-header open">
+                                    <div class="card-header" id="heading300" data-toggle="collapse" role="button" data-target="#collapse300" aria-expanded="true" aria-controls="collapse300">
+                                        <span class="collapse-title">4. Personal Statement</span>
+                                    </div>
+                                    <div id="collapse300" class="collapse show" aria-labelledby="heading300" data-parent="#accordionExample3">
+                                        <div class="card-body">
+                                            Please be advised that the applicant is required to submit a Personal statement, approximately 5,000 characters, explaining why the applicant is interested in studying in the chosen program.
+                                            </br> </br> </br>
+
+                                            Please follow the University's guidelines below:
+                                            </br> </br> </br>
+
+                                            Do the research
+                                            </br>
+
+                                            <ul>
+                                                <li>Research the course and its links to careers, and the example modules within the course</li>
+                                                <li>Think of some reasons why the applicant wants to do this particular course</li>
+                                                <li>Read through the entry requirements and course description very carefully: identify the keywords and phrases and think about how the applicant can provide evidence of these skills</li>
+
+                                                Writing (‘the four Ps')
+                                                </br>
+                                                <li>Passion for the subject – Demonstrate the applicant's academic interests, eg, further reading, favorite modules, and related events like exhibitions, conferences, and workshops.</li>
+                                                <li>Person – Give evidence of the applicant's previous experiences, motivations, and career goals.</li>
+                                                <li>
+                                                    Preparation – Apply the skills to the skills listed in the entry requirements and course description. Always give evidence to prove the applicant has these skills. These skills could be from academic work, employment, research placements, internships, societies, or other roles.
+                                                    Place – Why here? Tailor the personal statement to the particular course: the applicant can apply to more than one Master's course but each personal statement should be slightly different so that it is relevant to the individual course. Demonstrate that the applicant has researched the course and the University.
+                                                    What does the applicant like about Birmingham: staff interests, modules, resources, and the postgraduate community?
+                                                </li>
+                                                </br>  </br>
+                                                If the applicant is returning to study after employment, the applicant can relate the work experience to the skills required for studying in this program.
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+
+            </section>
+            <!-- collapse with icon end -->
+
+
+            <a type="button" value="Create" href="/StudentProfiles/ApplyCourse?id=@Model.student.StudentId&courseId=@Model.course.CourseId&UniId=@Model.university.UniversityId" class="btn btn-success glow mr-1 mb-1 mt-3 float-right">Apply</a>
+
+        </div>
+    </div>
+</div>
+
+<!-- BEGIN: Page JS-->

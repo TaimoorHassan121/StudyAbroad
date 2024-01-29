@@ -1,0 +1,328 @@
+﻿@model IEnumerable<Study_Abroad.Models.StudentProfile>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout1";
+}
+
+
+
+@section Css{
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css">
+}
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+        <div class="content-body">
+          
+            <!-- Zero configuration table -->
+            <section id="basic-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="form-group mt-3 ml-3">
+                                <a asp-action="Create" class="btn btn-primary" target="_blank">Create Student</a>
+                                @*<input type="submit" value="Create" class="btn btn-primary" />*@
+                            </div>
+                          
+                            <div class="card-body card-dashboard">
+                                <div class="table-responsive">
+                                    <table class="table zero-configuration">
+                                        <thead>
+                                            <tr>
+                                                <th>Search and Apply</th>
+                                                <th>Student Id</th>
+                                                <th>Student Email</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Nationality</th>
+                                                <th>Recruitment Partner</th>
+                                                <th>Recruitment Type</th>
+                                                <th>Education</th>
+                                                <th>Application</th>
+                                                <th>Referrel Source</th>
+                                                <th>Lead Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                            <tr>
+                                                <td><a href="/StudentProfiles/Search/@item.StudentId">Search and Apply</a></td>
+                                                <td>@item.StudentNum</td>
+                                                <td><a asp-action="CreateStudent" asp-route-id="@item.StudentId">@item.Email </a> </td>
+                                                <td>@item.F_Name</td>
+                                                <td>@item.L_Name</td>
+                                                <td>@item.country.CountryName</td>
+                                                <td>@item.agent.Agent_Email</td>
+                                                <td>@item.agent.Designation</td>
+                                                <td>@item.Education_Level</td>
+                                                <td></td>
+                                                <td>@item.Referral_Source</td>
+                                                <td>@item.Status</td>
+
+
+                                                @*<td>
+            <a asp-action="Edit" asp-route-id="@item.CountryId">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.CountryId">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.CountryId">Delete</a>
+        </td>*@
+                                            </tr>
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Zero configuration table -->
+
+        </div>
+    </div>
+</div>
+
+@section Js{
+    <script src="~/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+
+    <script src="~/app-assets/js/scripts/datatables/datatable.js"></script>
+}
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.F_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.M_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.L_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StateId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Current_Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Postal_Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First_Language)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marital_Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Passport_Num)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Passport_Expiry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Passport_Pic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country_of_Education)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Education_Level)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grading_Scheme)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade_Scale)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grading_Score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Graduated_From)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsValid_Visa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsStudy_Permit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Referral_Source)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country_Of_Intrest)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service_Of_Intrest)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Confirmation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.F_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.M_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.L_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DOB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.country.CountryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StateId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.city.CityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Current_Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Postal_Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.First_Language)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marital_Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passport_Num)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passport_Expiry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passport_Pic)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country_of_Education)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Education_Level)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grading_Scheme)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade_Scale)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grading_Score)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Graduated_From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsValid_Visa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsStudy_Permit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Referral_Source)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country_Of_Intrest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Service_Of_Intrest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Confirmation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.StudentId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.StudentId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.StudentId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>*@

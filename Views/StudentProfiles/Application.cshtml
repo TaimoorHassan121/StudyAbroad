@@ -1,0 +1,296 @@
+﻿@model Study_Abroad.Models.ApplicationDetails
+@{
+    ViewData["Title"] = "Application";
+    Layout = "_Layout1";
+}
+
+
+<style>
+    .rounded {
+        border-radius: 4.67rem;
+    }
+
+    .page-user-profile .user-profile-images .user-profile-image {
+        position: absolute;
+        left: 20px;
+        bottom: -65px;
+        border-radius: 4.6rem;
+        box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 41%);
+    }
+
+
+    .table thead th {
+        color: white;
+        border-top: none;
+        vertical-align: middle;
+        font-size: .8rem;
+        letter-spacing: 1px;
+        background-color: #04AF49;
+    }
+</style>
+
+<div class="app-content content">
+    <div class="content-wrapper">
+
+        <div class="content-body">
+
+            <section class="page-user-profile">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- user profile heading section start -->
+                        <div class="card">
+
+
+                            <div class="d-flex mt-2 ml-2  align-content-between">
+                                <h4 >Application ID:</h4>
+                                <span class="ml-1 font-medium-2">@Model.AppDetailId</span>
+                            </div>                      
+
+
+
+                            <div class="card-title-details d-flex align-items-center">
+                                <div class="">
+                                    <img src="@(string.IsNullOrEmpty(Model.University.UniversityIcon)?"/study-abroad/img/t-level-img-2.png":"/Images/"+Model.University.UniversityIcon)" class="img-fluid rounded-top user-timeline-image mt-2 ml-2" alt="user timeline image" style="  width: 100%; height: 100%;">
+                                </div>
+                                <div>
+                                    <h4 class="mb-1 text-bold-500 font-large-1 profile-text-color ml-2">@Model.University.UniversityName</h4>
+                                    <div class="card-subtitle ml-2 mb-0  text-bold-500 font-medium-3 profile-text-color">@Model.Course.CourseName</div>
+                                </div>
+                            </div>
+
+
+                            <div class="ml-2 mt-1">
+                                <h6 class=" text-bold-500">Delivery Method: <span class="badge badge-pill badge-light-success mr-1"> In Class</span></h6>
+                                <div class="d-flex  justify-content-md-start mt-1">
+                                    <h6 class=" text-bold-500 ">Level: <span class="text-bold-400"> @Model.Course.ProgramLevels.Name</span></h6>
+                                    <h6 class=" text-bold-500 ml-3">Required Level: <span class="text-bold-400"> Foundation Programming</span></h6>
+                                </div>
+                                <h6 class=" text-bold-500 mt-1">Academic Submission Deadline : <span class="text-bold-400"> July 04,2023</span></h6>
+
+                                <div class=" d-flex align-content-around mt-2">
+
+                                    <h6 class=" text-bold-500 ">Intake(s):</h6>
+                                    <select class="select2 form-control col-md-4 ml-2" placeholder="" @Model.Course.CourseIntake asp-items="@ViewBag.CourseIntake">
+                                        @*<option value="">Please Chose a status</option>
+                                        <option value="New Lead">New Lead</option>
+                                        <option value="Follow Up">Follow Up</option>
+                                        <option value="Ready To Apply">Ready To Apply</option>*@
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                
+
+                            <!-- user profile nav tabs start -->
+                            <div class="card-body px-0 ml-2">
+                                <ul class="nav user-profile-nav justify-content-center justify-content-md-start nav-pills border-bottom-0 mb-0" role="tablist">
+                                    <li class="nav-item mb-0">
+                                        <a class="nav-link d-flex px-1 active" id="profile-tab" data-toggle="tab" href="#profile" aria-controls="profile" role="tab" aria-selected="true"><i class="bx bx-home"></i><span class="d-none d-md-block">General</span></a>@*THE GENERAL*@
+                                    </li>
+
+                                    <li class="nav-item mb-0">
+                                        <a class=" nav-link d-flex px-1 " id="feed-tab" data-toggle="tab" href="#feed" aria-controls="feed" role="tab" aria-selected="false"><i class="bx bx-book-bookmark"></i><span class="d-none d-md-block">Requairement</span></a>
+                                    </li>
+
+                             
+
+
+                                </ul>
+                            </div>
+                            <!-- user profile nav tabs ends -->
+                        </div>
+                        <!-- user profile heading section ends -->
+                        <!-- user profile content section start -->
+                        <div class="row">
+                            <!-- user profile nav tabs content start -->
+                            <div class="col-lg-12">
+                                <div class="tab-content">
+
+                       
+                                    <div class="tab-pane" id="feed" aria-labelledby="feed-tab" role="tabpanel">
+                                  
+                                        <div class="row">
+                                            <div class="col-xl-6 col-12">
+                                                <div class="card">
+                                                    <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                                                        <h4 class="card-title">Complete Tours</h4>
+                                                        <div class="col-md-3 col-12 text-md-right" style="padding-right: 0px;">
+                                                            <button class="btn btn-sm btn-primary glow" onclick="">View All</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="table-responsive">
+                                                        <table class="table table-borderless mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Name</th>
+                                                                    <th>Departure</th>
+                                                                    <th>Destination</th>
+                                                                    <th>Status</th>
+                                                                    <th class="text-center">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                     
+                                        </div>
+
+
+
+                                        <!-- user profile nav tabs feed ends -->
+                                    </div>
+
+                                    @*THE GENERAL*@
+                                    <div class="tab-pane active" id="profile" aria-labelledby="profile-tab" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <!-- user profile nav tabs profile start -->
+                                          
+                                                @*@if (Model.Agency.IsAgency)
+                                            {*@
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Student Detail</h5>
+                                                        <dl class="row">
+                                                            <dt class="col-sm-2">
+                                                                @Html.DisplayNameFor(model => model.StudentProfile.StudentNum)
+                                                            </dt>
+                                                            <dd class="col-sm-4">
+                                                                @Html.DisplayFor(model => model.StudentProfile.StudentNum)
+                                                            </dd>
+                                                            <dt class="col-sm-2">
+                                                                Name
+                                                            </dt>
+                                                            <dd class="col-sm-4">
+                                                                @Model.StudentProfile.F_Name @Model.StudentProfile.M_Name @Model.StudentProfile.L_Name
+                                                            </dd>
+                                                            <dt class="col-sm-2">
+                                                                Email
+                                                            </dt>
+                                                            <dd class="col-sm-10">
+                                                                @Html.DisplayFor(model => model.StudentProfile.Email)
+                                                            </dd>
+                                                            <dt class="col-sm-2">
+                                                                Firat Name
+                                                            </dt>
+                                                            <dd class="col-sm-4">
+                                                                @Model.StudentProfile.F_Name
+                                                            </dd>
+                                                            <dt class="col-sm-2">
+                                                                First Name
+                                                            </dt>
+                                                            <dd class="col-sm-4">
+                                                                @Model.StudentProfile.L_Name
+                                                            </dd>
+                                                            <dt class="col-sm-2">
+                                                                Birthday
+                                                            </dt>
+                                                            <dd class="col-sm-10">
+                                                                @Model.StudentProfile.DOB.ToString("dd/MM/yyyy")
+                                                            </dd>
+                                                            <dt class="col-sm-2">
+                                                                Phone Number
+                                                            </dt>
+                                                            <dd class="col-sm-4">
+                                                                @Model.StudentProfile.PhoneNumber
+                                                            </dd>
+                                                            <dt class="col-sm-2">
+                                                                First Language
+                                                            </dt>
+                                                            <dd class="col-sm-4">
+                                                                @Model.StudentProfile.First_Language
+                                                            </dd>
+                                                            <dt class="col-sm-2">
+                                                                Gender
+                                                            </dt>
+                                                            <dd class="col-sm-4">
+                                                                @if (Model.StudentProfile.Gender == true)
+                                                                {
+                                                                    <div value="Male">Male</div>
+                                                                }
+                                                                else
+                                                                {
+                                                            <div value="Female">Female</div>
+                                                                }
+                                                            </dd>
+                                                            <dt class="col-sm-2">
+                                                                Marita Status
+                                                            </dt>
+                                                            <dd class="col-sm-4">
+                                                                @if (Model.StudentProfile.Marital_Status == true)
+                                                                {
+                                                                    <div value="Male">Single</div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div value="Female">Married</div>
+                                                                }
+                                                            </dd>
+                                                            <dt class="col-sm-2">
+                                                                Passport Number
+                                                            </dt>
+                                                            <dd class="col-sm-4">
+                                                                @Model.StudentProfile.Passport_Num
+                                                            </dd>
+                                                            <dt class="col-sm-2">
+                                                                Nationality
+                                                            </dt>
+                                                            <dd class="col-sm-4">
+                                                                @Model.StudentProfile.Current_Country
+                                                            </dd>
+                                                            <dt class="col-sm-2">
+                                                                Education Level
+                                                            </dt>
+                                                            <dd class="col-sm-4">
+                                                                @Model.StudentProfile.Education_Level
+                                                            </dd>
+                                                            <dt class="col-sm-2">
+                                                                Recuritment Partner
+                                                            </dt>
+                                                            <dd class="col-sm-4">
+                                                                @Model.StudentProfile.agent.Agent_Email
+                                                            </dd>
+
+
+
+                                                        </dl>
+
+                                                    </div>
+                                                </div>
+                                            </div>                              
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- page user profile ends -->
+@section Scripts
+
+    {
+
+    <script src="~/AdminAssets/app-assets/vendors/js/extensions/swiper.min.js"></script>
+    <!-- BEGIN: Page JS-->
+    <script src="~/AdminAssets/app-assets/js/scripts/pages/page-user-profile.js"></script>
+    <!-- END: Page JS-->
+
+}
+
+

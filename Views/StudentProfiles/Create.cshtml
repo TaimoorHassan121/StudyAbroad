@@ -1,0 +1,190 @@
+﻿@model Study_Abroad.Models.ViewModel.StudentProfileVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_Layout1";
+}
+
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-body">
+            <!-- Zero configuration table -->
+            <section id="basic-datatable">
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card-body card-dashboard">
+
+                            <form asp-action="Create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h3 class="py-50">Personal Information</h3>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>FIRST Name</label>
+                                            <input type="text" class="form-control" asp-for="studentProfile.F_Name" required placeholder="Enter First Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Middle Name</label>
+                                            <input type="text" class="form-control" asp-for="studentProfile.M_Name" placeholder="Enter Middle First Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input type="text" class="form-control" asp-for="studentProfile.L_Name" placeholder="Enter Last Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Date of Birth</label>
+                                            <fieldset class="form-group position-relative has-icon-left">
+                                                <input type="date" class="form-control pickadate" asp-for="studentProfile.DOB" placeholder="dd-MM-YYYY">
+                                            </fieldset>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="location">Country of Citizenship</label>
+                                            <select class="select2 form-control" asp-for="studentProfile.CountryId" asp-items="ViewBag.CountryId" placeholder="Select Country">
+                                                <option value="">Select Country</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Passport Number</label>
+                                            <input type="text" class="form-control" asp-for="studentProfile.Passport_Num" placeholder="Enter Passport Number">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>E-Mail</label>
+                                            <input type="text" class="form-control" asp-for="studentProfile.Email" placeholder="Enter Email">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input type="text" class="form-control" asp-for="studentProfile.PhoneNumber" placeholder="Enter Phone Number">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3 mt-1">
+                                        <div class="form-group">
+                                            <label class="d-block">Gender</label>
+                                            <div class="custom-control-inline">
+                                                <div class="radio mr-1">
+                                                    <input type="radio" asp-for="studentProfile.Gender" id="radio5" value="true">
+                                                    <label for="radio5">Male</label>
+                                                </div>
+                                                <div class="radio">
+                                                    <input type="radio" asp-for="studentProfile.Gender" value="false" id="radio888">
+                                                    <label for="radio888">Female</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="location">Status</label>
+                                            <select class="select2 form-control" asp-for="studentProfile.Status" placeholder="">
+                                                <option value="">Please Chose a status</option>
+                                                <option value="New Lead">New Lead</option>
+                                                <option value="Follow Up">Follow Up</option>
+                                                <option value="Ready To Apply">Ready To Apply</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="location">Referral Source</label>
+                                            <select class="select2 form-control" asp-for="studentProfile.Referral_Source" placeholder="">
+                                                <option value="">Please Chose a Referral Source</option>
+                                                <option value="FaceBook">FaceBook</option>
+                                                <option value="Youtube">Youtube</option>
+                                                <option value="Instagram">Instagram</option>
+                                                <option value="LinkdIn">LinkdIn</option>
+                                                <option value="Indeed">Indeed</option>
+                                                <option value="Friend">Friend</option>
+                                                <option value="Staff">Staff</option>
+                                                <option value="Immigration agent">Immigration agent</option>
+                                                <option value="Another Student">Another Student</option>
+                                                <option value="Client">Client</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="location">Country of Interest</label>
+                                            <select class="select2 form-control" asp-for="studentProfile.Country_Of_Intrest" placeholder="">
+                                                <option value="">Select Country</option>
+                                                <option value="Australia">Australia</option>
+                                                <option value="Canada">Canada</option>
+                                                <option value="Ireland">Ireland</option>
+                                                <option value="UK">UK</option>
+                                                <option value="USA">USA</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="location">Services of Interest</label>
+                                            <select class="select2 form-control" asp-for="studentProfile.Service_Of_Intrest" placeholder="">
+                                                <option value="">Chose a Service</option>
+                                                <option value="Program">Program</option>
+                                                <option value="Scholarships">Scholarships</option>
+                                                <option value="VisaService">VisaService</option>
+                                                <option value="Insurance">Insurance</option>
+                                                <option value="Accomodation">Accomodation</option>
+                                                <option value="Bank Account">Bank Account</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 mt-1">
+                                        <div class="form-group">
+                                            <div class="checkbox checkbox-primary checkbox-glow">
+                                                <input type="checkbox" asp-for="studentProfile.Confirmation" id="checkboxGlow1">
+                                                <label for="checkboxGlow1">
+                                                    I confirm that I have received express written consent from the student whom
+                                                    I am creating this profile for and I can provide proof of their consent upon request.
+                                                    To learn more please refer to the Personal Data Consent/Confirm Visa+Enrolment article.
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Zero configuration table -->
+
+        </div>
+    </div>
+</div>
+

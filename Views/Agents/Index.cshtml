@@ -1,0 +1,180 @@
+﻿@model IEnumerable<Study_Abroad.Models.Agent>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout1";
+}
+@section Css{
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css">
+}
+
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+
+        <div class="content-body">
+            <div class="row">
+
+            </div>
+            <!-- Zero configuration table -->
+            <section id="basic-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+
+                            <div class="card-body card-dashboard">
+
+                                <div class="table-responsive">
+                                    <table class="table zero-configuration">
+                                        <thead>
+                                            <tr>
+                                                <th>Agent Name</th>
+                                                <th>City</th>
+                                                <th>Mobile</th>
+                                                <th>Designation</th>
+                                                <th>Email</th>
+                                                <th>Passward</th>
+                                                <th>status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@item.AgentName</td>
+                                                    <td>@item.Cities.CityName</td>
+                                                    <td>@item.ContactNumber</td>
+                                                    <td>@item.Designation</td>
+                                                    <td>@item.Agent_Email</td>
+                                                    <td>@item.Agent_Passward</td>
+                                                    <td>
+                                                        @if (item.Status == true)
+                                                        {
+                                                            @Html.Raw("Active") }
+                                                        else
+                                                        {
+                                                            @Html.Raw("Deactive")}
+                                                    </td>
+                                                    <td>
+                                                        <a asp-action="Edit" asp-route-id="@item.AgentId">Edit</a> |
+                                                        <a asp-action="Details" asp-route-id="@item.AgentId">Details</a> |
+                                                        <a asp-action="Delete" asp-route-id="@item.AgentId">Delete</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Zero configuration table -->
+
+        </div>
+    </div>
+</div>
+
+@section Js{
+    <script src="~/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+
+    <script src="~/app-assets/js/scripts/datatables/datatable.js"></script>
+}
+
+@*<h1>Index</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdentityUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgentName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agent_Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agent_Passward)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cities)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Designation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdentityUser.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ContactNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Agent_Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Agent_Passward)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cities.CityName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Designation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.AgentId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.AgentId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.AgentId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@

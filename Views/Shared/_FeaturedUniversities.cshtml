@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Study_Abroad.Models.University>
+@{
+    var i = 0;
+}
+<div class="row">
+    <div class="text-center col-md-12 mt-5 f-u-s">
+        <h1 class="main-heading-2">Featured Universities</h1>
+    </div>
+</div>
+<div class="owl-one owl-carousel owl-theme" id="featured-universities">
+    @foreach (var item in Model)
+    {
+        if (string.IsNullOrEmpty(item.UniversityIcon))
+            i++;
+
+        <div class="item">
+            <img src="@(string.IsNullOrEmpty(item.UniversityIcon) ? "/study-abroad/img/feature"+i+".png" : "/Images/" + item.UniversityIcon)" width="100%" style="cursor:pointer" onclick="universityPage(@item.UniversityId)">
+        </div>
+        if (i == 4)
+            i = 0;
+
+    }
+</div>
+    <script>
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: false,
+            dots: true,
+            responsive: {
+                0: {
+                    items: 2
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        })
+        function universityPage(id) {
+            if (id)
+                window.location.href = "/Home/University/" + id;
+        }
+    </script>

@@ -1,0 +1,163 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/study-abroad/css/bootstrap.min.css" />
+    <link href="~/study-abroad/css/Toggleswitch.css" rel="stylesheet" />
+    <link href="~/app-assets/css/bootstrap-extended.css" rel="stylesheet" />
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" type="text/css" href="~/study-abroad/css/owl.carousel.css" />
+    <link rel="stylesheet" type="text/css" href="~/study-abroad/css/owl.theme.green.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Owl Carousel jQuery and JS -->
+    <script src="~/study-abroad/js/jquery.min.js"></script>
+    <script src="~/study-abroad/js/owl.carousel.min.js"></script>
+
+    <!----Custom CSS AboutUS---->
+    <!-- owl -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <title>@ViewBag.Title</title>
+
+
+
+    <!-----Contact Us-->
+    <link rel="stylesheet" href="~/study-abroad/css/nav.css">
+    <link rel="stylesheet" href="~/study-abroad/css/footer.css">
+    @*<title>Contact US</title>*@
+
+
+
+    @RenderSection("CSS", required: false)
+
+</head>
+
+
+<body>
+
+    @RenderBody();
+    <!-- Footer Start -->
+    <div class="footer" style="margin-top: 8%;">
+        <div class="container">
+            <div class="row">
+                <div class=" col-lg-4 col-md-4">
+                    <div class="footer-about">
+                        <img src="~/study-abroad/img/logo@2x.png" width="50%">
+                        <p>
+                            KHM is a global leader in international education services. We help international students such as yourself to study in English speaking countries.
+                        </p>
+                        <div class="footer-social">
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-lg-8 col-md-8">
+                    <div class="row">
+                        <div class=" col-lg-4 col-md-4">
+                            <div class="footer-link">
+                                <!-- <h3>Service Area</h3> -->
+                                <a href="index.html">Home</a>
+                                <a href="about.html">About Us </a>
+                                <a href="our-services.html">Our Services</a>
+                                <a href="">Foreign Universities</a>
+                                <a href="">IELTS</a>
+                            </div>
+                        </div>
+                        <div class=" col-lg-4 col-md-4">
+                            <div class="footer-link">
+                                <!-- <h3>Useful Link</h3> -->
+                                <a href="">FAQ's</a>
+                                <a href="contact.html">Contact Us</a>
+                                <a href="">Stories</a>
+                                <a href="">Countries</a>
+                                <a href="">Blog</a>
+                            </div>
+                        </div>
+                        <div class=" col-lg-4 col-md-4" style="font-weight: 500;">
+                            <div class="footer-link">
+                                <a href="">Student Visa Requirements</a>
+                                <a href="">Top Universities</a>
+                                <a href="">Top Courses</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid copyright mt-5">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>Copyright © 2021 | KHM Consultancy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <script src="~/study-abroad/js/about.js"></script>
+    <script src="~/study-abroad/js/bootstrap.bundle.min.js "></script>
+    @*<script src="~/study-abroad/js/bootstrap.bundle.min.js"></script>*@
+
+    <!-- owl -->
+    @*<script src="~/study-abroad/jquery.min.js"></script>
+        <script src="~/study-abroad/js/owl.carousel.min.js"></script>*@
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>*@
+
+
+    <script>
+    $(document).ready(function () {
+        var featured_Uni = document.getElementById("featured-universities");
+        if (featured_Uni)
+            $(featured_Uni).load('@Url.Content("/Home/FeaturedUniversities")');
+
+        $(function () {
+            var Accordion = function (el, multiple) {
+                this.el = el || {};
+                this.multiple = multiple || false;
+
+                // Variables privadas
+                var links = this.el.find('.link');
+                // Evento
+                links.on('click', {
+                    el: this.el,
+                    multiple: this.multiple
+                }, this.dropdown)
+            }
+
+            Accordion.prototype.dropdown = function (e) {
+                var $el = e.data.el;
+                $this = $(this),
+                    $next = $this.next();
+
+                $next.slideToggle();
+                $this.parent().toggleClass('open');
+
+                if (!e.data.multiple) {
+                    $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+                };
+            }
+
+            var accordion = new Accordion($('#accordion'), false);
+        });
+    });
+
+    </script>
+    @RenderSection("Script", required: false)
+</body>
+
+</html>
+
+

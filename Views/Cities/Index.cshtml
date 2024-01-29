@@ -1,0 +1,140 @@
+﻿@model IEnumerable<Study_Abroad.Models.City>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout1";
+}
+
+
+@section Css{
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css">
+}
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+        <div class="content-body">
+            <!-- Zero configuration table -->
+            <section id="basic-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body card-dashboard">
+                                <div class="table-responsive">
+                                    <table class="table zero-configuration">
+                                        <thead>
+                                            <tr>
+                                                <th>Country Name</th>
+                                                <th>State Name</th>
+                                                <th>City Name</th>
+                                                <th>Status</th>
+                                                <th>Date</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                            <tr>
+                                                <td>@item.country.CountryName</td>
+                                                <td>@item.States.StateName</td>
+                                                <td>@item.CityName</td>
+
+                                                <td>
+                                                    @if (item.Status == true)
+                                                    {
+                                                        @Html.Raw("Active") }
+                                                    else
+                                                    {
+                                                        @Html.Raw("Deactive")}
+                                                </td>
+                                                <td>@item.DateTime</td>
+                                                <td>
+                                                    <a asp-action="Edit" asp-route-id="@item.CountryId">Edit</a> |
+                                                    <a asp-action="Details" asp-route-id="@item.CountryId">Details</a> |
+                                                    <a asp-action="Delete" asp-route-id="@item.CountryId">Delete</a>
+                                                </td>
+                                            </tr>}
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Zero configuration table -->
+
+        </div>
+    </div>
+</div>
+
+@section Js{
+    <script src="~/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+
+    <script src="~/app-assets/js/scripts/datatables/datatable.js"></script>
+}
+
+    @*<h1>Index</h1>
+
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.country)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.States)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CityName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateTime)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.country.CountryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.States.StateName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CityName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateTime)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CityId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.CityId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.CityId">Delete</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>*@

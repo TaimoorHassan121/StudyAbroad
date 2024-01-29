@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_StudyAbroadLayout2";
+}
+@section CSS {
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- fontawsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="~/study-abroad/css/login.css">
+}
+<div class="container login-header-section" style="border: 2px solid #FFFFFF;">
+    <div class="row" @*style="margin-top: 5rem;"*@>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <p class="oro">Start your Journey To <span class="euro2"> STUDY</span> Abroad</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <img class="img-fluid" src="~/study-abroad/img/Group 3465@2x.jpg" alt="" />
+                    </p>
+                </div>
+            </div>
+            <!-- <h1>Start your Journey <br> To <span class="euro2"> STUDY </span>Abroad</h1>
+            <div class="row">
+                <div class="col-12 euro3"></div>
+            </div> -->
+
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5 login-form">
+            <div class="color">
+                <h2>Login</h2>
+            </div>
+            <div class="cards  py-5" id="form1">
+                <div class="form-data" v-if="!submitted">
+
+
+                    <div class="forms-inputs mb-4">
+                        <span> Email </span> <input autocomplete="off" placeholder="Enter email" type="email" v-model="email" v-bind:class="{'form-control':true, 'is-invalid' : !validemail(email) && emailBlured}" v-on:blur="passwordBlured = true">
+
+                    </div>
+                    <br>
+                    <div class="forms-inputs mb-2">
+                        <span> Password </span> <input autocomplete="off" placeholder="Enter password" type="password" v-model="password" v-bind:class="{'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured}" v-on:blur="passwordBlured = true">
+                        <div class="invalid-feedback">Password must be 8 character!</div>
+                    </div>
+
+                    <p class="ori"><a href="">Forgot Password?</a><br></p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Remember me
+                        </label>
+                        <br>
+                        <br>
+
+                    </div>
+                    <div class="form-check">
+                        <button type="submit" class="col-12 btn btn-dark login-button" required>Login</button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row align-items-center" style="margin-top: 5rem; margin-bottom: 2.5rem;">
+            <div class="col-4"> <hr> </div>
+            <div class="col-4 p-0">
+                <h6 class="border-space-text">or login with</h6>
+            </div>
+            <div class="col-4"> <hr> </div> -->
+            <!-- </div>
+                <div class="media">
+                    <div class="row">
+                <button class="social facebook"><img class="orio" src="img/icons8-google-48.png" alt=""> Sign in with facebook</button>
+                <button class="social facebook"><img class="euro1" src="img/Icon awesome-facebook-f@2x.png" alt=""> Sign in with facebook</button>
+                <h6 class="para"> Don't have an account?<span style="color: #202E61;">&nbsp;<a href="">Sign Up</a></span></h6>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+
+@section Script{
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+}

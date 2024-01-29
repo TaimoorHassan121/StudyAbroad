@@ -1,0 +1,103 @@
+﻿@model Study_Abroad.Models.Country
+
+@{ ViewData["Title"] = "Edit";
+    Layout = "_Layout1"; }
+
+
+
+<!-- BEGIN: Content-->
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+
+        <div class="content-body">
+
+            <!-- Zero configuration table -->
+            <section id="basic-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card col-6 offset-3">
+
+                            <div class="card-body card-dashboard">
+
+                                <div class="table-responsive">
+                                    <form asp-action="Edit" enctype="multipart/form-data">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <input type="hidden" asp-for="CountryId" />
+                                        <div class="form-group">
+                                            <label asp-for="CountryName" class="control-label"></label>
+                                            <input asp-for="CountryName" class="form-control" />
+                                            <span asp-validation-for="CountryName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            @*<label asp-for="ProfilePicture" class="control-label"></label>*@
+                                            <input name="Images" class="form-control" type="file" />
+                                            @*<span asp-validation-for="ProfilePicture" class="text-danger"></span>*@
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="DateTime" class="control-label"></label>
+                                            <input name="DateTime" class="form-control" value="@DateTime.Now" />
+                                            <span asp-validation-for="DateTime" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                Status
+                                            </label>
+                                            <select asp-for="Status" class="form-control">
+                                                <option value="true">Active</option>
+                                                <option value="false">Deactive</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                        </div>
+                                    </form>
+                                    <div>
+                                        <a asp-action="Index">Back to List</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Zero configuration table -->
+
+        </div>
+    </div>
+</div>
+<!-- END: Content-->
+@*<h1>Edit</h1>
+
+    <h4>Country</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Country_ID" />
+                <div class="form-group">
+                    <label asp-for="Country_Name" class="control-label"></label>
+                    <input asp-for="Country_Name" class="form-control" />
+                    <span asp-validation-for="Country_Name" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Country_Status" /> @Html.DisplayNameFor(model => model.Country_Status)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateTime" class="control-label"></label>
+                    <input asp-for="DateTime" class="form-control" />
+                    <span asp-validation-for="DateTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@

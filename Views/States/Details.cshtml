@@ -1,0 +1,105 @@
+﻿@model Study_Abroad.Models.State
+
+@{ ViewData["Title"] = "Details";
+    Layout = "_Layout1"; }
+
+
+
+<!-- BEGIN: Content-->
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+
+        <div class="content-body">
+            <div class="row">
+
+            </div>
+            <!-- Zero configuration table -->
+            <section id="basic-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+
+                            <div class="card-body card-dashboard">
+
+                                <dl class="row">
+                                    <dt class="col-sm-2">
+                                        @Html.DisplayNameFor(model => model.StateName)
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        @Html.DisplayFor(model => model.StateName)
+                                    </dd>
+                                    <dt class="col-sm-2">
+                                        @Html.DisplayNameFor(model => model.DateTime)
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        @Html.DisplayFor(model => model.DateTime)
+                                    </dd>
+                                    <dt class="col-sm-2">
+                                        @Html.DisplayNameFor(model => Model.Countries.CountryName)
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        @Html.DisplayFor(model => Model.Countries.CountryName)
+                                    </dd>
+                                    <dt class="col-sm-2">
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        @if (Model.Status == true)
+                                        {
+                            @Html.Raw("Active") }
+                        else
+                        {
+            @Html.Raw("Deactive")}
+                                    </dd>
+                                </dl>
+                                <div>
+                                    <a asp-action="Edit" asp-route-id="@Model.StateId">Edit</a> |
+                                    <a asp-action="Index">Back to List</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Zero configuration table -->
+        </div>
+    </div>
+</div>
+<!-- END: Content-->
+@*<h1>Details</h1>
+
+    <div>
+        <h4>State</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.State_Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.State_Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DateTime)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DateTime)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Country_ID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Country_ID)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.State_ID">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>*@

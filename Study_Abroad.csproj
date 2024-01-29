@@ -1,0 +1,111 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20230329102425_studentProfile.cs" />
+    <Compile Remove="Migrations\20230329102425_studentProfile.Designer.cs" />
+    <Compile Remove="Migrations\20230329103519_studentProfile.cs" />
+    <Compile Remove="Migrations\20230329103519_studentProfile.Designer.cs" />
+    <Compile Remove="Migrations\20230329103838_StudentProfile.cs" />
+    <Compile Remove="Migrations\20230329103838_StudentProfile.Designer.cs" />
+    <Compile Remove="Migrations\20230329105346_studentProfile.cs" />
+    <Compile Remove="Migrations\20230329105346_studentProfile.Designer.cs" />
+    <Compile Remove="Migrations\20230329105524_student.cs" />
+    <Compile Remove="Migrations\20230329105524_student.Designer.cs" />
+    <Compile Remove="Migrations\20230329110213_StudentProfile.cs" />
+    <Compile Remove="Migrations\20230329110213_StudentProfile.Designer.cs" />
+    <Compile Remove="Migrations\20230329110836_StudentProfile.cs" />
+    <Compile Remove="Migrations\20230329110836_StudentProfile.Designer.cs" />
+    <Compile Remove="Migrations\20230329111550_Student.cs" />
+    <Compile Remove="Migrations\20230329111550_Student.Designer.cs" />
+    <Compile Remove="Migrations\20230329183418_StudentProfile.cs" />
+    <Compile Remove="Migrations\20230329183418_StudentProfile.Designer.cs" />
+    <Compile Remove="Migrations\20230329183614_StudentProfile.cs" />
+    <Compile Remove="Migrations\20230329183614_StudentProfile.Designer.cs" />
+    <Compile Remove="Migrations\20230404192417_CountryInCity.cs" />
+    <Compile Remove="Migrations\20230404192417_CountryInCity.Designer.cs" />
+    <Compile Remove="Migrations\20230410145635_StudentProfile&amp;Language.cs" />
+    <Compile Remove="Migrations\20230410145635_StudentProfile&amp;Language.Designer.cs" />
+    <Compile Remove="Migrations\20230410151146_StudentProfile&amp;Language.cs" />
+    <Compile Remove="Migrations\20230410151146_StudentProfile&amp;Language.Designer.cs" />
+    <Compile Remove="Migrations\20230412073355_Language_Change_Float.cs" />
+    <Compile Remove="Migrations\20230412073355_Language_Change_Float.Designer.cs" />
+    <Compile Remove="Migrations\20230412112135_changeistudent.cs" />
+    <Compile Remove="Migrations\20230412112135_changeistudent.Designer.cs" />
+    <Compile Remove="Migrations\20230413100639_Education_DateValidation.cs" />
+    <Compile Remove="Migrations\20230413100639_Education_DateValidation.Designer.cs" />
+    <Compile Remove="Migrations\20230413104744_StudentProfile.cs" />
+    <Compile Remove="Migrations\20230413104744_StudentProfile.Designer.cs" />
+    <Compile Remove="Migrations\20230413123632_Student&amp;EDU&amp;Lang.cs" />
+    <Compile Remove="Migrations\20230413123632_Student&amp;EDU&amp;Lang.Designer.cs" />
+    <Compile Remove="Migrations\20230419200339_dateformate.cs" />
+    <Compile Remove="Migrations\20230419200339_dateformate.Designer.cs" />
+    <Compile Remove="Migrations\20230427104908_Student_Information.cs" />
+    <Compile Remove="Migrations\20230427104908_Student_Information.Designer.cs" />
+    <Compile Remove="Migrations\20230512114906_SchoolType.cs" />
+    <Compile Remove="Migrations\20230512114906_SchoolType.Designer.cs" />
+    <Compile Remove="Migrations\20230512123506_typeschool.cs" />
+    <Compile Remove="Migrations\20230512123506_typeschool.Designer.cs" />
+    <Compile Remove="Migrations\20230512124143_Schooltype.cs" />
+    <Compile Remove="Migrations\20230512124143_Schooltype.Designer.cs" />
+    <Compile Remove="Migrations\20230515081003_PL_In.cs" />
+    <Compile Remove="Migrations\20230515081003_PL_In.Designer.cs" />
+    <Compile Remove="Migrations\20230516085210_City_in_campus.cs" />
+    <Compile Remove="Migrations\20230516085210_City_in_campus.Designer.cs" />
+    <Compile Remove="Migrations\20230524115435_AppDb.cs" />
+    <Compile Remove="Migrations\20230524115435_AppDb.Designer.cs" />
+    <Compile Remove="Migrations\20230524120138_AppDb.cs" />
+    <Compile Remove="Migrations\20230524120138_AppDb.Designer.cs" />
+    <Compile Remove="Migrations\20230524125318_AppDb.cs" />
+    <Compile Remove="Migrations\20230524125318_AppDb.Designer.cs" />
+    <Compile Remove="Migrations\20230601093639_Requairement.cs" />
+    <Compile Remove="Migrations\20230601093639_Requairement.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.32" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.32" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.32" />
+    <!--<PackageReference Include="EPPlus" Version="6.1.2" />-->
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.25" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.32">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="System.Data.OleDb" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\lib\bootstrap\" />
+    <Folder Include="wwwroot\lib\bootstrap\dist\js\" />
+    <Folder Include="wwwroot\lib\jquery-validation-unobtrusive\" />
+    <Folder Include="wwwroot\lib\jquery-validation\" />
+    <Folder Include="wwwroot\lib\jquery-validation\dist\" />
+    <Folder Include="wwwroot\lib\jquery\" />
+    <Folder Include="wwwroot\lib\jquery\dist\" />
+    <Folder Include="wwwroot\UploadExcelFiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\study-abroad\img\Group 3456.svg" />
+    <None Include="wwwroot\study-abroad\img\Group 3457.svg" />
+    <None Include="wwwroot\study-abroad\img\Group 3458.svg" />
+    <None Include="wwwroot\study-abroad\img\Group 3459.svg" />
+    <None Include="wwwroot\study-abroad\img\Group 3460.svg" />
+    <None Include="wwwroot\study-abroad\js\about.js" />
+    <None Include="wwwroot\study-abroad\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\study-abroad\js\jquery.min.js" />
+    <None Include="wwwroot\study-abroad\js\owl.carousel.min.js" />
+    <None Include="wwwroot\study-abroad\js\owl.js" />
+  </ItemGroup>
+
+</Project>

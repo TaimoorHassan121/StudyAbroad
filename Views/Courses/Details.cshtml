@@ -1,0 +1,215 @@
+﻿@model Study_Abroad.Models.Course
+
+
+@{ ViewData["Title"] = "Details";
+    Layout = "_Layout1"; }
+
+<!-- BEGIN: Content-->
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+
+        <div class="content-body">
+
+            <!-- Zero configuration table -->
+            <section id="basic-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+
+                            <div class="card-body card-dashboard">
+                                <dl class="row">
+                                    <dt class="col-sm-2">
+                                        @Html.DisplayNameFor(model => model.CourseName)
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        @Html.DisplayFor(model => model.CourseName)
+                                    </dd>
+                                    <dt class="col-sm-2">
+                                        @Html.DisplayNameFor(model => model.Program_Id)
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        @Html.DisplayFor(model => model.Program_Id)
+                                    </dd>
+                                    <dt class="col-sm-2">
+                                        @Html.DisplayNameFor(model => Model.Disiplines.DisiplineName)
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        @Html.DisplayFor(model => Model.Disiplines.DisiplineName)
+                                    </dd>
+                                    <dt class="col-sm-2">
+                                        @Html.DisplayNameFor(model => model.CourseIntake)
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        @Html.DisplayFor(model => model.CourseIntake)
+                                    </dd>
+                                    <dt class="col-sm-2">
+                                        @Html.DisplayNameFor(model => model.CourseMode)
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        @Html.DisplayFor(model => model.CourseMode)
+                                    </dd>
+                                    <dt class="col-sm-2">
+                                        @Html.DisplayNameFor(model => model.CourseTutionFee)
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        @Html.DisplayFor(model => model.CourseTutionFee)
+                                    </dd>
+                                    <dt class="col-sm-2">
+                                        @Html.DisplayNameFor(model => model.CourseDuration)
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        @Html.DisplayFor(model => model.CourseDuration)
+                                    </dd>
+                                    <dt class="col-sm-2">
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        @if (Model.Status == true)
+                                        {
+                                            @Html.Raw("Active") }
+                                        else
+                                        {
+                                            @Html.Raw("Deactive")}
+                                    </dd>
+                                    <dt class="col-sm-2">
+                                        @Html.DisplayNameFor(model => model.DateTime)
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        @Html.DisplayFor(model => model.DateTime)
+                                    </dd>
+                                </dl>
+                                <div>
+                                    <a asp-action="Details" asp-route-id="@Model.CourseId">Edit</a> |
+                                    <a asp-action="Index">Back to List</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Zero configuration table -->
+        </div>
+    </div>
+</div>
+<!-- END: Content-->
+@*<h1>Details</h1>
+
+    <div>
+        <h4>Course</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Disiplines)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Disiplines.DisiplineId)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Campuses)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Campuses.CampusId)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.States)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.States.StateName)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseName)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CourseName)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Program_Id)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Program_Id)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseIntake)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CourseIntake)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseMode)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CourseMode)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseTutionFee)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CourseTutionFee)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseDuration)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CourseDuration)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.DateTime)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.DateTime)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseScholarship)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CourseScholarship)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseApplicationDeadline)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CourseApplicationDeadline)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseOverview)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CourseOverview)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseLearningOutcome)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CourseLearningOutcome)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseStartDateAndPrice)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CourseStartDateAndPrice)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseHowToApply)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CourseHowToApply)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseReviewAndRanking)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CourseReviewAndRanking)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.CourseId">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>*@

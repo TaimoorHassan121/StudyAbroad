@@ -1,0 +1,35 @@
+﻿@page
+@model LogoutModel
+@{
+    ViewData["Title"] = "Log out";
+    Layout = "_LayoutLogout";
+}
+
+
+
+<div class="container login-header-section" style="border: 2px solid #FFFFFF;">
+    <div class="row" style="margin-top: 5rem;">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <p class="oro">Start your Journey To <span class="euro2"> STUDY</span> Abroad</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <img class="img-fluid" src="~/study-abroad/img/Group 3465@2x.jpg" alt="" style="width:450px;height:450px">
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 login-form" style="margin-top: 5rem;">
+            <header style="margin-top: 5rem;">
+                <h1>@ViewData["Title"]</h1>
+                <p>You have successfully logged out of the application.</p>
+            </header>
+        </div>
+    </div>
+</div>

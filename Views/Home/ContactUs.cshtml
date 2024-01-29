@@ -1,0 +1,114 @@
+﻿@model Study_Abroad.Models.ContactUs
+@{
+    ViewData["Title"] = "Contact Us";
+    Layout = "_StudyAbroadLayout2";
+}
+@section CSS {
+    <link rel="stylesheet" href="~/study-abroad/css/contact.css">
+}
+
+<div class=" header-section contact-header-section ">
+    <div class="container-fluid ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-md-12 ">
+                    <div class="hadding ">
+                        <h1>Contact Us</h1>
+                        <p style="margin-bottom: 0px; ">Vestibulum commodo sapien non elit porttitor, vitae volutpat nibh mollis. Nulla porta risus id neque tempor, in efficitur justo imperdiet. Etiam a ex at ante tincidunt imperdiet. Nunc congue ex vel nisl viverra, sit amet aliquet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="icons-section ">
+    <div class="container-fluid ">
+        <div class="container ">
+            <div class="row ">
+                <!-- <div class="alin mt-5 "> -->
+                <div class="col-md-4 border-44 alin ">
+                    <svg xmlns="http://www.w3.org/2000/svg " width="41.55 " height="58.992 " viewBox="0 0 41.55 58.992 ">
+                        <path id="Icon_material-location-on " data-name="Icon material-location-on " d="M27.275,3A19.761,19.761,0,0,0,7.5,22.775C7.5,37.606,27.275,59.5,27.275,59.5S47.05,37.606,47.05,22.775A19.761,19.761,0,0,0,27.275,3Zm0,26.837a7.063,7.063,0,1,1,7.063-7.062A7.065,7.065,0,0,1,27.275,29.837Z
+                            " transform="translate(-6.5 -2) " fill="none " stroke="#202e61 " stroke-width="2 " />
+                    </svg>
+                    <h1>Address</h1>
+                    <p>House # 29, Tariq Block New Garden<br> Town, Lahore, Punjab 54000</p>
+                </div>
+
+                <div class="col-md-4 border-44 alin ">
+                    <svg xmlns="http://www.w3.org/2000/svg " width="54.5 " height="44 " viewBox="0 0 54.5 44 ">
+                        <path id="Icon_material-email " data-name="Icon material-email " d="M50.25,6h-42a5.243,5.243,0,0,0-5.224,5.25L3,42.75A5.265,5.265,0,0,0,8.25,48h42a5.265,5.265,0,0,0,5.25-5.25V11.25A5.265,5.265,0,0,0,50.25,6Zm0,10.5-21,13.125L8.25,16.5V11.25l21,13.125,21-13.125Z
+                            " transform="translate(-2 -5) " fill="none " stroke="#202e61 " stroke-width="2 " />
+                    </svg>
+
+                    <h1>Email</h1>
+                    <p>barbara.griffin@mail.com</p>
+                </div>
+                <div class="col-md-4 alin ">
+                    <svg xmlns="http://www.w3.org/2000/svg " width="44" height="44" viewBox="0 0 44 44">
+                        <path id="Icon_material-call " data-name="Icon material-call " d="M12.947,22.677A35.347,35.347,0,0,0,28.323,38.053l5.133-5.133a2.32,2.32,0,0,1,2.38-.56,26.616,26.616,0,0,0,8.33,1.33A2.34,2.34,0,0,1,46.5,36.023v8.143A2.34,2.34,0,0,1,44.167,46.5,39.663,39.663,0,0,1,4.5,6.833,2.34,2.34,0,0,1,6.833,4.5H15a2.34,2.34,0,0,1,2.333,2.333,26.508,26.508,0,0,0,1.33,8.33,2.342,2.342,0,0,1-.583,2.38l-5.133,5.133Z
+                            " transform="translate(-3.5 -3.5) " fill="none " stroke="#202e61 " stroke-width="2 " />
+                    </svg>
+                    <h1>Landline</h1>
+                    <p>(761)302-3732</p>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="input-section " style="padding-bottom: 150px; ">
+    <div class="container-fluid ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-md-6 mt-5">
+                    <div class="color">
+                        <h2>Get in Touch</h2>
+                    </div>
+                        <div class="cards py-5 " id="form1 ">
+                    <form asp-action="ContactUs">
+                            <div class="form-data " v-if="!submitted ">
+                                <div class="forms-inputs " style="margin-bottom: 40px; ">
+                                    <span> Full Name </span> <input autocomplete="off " placeholder="Your Name " type="text" asp-for="ContactUsName" v-model="email " v-bind:class="{ 'form-control':true, 'is-invalid' : !validEmail(email) && emailBlured} " v-on:blur="emailBlured=t rue ">
+                                </div>
+                                <div class="forms-inputs " style="margin-bottom: 40px; ">
+                                    <span> Email Address * </span> <input autocomplete="off " placeholder="Email Address " asp-for="ContactUsEmail" type="email" v-model="password " v-bind:class="{ 'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured} "
+                                                                          v-on:blur="passwordBlured=t rue ">
+                                    <div class="invalid-feedback ">Password must be 8 character!</div>
+                                </div>
+
+                                <div class="forms-inputs " style="margin-bottom: 40px; ">
+                                    <span> Subject </span> <input autocomplete="off " placeholder="Major you want to study.... " type="text" asp-for="ContactUsSubject" v-model="password " v-bind:class="{ 'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured} "
+                                                                  v-on:blur="passwordBlured=t rue ">
+                                    <div class="invalid-feedback ">Password must be 8 character!</div>
+                                </div>
+
+                                <div class="forms-inputs " style="margin-bottom: 40px; ">
+                                    <span> Message </span> <textarea style="padding-top: 15px; " asp-for="ContactUsMessage" class="form-control " rows="6 "></textarea>
+                                    <div class="invalid-feedback ">Password must be 8 character!</div>
+                                </div>
+                                <div class="bitton mb-3 "> <button type="submit" class="btn btn " required>Submit</button></div>
+                            </div>
+                    </form>
+                        </div>
+                  
+                </div>
+                <div class="col-md-6 ">
+                    <div class="mapouter ">
+                        <div class="gmap_canvas px-2 ">
+                            <iframe class="gmap_iframe " frameborder="0" scrolling="no" marginheight="0 " marginwidth="0 " src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=venturtech&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed "></iframe>
+                            <a href="https://embedmapgenerator.com/ ">embed google maps in website</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script{ 
+
+<script src="~/study-abroad/js/ContactUs.js"></script>
+}

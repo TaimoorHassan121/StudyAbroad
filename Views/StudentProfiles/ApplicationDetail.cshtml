@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Study_Abroad.Models.ApplicationDetails>
+@{
+    ViewData["Title"] = "ApplicationDetail";
+    Layout = "_Layout1";
+}
+
+<!-- BEGIN: Content-->
+
+@section Css{
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css">
+}
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+
+        <div class="content-body">
+
+            <!-- Zero configuration table -->
+            <section id="basic-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+
+                            <div class="card-body card-dashboard">
+
+                                <div class="table-responsive">
+                                    <table class="table zero-configuration">
+                                        <thead>
+                                            <tr>
+                                                <th>Status</th>
+                                                <th>School</th>
+                                                <th>Program</th>
+                                                <th>ESL Start Date</th>
+                                                <th>Start Date</th>
+                                                <th>Fee</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>Status</td>
+                                                    <td>@item.University.UniversityName</td>
+                                                    <td>@item.Course.CourseName</td>
+                                                    <td>ADC</td>
+                                                    <td>EFG</td>
+                                                    <td>Application Fee</td>
+                                                    <td>
+                                                        <a type="button" href="/StudentProfiles/Application?id=@item.AppDetailId" class="btn btn-primary ">View</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Zero configuration table -->
+
+        </div>
+    </div>
+</div>
+
+@section Js{
+    <script src="~/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+
+    <script src="~/app-assets/js/scripts/datatables/datatable.js"></script>
+}
+

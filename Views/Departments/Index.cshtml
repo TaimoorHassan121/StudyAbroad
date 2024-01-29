@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Study_Abroad.Models.Department>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout1";
+}
+
+
+<!-- BEGIN: Content-->
+
+@section Css{
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css">
+}
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+        @*<div class="content-header row">
+            <div class="content-header-left col-12 mb-2 mt-1">
+                <div class="breadcrumbs-top">
+                    <h3 class="content-header-title float-left pr-1 mb-0">Department</h3>
+                    <div class="breadcrumb-wrapper d-none d-sm-block">
+                        <ol class="breadcrumb p-0 mb-0 pl-1">
+                            <li class="breadcrumb-item">
+                                <a href="index.html"><i class="bx bx-home-alt"></i></a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                <a asp-action="Create">Create New</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <div class="content-body">
+            <div class="row">
+                @*<div class="col-12">
+                        <p>
+                            Read full documnetation
+                            <a href="https://datatables.net/" target="_blank">here</a>
+                        </p>
+                    </div>*@
+            </div>
+            <!-- Zero configuration table -->
+            <section id="basic-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            @*<div class="card-header">
+                                    <h4 class="card-title">Zero configuration</h4>
+                                </div>*@
+                            <div class="card-body card-dashboard">
+                                @*<p class="card-text">
+                                        DataTables has most features enabled by default, so all you need
+                                        to do to use it with your own tables is to call the construction
+                                        function: $().DataTable();.
+                                    </p>*@
+                                <div class="table-responsive">
+                                    <table class="table zero-configuration">
+                                        <thead>
+                                            <tr>
+                                                <th>Department Name</th>
+                                                <th>Campus ID</th>
+                                                <th>Status</th>
+                                                <th>DateTime</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@item.DepartmentName</td>
+                                                    <td>@item.Campuses.CampusName</td>
+                                                    <td>
+                                                        @if (item.Status == true)
+                                                        {
+                                                            @Html.Raw("Active")
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.Raw("Deactive")
+                                                        }
+                                                    </td>
+                                                    <td>@item.DateTime</td>
+                                                    <td>
+                                                        <a asp-action="Edit" asp-route-id="@item.DepartmentId">Edit</a> |
+                                                        <a asp-action="Details" asp-route-id="@item.DepartmentId">Details</a> |
+                                                        <a asp-action="Delete" asp-route-id="@item.DepartmentId">Delete</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        @*<tfoot>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Position</th>
+                                                    <th>Office</th>
+                                                    <th>Age</th>
+                                                    <th>Start date</th>
+                                                    <th>Salary</th>
+                                                </tr>
+                                            </tfoot>*@
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Zero configuration table -->
+
+        </div>
+    </div>
+</div>
+
+@section Js{
+    <script src="~/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+
+    <script src="~/app-assets/js/scripts/datatables/datatable.js"></script>
+}
+<!-- END: Content-->
